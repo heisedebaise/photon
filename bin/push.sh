@@ -4,6 +4,7 @@ git add bin
 git add pom.xml
 git add *.md
 git add LICENSE
+git add .gitignore
 
 for file in *
 do
