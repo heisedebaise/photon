@@ -1,45 +1,57 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
 
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.lpw.photon</groupId>
+    <groupId>org.lpw.photon</groupId>
+    <artifactId>photon</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1.0</version>
+    <modules>
+        <module>photon-base</module>
+        <module>photon-dao</module>
+        <module>photon-ctrl</module>
+        <module>photon-ctrl-http</module>
+        <module>photon-ctrl-socket</module>
+        <module>photon-script</module>
+        <module>photon-wormhole</module>
+        <module>photon-chrome</module>
+        <module>photon-office</module>
+        <module>photon-lucene</module>
+        <module>photon-pdf</module>
+        <module>photon-hadoop</module>
+        <module>photon-web</module>
+    </modules>
 
-  <artifactId>photon</artifactId>
+    <name>photon</name>
+    <url>https://github.com/heisedebaise/photon</url>
 
-  <version>0.1</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.photon>0.1.0</version.photon>
+    </properties>
 
-  <packaging>pom</packaging>
-
-  <name>photon</name>
-
-  <url>https://github.com/heisedebaise/photon</url>
-
-  <properties>
-
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-  </properties>
-
-  <dependencies>
-
-    <dependency>
-
-      <groupId>junit</groupId>
-
-      <artifactId>junit</artifactId>
-
-      <version>4.13</version>
-
-      <scope>test</scope>
-
-    </dependency>
-
-  </dependencies>
-
-  <modules>
-
-    <module>photon-base</module>
-
-  </modules>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
