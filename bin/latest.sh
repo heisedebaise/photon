@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mvn clean install -Dmaven.test.skip=true versions:use-latest-releases
+mvn clean install versions:use-latest-releases

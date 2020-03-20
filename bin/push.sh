@@ -1,18 +1,10 @@
 #!/bin/bash
 
 git add bin
-git add pom.xml
-git add *.md
+git add **/src
+git add **/pom.xml
 git add LICENSE
-git add .gitignore
-
-for file in *
-do
-    if [[ $file == photon-* ]]; then
-        git add $file/pom.xml
-        git add $file/src
-    fi
-done
-
+git add pom.xml
+git add README.md
 git commit -m dev
 git push
