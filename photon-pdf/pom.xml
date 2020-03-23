@@ -6,7 +6,7 @@
 
     <groupId>org.lpw.photon</groupId>
     <artifactId>photon-pdf</artifactId>
-    <version>0.1.0</version>
+    <version>0.1</version>
 
     <name>photon-pdf</name>
     <url>https://github.com/heisedebaise/photon</url>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.lpw.photon</groupId>
             <artifactId>photon-base</artifactId>
-            <version>0.1.0</version>
+            <version>0.1</version>
         </dependency>
     </dependencies>
 </project>

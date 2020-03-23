@@ -6,7 +6,7 @@
 
     <groupId>org.lpw.photon</groupId>
     <artifactId>photon-ctrl-socket</artifactId>
-    <version>0.1.0</version>
+    <version>0.1</version>
 
     <name>photon-ctrl-socket</name>
     <url>https://github.com/heisedebaise/photon</url>
@@ -15,7 +15,7 @@
         <dependency>
             <groupId>org.lpw.photon</groupId>
             <artifactId>photon-ctrl</artifactId>
-            <version>0.1.0</version>
+            <version>0.1</version>
         </dependency>
     </dependencies>
 </project>

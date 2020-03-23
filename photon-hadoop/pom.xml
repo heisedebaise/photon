@@ -6,7 +6,7 @@
 
     <groupId>org.lpw.photon</groupId>
     <artifactId>photon-hadoop</artifactId>
-    <version>0.1.0</version>
+    <version>0.1</version>
 
     <name>photon-hadoop</name>
     <url>https://github.com/heisedebaise/photon</url>
@@ -66,7 +66,7 @@
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
-            <version>2.2.3</version>
+            <version>2.2.4</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.hadoop</groupId>
@@ -93,7 +93,7 @@
         <dependency>
             <groupId>org.lpw.photon</groupId>
             <artifactId>photon-ctrl</artifactId>
-            <version>0.1.0</version>
+            <version>0.1</version>
         </dependency>
     </dependencies>
 </project>

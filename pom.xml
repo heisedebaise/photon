@@ -7,7 +7,7 @@
     <groupId>org.lpw.photon</groupId>
     <artifactId>photon</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.0</version>
+    <version>0.1</version>
     <modules>
         <module>photon-base</module>
         <module>photon-dao</module>
