@@ -27,15 +27,6 @@ public interface Templates {
     String STREAM = "stream";
 
     /**
-     * Excel模板类型。
-     */
-    String EXCEL = "excel";
-    /**
-     * PPTx模板类型。
-     */
-    String PPTX = "pptx";
-
-    /**
      * 获取默认模板实例。
      *
      * @return 默认模板实例。
