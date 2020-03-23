@@ -2,14 +2,11 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>photon</artifactId>
-        <groupId>org.lpw.photon</groupId>
-        <version>0.1.0</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>org.lpw.photon</groupId>
     <artifactId>photon-chrome</artifactId>
+    <version>0.1.0</version>
 
     <name>photon-chrome</name>
     <url>https://github.com/heisedebaise/photon</url>
@@ -18,7 +15,7 @@
         <dependency>
             <groupId>org.lpw.photon</groupId>
             <artifactId>photon-base</artifactId>
-            <version>${version.photon}</version>
+            <version>0.1.0</version>
         </dependency>
     </dependencies>
 </project>

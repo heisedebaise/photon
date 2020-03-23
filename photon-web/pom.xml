@@ -2,16 +2,16 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <artifactId>photon</artifactId>
-        <groupId>org.lpw.photon</groupId>
-        <version>0.1.0</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.lpw.photon</groupId>
     <artifactId>photon-web</artifactId>
+    <version>0.1.0</version>
     <packaging>war</packaging>
+
     <name>photon-web</name>
     <url>https://github.com/heisedebaise/photon</url>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -20,16 +20,8 @@
         </dependency>
         <dependency>
             <groupId>org.lpw.photon</groupId>
-            <artifactId>photon-script</artifactId>
-            <version>${version.photon}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.lpw.photon</groupId>
             <artifactId>photon-ctrl-http</artifactId>
-            <version>${version.photon}</version>
+            <version>0.1.0</version>
         </dependency>
     </dependencies>
-    <build>
-        <finalName>photon-web</finalName>
-    </build>
 </project>
