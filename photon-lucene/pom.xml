@@ -6,7 +6,7 @@
 
     <groupId>org.lpw.photon</groupId>
     <artifactId>photon-lucene</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 
     <name>photon-lucene</name>
     <url>https://github.com/heisedebaise/photon</url>
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.lpw.photon</groupId>
             <artifactId>photon-base</artifactId>
-            <version>0.1</version>
+            <version>0.2</version>
         </dependency>
     </dependencies>
 </project>
