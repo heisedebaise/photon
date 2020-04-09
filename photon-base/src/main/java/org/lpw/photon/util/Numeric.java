@@ -126,6 +126,40 @@ public interface Numeric {
     int[] toInts(String[] array, int defaultValue);
 
     /**
+     * 将字符串转化为double数组，字符串中数值以逗号分割。
+     *
+     * @param string 数值组字符串。
+     * @return double数组；如果转化失败则返回空数组。
+     */
+    double[] toDoubles(String string);
+
+    /**
+     * 将字符串转化为double数组，字符串中数值以逗号分割。
+     *
+     * @param string       数值组字符串。
+     * @param defaultValue 默认值。
+     * @return double数组；如果转化失败则返回空数组。
+     */
+    double[] toDoubles(String string, double defaultValue);
+
+    /**
+     * 将数值字符串数组转化为数值数组。
+     *
+     * @param array 数值字符串数组。
+     * @return double数组；如果元素转化失败则默认为0。
+     */
+    double[] toDoubles(String[] array);
+
+    /**
+     * 将数值字符串数组转化为数值数组。
+     *
+     * @param array        数值字符串数组。
+     * @param defaultValue 默认值。
+     * @return double数组；如果元素转化失败则默认为0。
+     */
+    double[] toDoubles(String[] array, double defaultValue);
+
+    /**
      * 按指定格式将数值格式化为字符串。
      *
      * @param number 要进行格式化的数值。

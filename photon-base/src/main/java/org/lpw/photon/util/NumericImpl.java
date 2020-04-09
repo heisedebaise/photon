@@ -212,6 +212,36 @@ public class NumericImpl implements Numeric {
     }
 
     @Override
+    public double[] toDoubles(String string) {
+        return toDoubles(string, 0.0D);
+    }
+
+    @Override
+    public double[] toDoubles(String string, double defaultValue) {
+        if (validator.isEmpty(string))
+            return new double[0];
+
+        return toDoubles(string.split(","), defaultValue);
+    }
+
+    @Override
+    public double[] toDoubles(String[] array) {
+        return toDoubles(array, 0.0D);
+    }
+
+    @Override
+    public double[] toDoubles(String[] array, double defaultValue) {
+        if (validator.isEmpty(array))
+            return new double[0];
+
+        double[] ns = new double[array.length];
+        for (int i = 0; i < ns.length; i++)
+            ns[i] = toDouble(array[i], defaultValue);
+
+        return ns;
+    }
+
+    @Override
     public String toString(Number number, String format) {
         return formats.computeIfAbsent(format, DecimalFormat::new).format(number);
     }
