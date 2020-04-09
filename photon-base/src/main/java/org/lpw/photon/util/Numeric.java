@@ -94,18 +94,20 @@ public interface Numeric {
     /**
      * 将字符串转化为int数组，字符串中数值以逗号分割。
      *
-     * @param string 数值组字符串。
+     * @param string       数值组字符串。
+     * @param defaultValue 默认值。
      * @return int数组；如果转化失败则返回空数组。
      */
-    int[] toInts(String string);
+    int[] toInts(String string, int defaultValue);
 
     /**
      * 将数值字符串数组转化为数值数组。
      *
-     * @param array 数值字符串数组。
+     * @param array        数值字符串数组。
+     * @param defaultValue 默认值。
      * @return int数组；如果元素转化失败则默认为0。
      */
-    int[] toInts(String[] array);
+    int[] toInts(String[] array, int defaultValue);
 
     /**
      * 按指定格式将数值格式化为字符串。

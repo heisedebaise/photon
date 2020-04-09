@@ -182,21 +182,21 @@ public class NumericImpl implements Numeric {
     }
 
     @Override
-    public int[] toInts(String string) {
+    public int[] toInts(String string, int defaultValue) {
         if (validator.isEmpty(string))
             return new int[0];
 
-        return toInts(string.split(","));
+        return toInts(string.split(","), defaultValue);
     }
 
     @Override
-    public int[] toInts(String[] array) {
+    public int[] toInts(String[] array, int defaultValue) {
         if (validator.isEmpty(array))
             return new int[0];
 
         int[] ns = new int[array.length];
         for (int i = 0; i < ns.length; i++)
-            ns[i] = toInt(array[i]);
+            ns[i] = toInt(array[i], defaultValue);
 
         return ns;
     }
