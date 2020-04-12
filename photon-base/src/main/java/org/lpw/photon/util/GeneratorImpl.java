@@ -17,7 +17,7 @@ public class GeneratorImpl implements Generator {
         StringBuilder sb = new StringBuilder();
         char a = 'a' - 10;
         while (sb.length() < length) {
-            int n = Math.abs(random.nextInt()) % 36 + '0';
+            int n = Math.abs(random.nextInt()) % 36;
             if (n < 10)
                 n += '0';
             else
