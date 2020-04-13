@@ -73,7 +73,7 @@ public class ServiceHelperImpl implements ServiceHelper {
     private boolean ignoreRoot;
     @Value("${photon.ctrl.http.ignore.prefixes:/upload/}")
     private String ignorePrefixes;
-    @Value("${photon.ctrl.http.ignore.suffixes:.ico,.js,.css,.html,.jpg,.jpeg,.gif,.png,.svg,.eot,.woff,.ttf,.json,.txt,.map}")
+    @Value("${photon.ctrl.http.ignore.suffixes:.ico,.js,.css,.html,.jpg,.jpeg,.gif,.png,.svg,.eot,.woff,.ttf,.json,.txt}")
     private String ignoreSuffixes;
     @Value("${photon.ctrl.http.virtual-context:}")
     private String virtualContext;
