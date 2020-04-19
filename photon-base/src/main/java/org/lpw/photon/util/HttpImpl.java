@@ -254,8 +254,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
         if (!validator.isEmpty(requestHeaders))
             requestHeaders.keySet().stream().filter(key -> !key.toLowerCase().equals("content-length"))
                     .forEach(key -> request.addHeader(key, requestHeaders.get(key)));
-        request.addHeader("time-hash", numeric.toString(timeHash.generate(), "0"));
-        try (CloseableHttpResponse response = HttpClients.custom().setConnectionManager(manager).build()
+        try (CloseableHttpResponse response = HttpClients.custom().setConnectionManager(null).build()
                 .execute(request, HttpClientContext.create())) {
             int statusCode = response.getStatusLine().getStatusCode();
             this.statusCode.set(statusCode);
