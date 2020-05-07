@@ -20,7 +20,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.19</version>
+            <version>8.0.20</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat</groupId>
@@ -30,12 +30,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>5.2.5.RELEASE</version>
+            <version>5.2.6.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.0.0.Alpha4</version>
+            <version>6.0.0.Alpha5</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -45,7 +45,7 @@
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
-            <version>3.12.3</version>
+            <version>3.12.4</version>
         </dependency>
         <dependency>
             <groupId>org.lpw.photon</groupId>
