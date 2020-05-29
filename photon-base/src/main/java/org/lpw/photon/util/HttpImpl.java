@@ -258,19 +258,11 @@ public class HttpImpl implements Http, ContextRefreshedListener {
                 .execute(request, HttpClientContext.create())) {
             int statusCode = response.getStatusLine().getStatusCode();
             this.statusCode.set(statusCode);
-            if (statusCode != 200) {
-                request.abort();
-                outputStream.close();
-                logger.warn(null, "执行HTTP请求[{}:{}]失败[{}]！", request.getMethod(), request.getURI(), statusCode);
-
-                return;
-            }
-
             HttpEntity httpEntity = response.getEntity();
             if (httpEntity == null) {
                 request.abort();
                 outputStream.close();
-                logger.warn(null, "执行HTTP请求[{}:{}]未返回数据！", request.getMethod(), request.getURI());
+                logger.warn(null, "执行HTTP请求[{}:{}:{}]未返回数据！", request.getMethod(), request.getURI(), statusCode);
 
                 return;
             }
@@ -279,6 +271,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
                 for (Header header : response.getAllHeaders())
                     responseHeaders.put(header.getName(), header.getValue());
             copy(request, httpEntity, outputStream);
+            logger.info(null, "执行HTTP请求[{}:{}:{}]！", request.getMethod(), request.getURI(), statusCode);
         } catch (Throwable throwable) {
             request.abort();
             logger.warn(throwable, "执行HTTP请求时发生异常[{}]！");
