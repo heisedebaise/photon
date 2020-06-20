@@ -9,6 +9,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.QRCodeReader;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.springframework.stereotype.Component;
@@ -47,7 +48,7 @@ public class QrCodeImpl implements QrCode {
     @Inject
     private Logger logger;
     private final QRCodeWriter writer = new QRCodeWriter();
-    private final MultiFormatReader reader = new MultiFormatReader();
+    private final QRCodeReader reader = new QRCodeReader();
     private final Map<DecodeHintType, ?> hints = Map.of(DecodeHintType.PURE_BARCODE, Boolean.TRUE);
 
     @Override
@@ -170,9 +171,7 @@ public class QrCodeImpl implements QrCode {
     @Override
     public String read(InputStream inputStream) {
         try {
-
-            String string = reader.decode(new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(
-                    ImageIO.read(inputStream)))), hints).getText();
+            String string = reader.decode(new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(ImageIO.read(inputStream)))), hints).getText();
             inputStream.close();
 
             return string;
