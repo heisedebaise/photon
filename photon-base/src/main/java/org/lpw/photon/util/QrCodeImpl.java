@@ -4,7 +4,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatReader;
+import com.google.zxing.Result;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.BitMatrix;
@@ -171,14 +171,31 @@ public class QrCodeImpl implements QrCode {
     @Override
     public String read(InputStream inputStream) {
         try {
-            String string = reader.decode(new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(ImageIO.read(inputStream)))), hints).getText();
+            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(ImageIO.read(inputStream))));
             inputStream.close();
+            Result result = read(bitmap, true);
+            if (result == null)
+                result = read(bitmap, false);
 
-            return string;
+            return result == null ? null : result.getText();
         } catch (Throwable e) {
             logger.warn(e, "读取二维码图片内容时发生异常！");
 
             return null;
+        }
+    }
+
+    private Result read(BinaryBitmap bitmap, boolean pure) {
+        try {
+            if (pure)
+                return reader.decode(bitmap, hints);
+
+            return reader.decode(bitmap);
+        } catch (Throwable e) {
+            logger.warn(e, "读取二维码图片内容时发生异常！");
+
+            return null;
+
         }
     }
 }
