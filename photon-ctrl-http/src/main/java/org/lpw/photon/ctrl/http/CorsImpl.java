@@ -52,7 +52,7 @@ public class CorsImpl implements Cors, StorageListener {
             String origin = request.getHeader("Origin");
             if (corsOrigins.contains("*") || corsOrigins.contains(origin)) {
                 response.addHeader("Access-Control-Allow-Credentials", "true");
-                response.addHeader("Access-Control-Allow-Origin", "*");
+                response.addHeader("Access-Control-Allow-Origin", origin);
                 response.addHeader("Access-Control-Allow-Methods", corsMethods);
                 response.addHeader("Access-Control-Allow-Headers", corsHeaders);
             }
