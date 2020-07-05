@@ -15,21 +15,21 @@ import java.io.IOException;
  * @author lpw
  */
 @MultipartConfig
-@WebServlet(name = "UploadServlet", urlPatterns = {UploadHelper.UPLOAD})
+@WebServlet(name = "UploadServlet", urlPatterns = {UploadService.UPLOAD})
 public class UploadServlet extends HttpServlet {
     private static final long serialVersionUID = 2035601763794785803L;
 
-    private UploadHelper uploadHelper;
+    private UploadService uploadService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
 
-        uploadHelper = BeanFactory.getBean(UploadHelper.class);
+        uploadService = BeanFactory.getBean(UploadService.class);
     }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        uploadHelper.upload(request, response, UploadHelper.UPLOAD);
+        uploadService.upload(request, response, UploadService.UPLOAD);
     }
 }

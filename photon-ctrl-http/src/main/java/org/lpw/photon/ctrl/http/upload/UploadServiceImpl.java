@@ -27,8 +27,8 @@ import java.util.Map;
 /**
  * @author lpw
  */
-@Service(UploadHelper.PREFIX + "helper")
-public class UploadHelperImpl implements UploadHelper, IgnoreUri, ContextRefreshedListener {
+@Service(UploadService.PREFIX + "helper")
+public class UploadServiceImpl implements UploadService, IgnoreUri, ContextRefreshedListener {
     @Inject
     private Context context;
     @Inject
@@ -43,7 +43,7 @@ public class UploadHelperImpl implements UploadHelper, IgnoreUri, ContextRefresh
     private Cors cors;
     @Inject
     private ServiceHelper serviceHelper;
-    @Value("${" + UploadHelper.PREFIX + "max-size:1m}")
+    @Value("${" + UploadService.PREFIX + "max-size:1m}")
     private String maxSize;
     private Map<String, Uploader> uploaders;
     private long maxFileSize;
@@ -65,6 +65,7 @@ public class UploadHelperImpl implements UploadHelper, IgnoreUri, ContextRefresh
             if (readers.isEmpty())
                 return;
 
+            response.setContentType("application/json");
             response.setCharacterEncoding(context.getCharset(null));
             outputStream.write(uploaders.get(uploader).upload(readers));
             outputStream.flush();

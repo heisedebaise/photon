@@ -1,7 +1,6 @@
 package org.lpw.photon.ctrl.http.upload;
 
 import org.lpw.photon.ctrl.upload.UploadReader;
-import org.lpw.photon.ctrl.upload.UploadService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -11,14 +10,14 @@ import java.util.List;
 /**
  * @author lpw
  */
-@Service(UploadHelper.PREFIX + "uploader.path")
+@Service(UploadService.PREFIX + "uploader.path")
 public class UploaderPathImpl implements Uploader {
     @Inject
-    private UploadService uploadService;
+    private org.lpw.photon.ctrl.upload.UploadService uploadService;
 
     @Override
     public String getName() {
-        return UploadHelper.UPLOAD_PATH;
+        return UploadService.UPLOAD_PATH;
     }
 
     @Override

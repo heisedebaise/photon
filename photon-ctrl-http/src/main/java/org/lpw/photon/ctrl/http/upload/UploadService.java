@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author lpw
  */
-public interface UploadHelper {
+public interface UploadService {
     /**
      * 前缀。
      */

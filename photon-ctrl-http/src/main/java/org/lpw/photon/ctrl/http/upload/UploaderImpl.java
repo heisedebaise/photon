@@ -1,7 +1,6 @@
 package org.lpw.photon.ctrl.http.upload;
 
 import org.lpw.photon.ctrl.upload.UploadReader;
-import org.lpw.photon.ctrl.upload.UploadService;
 import org.lpw.photon.util.Json;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +11,16 @@ import java.util.List;
 /**
  * @author lpw
  */
-@Service(UploadHelper.PREFIX + "uploader")
+@Service(UploadService.PREFIX + "uploader")
 public class UploaderImpl implements Uploader {
     @Inject
     private Json json;
     @Inject
-    private UploadService uploadService;
+    private org.lpw.photon.ctrl.upload.UploadService uploadService;
 
     @Override
     public String getName() {
-        return UploadHelper.UPLOAD;
+        return UploadService.UPLOAD;
     }
 
     @Override
