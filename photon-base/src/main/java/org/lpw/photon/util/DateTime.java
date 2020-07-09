@@ -176,6 +176,14 @@ public interface DateTime {
     Timestamp[] toTimeRange(String[] dates);
 
     /**
+     * 转化为时间范围。
+     *
+     * @param date 日期。
+     * @return 时间范围。
+     */
+    Timestamp[] toTimeRange(Date date);
+
+    /**
      * 获取日期毫秒值。
      *
      * @param date 日期值。

@@ -212,6 +212,11 @@ public class DateTimeImpl implements DateTime {
     }
 
     @Override
+    public Timestamp[] toTimeRange(Date date) {
+        return new Timestamp[]{getStart(date), getEnd(date)};
+    }
+
+    @Override
     public long toLong(Date date) {
         return date == null ? 0L : date.getTime();
     }
