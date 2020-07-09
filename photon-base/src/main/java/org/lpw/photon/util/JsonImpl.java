@@ -178,7 +178,8 @@ public class JsonImpl implements Json {
     @Override
     public Map<String, String> toMap(JSONObject object) {
         Map<String, String> map = new HashMap<>();
-        object.keySet().forEach(key -> map.put(key, object.getString(key)));
+        if (object != null)
+            object.keySet().forEach(key -> map.put(key, object.getString(key)));
 
         return map;
     }
