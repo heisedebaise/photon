@@ -2,7 +2,7 @@ package org.lpw.photon.ctrl.upload;
 
 import org.lpw.photon.bean.BeanFactory;
 import org.lpw.photon.storage.Storage;
-import org.lpw.photon.util.Coder;
+import org.lpw.photon.util.Codec;
 import org.lpw.photon.util.Http;
 
 import java.io.ByteArrayInputStream;
@@ -49,7 +49,7 @@ public class SimpleUploadReader implements UploadReader {
 
     private void read() {
         if (base64 != null) {
-            bytes = BeanFactory.getBean(Coder.class).decodeBase64(base64);
+            bytes = BeanFactory.getBean(Codec.class).decodeBase64(base64);
 
             return;
         }

@@ -42,7 +42,7 @@ public class ServiceHelperImpl implements ServiceHelper {
     @Inject
     private Numeric numeric;
     @Inject
-    private Coder coder;
+    private Codec codec;
     @Inject
     private TimeHash timeHash;
     @Inject
@@ -117,7 +117,7 @@ public class ServiceHelperImpl implements ServiceHelper {
             if (validator.isEmpty(filename))
                 attachment.append(uri.substring(uri.lastIndexOf('/') + 1));
             else {
-                attachment.append(coder.encodeUrl(filename, null));
+                attachment.append(codec.encodeUrl(filename, null));
                 int indexOf;
                 if (filename.indexOf('.') == -1 && (indexOf = uri.lastIndexOf('.')) > -1)
                     attachment.append(uri.substring(indexOf));

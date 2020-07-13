@@ -27,8 +27,8 @@ public class ContextImpl implements Context, Closable, ContextRefreshedListener 
     private String i18n;
     private String root;
     private Locale i18nLocale;
-    private ThreadLocal<Locale> locale = new ThreadLocal<>();
-    private ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
+    private final ThreadLocal<Locale> locale = new ThreadLocal<>();
+    private final ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
 
     @Override
     public String getAbsoluteRoot() {

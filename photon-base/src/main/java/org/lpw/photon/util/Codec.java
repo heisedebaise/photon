@@ -5,7 +5,7 @@ package org.lpw.photon.util;
  *
  * @author lpw
  */
-public interface Coder {
+public interface Codec {
     /**
      * 将byte数据转化为hex字符串。
      *

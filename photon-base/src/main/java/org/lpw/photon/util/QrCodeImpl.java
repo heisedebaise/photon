@@ -44,7 +44,7 @@ public class QrCodeImpl implements QrCode {
     @Inject
     private Validator validator;
     @Inject
-    private Coder coder;
+    private Codec codec;
     @Inject
     private Logger logger;
     private final QRCodeWriter writer = new QRCodeWriter();
@@ -103,7 +103,7 @@ public class QrCodeImpl implements QrCode {
             create(content, size, logo, outputStream);
             outputStream.close();
 
-            return coder.encodeBase64(outputStream.toByteArray());
+            return codec.encodeBase64(outputStream.toByteArray());
         } catch (Throwable e) {
             logger.warn(e, "生成二维码图片[{}:{}]时发生异常！", content, size);
 
@@ -159,7 +159,7 @@ public class QrCodeImpl implements QrCode {
 
     @Override
     public String readBase64(String base64) {
-        try (InputStream inputStream = new ByteArrayInputStream(coder.decodeBase64(base64))) {
+        try (InputStream inputStream = new ByteArrayInputStream(codec.decodeBase64(base64))) {
             return read(inputStream);
         } catch (Throwable e) {
             logger.warn(e, "读取二维码图片[{}]内容时发生异常！", base64);

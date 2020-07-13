@@ -55,7 +55,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
     @Inject
     private Converter converter;
     @Inject
-    private Coder coder;
+    private Codec codec;
     @Inject
     private Numeric numeric;
     @Inject
@@ -88,7 +88,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
             return "";
 
         StringBuilder sb = new StringBuilder();
-        parameters.forEach((name, value) -> sb.append('&').append(name).append('=').append(coder.encodeUrl(value, charset)));
+        parameters.forEach((name, value) -> sb.append('&').append(name).append('=').append(codec.encodeUrl(value, charset)));
 
         return sb.substring(1);
     }

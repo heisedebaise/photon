@@ -30,7 +30,7 @@ public class ConverterImpl implements Converter {
     @Inject
     private DateTime dateTime;
     @Inject
-    private Coder coder;
+    private Codec codec;
     @Inject
     private Logger logger;
 
@@ -255,7 +255,7 @@ public class ConverterImpl implements Converter {
 
                 continue;
             }
-            map.put(string.substring(0, indexOf), coder.decodeUrl(string.substring(indexOf + 1) + value, null));
+            map.put(string.substring(0, indexOf), codec.decodeUrl(string.substring(indexOf + 1) + value, null));
             value = "";
         }
 

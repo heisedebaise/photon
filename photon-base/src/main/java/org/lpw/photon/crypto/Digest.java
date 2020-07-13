@@ -78,4 +78,13 @@ public interface Digest {
      * @return 消息摘要；如果提取失败则返回null。
      */
     byte[] digest(String algorithm, byte[] bytes);
+
+    /**
+     * HmacSHA1消息摘要。
+     *
+     * @param key   密钥。
+     * @param bytes 源数据。
+     * @return HmacSHA1消息摘要；如果提取失败则返回null。
+     */
+    byte[] hmacSHA1(byte[] key, byte[] bytes);
 }

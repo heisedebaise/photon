@@ -7,20 +7,21 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
  * @author lpw
  */
 @Component("photon.util.coder")
-public class CoderImpl implements Coder {
+public class CodecImpl implements Codec {
     private static final char[] HEX = "0123456789abcdef".toCharArray();
 
     @Inject
     private Context context;
     @Inject
     private Logger logger;
-    private Charset charset = Charset.forName("ISO-8859-1");
+    private final Charset charset = StandardCharsets.ISO_8859_1;
 
     @Override
     public String hex(byte[] bytes) {
