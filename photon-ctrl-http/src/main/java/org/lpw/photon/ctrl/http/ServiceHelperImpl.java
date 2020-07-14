@@ -87,7 +87,7 @@ public class ServiceHelperImpl implements ServiceHelper {
     private String ignoreSuffixes;
     @Value("${photon.ctrl.http.virtual-context:}")
     private String virtualContext;
-    @Value("${photon.ctrl.http.url}")
+    @Value("${photon.ctrl.http.url:}")
     private String url;
     private int contextPath;
     private String servletContextPath;
