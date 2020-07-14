@@ -42,4 +42,11 @@ public interface ServiceHelper {
      * @throws IOException 如果写入流时发生IOException异常则抛出。
      */
     OutputStream setContext(HttpServletRequest request, HttpServletResponse response, String uri) throws IOException;
+
+    /**
+     * 获取服务URL地址。
+     *
+     * @return 服务URL地址。
+     */
+    String getUrl();
 }

@@ -7,11 +7,21 @@ import org.lpw.photon.ctrl.context.HeaderAware;
 import org.lpw.photon.ctrl.context.RequestAware;
 import org.lpw.photon.ctrl.context.ResponseAware;
 import org.lpw.photon.ctrl.context.SessionAware;
-import org.lpw.photon.ctrl.http.context.*;
+import org.lpw.photon.ctrl.http.context.CookieAware;
+import org.lpw.photon.ctrl.http.context.HeaderAdapterImpl;
+import org.lpw.photon.ctrl.http.context.RequestAdapterImpl;
+import org.lpw.photon.ctrl.http.context.ResponseAdapterImpl;
+import org.lpw.photon.ctrl.http.context.SessionAdapterImpl;
 import org.lpw.photon.ctrl.http.ws.WsHelper;
 import org.lpw.photon.ctrl.status.Status;
 import org.lpw.photon.ctrl.upload.UploadService;
-import org.lpw.photon.util.*;
+import org.lpw.photon.util.Codec;
+import org.lpw.photon.util.Context;
+import org.lpw.photon.util.Converter;
+import org.lpw.photon.util.Logger;
+import org.lpw.photon.util.Numeric;
+import org.lpw.photon.util.TimeHash;
+import org.lpw.photon.util.Validator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
@@ -77,6 +87,8 @@ public class ServiceHelperImpl implements ServiceHelper {
     private String ignoreSuffixes;
     @Value("${photon.ctrl.http.virtual-context:}")
     private String virtualContext;
+    @Value("${photon.ctrl.http.url}")
+    private String url;
     private int contextPath;
     private String servletContextPath;
     private int virtualContextLength;
@@ -278,5 +290,10 @@ public class ServiceHelperImpl implements ServiceHelper {
         request.getSession().setAttribute(SESSION_ID, sessionId);
 
         return sessionId;
+    }
+
+    @Override
+    public String getUrl() {
+        return url;
     }
 }
