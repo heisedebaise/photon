@@ -85,6 +85,8 @@ public class ServiceHelperImpl implements ServiceHelper {
     private String ignorePrefixes;
     @Value("${photon.ctrl.http.ignore.suffixes:.ico,.js,.css,.html,.jpg,.jpeg,.gif,.png,.svg,.eot,.woff,.ttf,.json,.txt}")
     private String ignoreSuffixes;
+    @Value("${photon.ctrl.http.not-modified.names:/upload/image/}")
+    private String notModifiedNames;
     @Value("${photon.ctrl.http.virtual-context:}")
     private String virtualContext;
     @Value("${photon.ctrl.http.url:}")
@@ -94,6 +96,7 @@ public class ServiceHelperImpl implements ServiceHelper {
     private int virtualContextLength;
     private String[] prefixes;
     private String[] suffixes;
+    private String[] names;
     private Set<String> ignoreUris;
 
     @Override
@@ -105,6 +108,7 @@ public class ServiceHelperImpl implements ServiceHelper {
             logger.info("部署项目路径[{}]，虚拟路径[{}]。", context, virtualContext);
         prefixes = converter.toArray(ignorePrefixes, ",");
         suffixes = converter.toArray(ignoreSuffixes, ",");
+        names = converter.toArray(notModifiedNames, ",");
 
         ignoreUris = new HashSet<>();
         BeanFactory.getBeans(IgnoreUri.class).forEach(ignoreUri -> ignoreUris.addAll(Arrays.asList(ignoreUri.getIgnoreUris())));
@@ -215,7 +219,7 @@ public class ServiceHelperImpl implements ServiceHelper {
         response.setHeader("Cache-Control", "no-cache");
         String ifNoneMatch = request.getHeader("If-None-Match");
         String lastModified = numeric.toString(file.lastModified(), "0");
-        if (lastModified.equals(ifNoneMatch))
+        if (notModified(ifNoneMatch, lastModified, uri))
             response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
         else
             response.setHeader("ETag", lastModified);
@@ -247,6 +251,20 @@ public class ServiceHelperImpl implements ServiceHelper {
         String suffix = name.substring(indexOf);
         for (String s : suffixes)
             if (suffix.equals(s))
+                return true;
+
+        return false;
+    }
+
+    private boolean notModified(String ifNoneMatch, String lastModified, String uri) {
+        if (validator.isEmpty(ifNoneMatch))
+            return false;
+
+        if (ifNoneMatch.equals(lastModified))
+            return true;
+
+        for (String name : names)
+            if (uri.contains(name))
                 return true;
 
         return false;
