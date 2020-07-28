@@ -1,6 +1,6 @@
 package org.lpw.photon.ctrl.context;
 
-import org.lpw.photon.ctrl.Coder;
+import org.lpw.photon.ctrl.Codec;
 import org.lpw.photon.ctrl.execute.Executor;
 import org.lpw.photon.ctrl.execute.ExecutorHelper;
 import org.lpw.photon.ctrl.template.Template;
@@ -31,7 +31,7 @@ public class ResponseImpl implements Response, ResponseAware {
     @Inject
     private TemplateHelper templateHelper;
     @Inject
-    private Optional<Coder> coder;
+    private Optional<Codec> codec;
     private ThreadLocal<ResponseAdapter> adapter = new ThreadLocal<>();
     private ThreadLocal<String> contentType = new ThreadLocal<>();
 
@@ -68,7 +68,7 @@ public class ResponseImpl implements Response, ResponseAware {
                 templateHelper.setTemplate(null);
             }
             setContentType(template);
-            if (!coder.isPresent()) {
+            if (!codec.isPresent()) {
                 template.process(view, object, getOutputStream());
                 adapter.get().send();
 
@@ -78,7 +78,7 @@ public class ResponseImpl implements Response, ResponseAware {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             template.process(view, object, baos);
             baos.close();
-            getOutputStream().write(coder.get().encode(baos.toByteArray()));
+            getOutputStream().write(codec.get().encode(baos.toByteArray()));
             adapter.get().send();
         } catch (Exception e) {
             logger.warn(e, "返回输出结果时发生异常！");

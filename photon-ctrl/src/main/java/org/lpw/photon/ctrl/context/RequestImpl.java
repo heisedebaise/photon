@@ -2,10 +2,15 @@ package org.lpw.photon.ctrl.context;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.lpw.photon.ctrl.Coder;
+import org.lpw.photon.ctrl.Codec;
 import org.lpw.photon.dao.model.Model;
 import org.lpw.photon.dao.model.ModelHelper;
-import org.lpw.photon.util.*;
+import org.lpw.photon.util.Context;
+import org.lpw.photon.util.Converter;
+import org.lpw.photon.util.DateTime;
+import org.lpw.photon.util.Json;
+import org.lpw.photon.util.Numeric;
+import org.lpw.photon.util.Validator;
 import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
@@ -36,7 +41,7 @@ public class RequestImpl implements Request, RequestAware {
     @Inject
     private ModelHelper modelHelper;
     @Inject
-    private Optional<Coder> coder;
+    private Optional<Codec> codec;
 
     @Override
     public String getId() {
@@ -119,7 +124,7 @@ public class RequestImpl implements Request, RequestAware {
 
         Map<String, String> map = getAdapter().getMap();
 
-        return coder.isPresent() ? coder.get().decode(map) : map;
+        return codec.isPresent() ? codec.get().decode(map) : map;
     }
 
     @Override

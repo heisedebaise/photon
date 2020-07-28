@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * @author lpw
  */
-public interface Coder {
+public interface Codec {
     /**
      * 对请求参数进行解码。
      *
