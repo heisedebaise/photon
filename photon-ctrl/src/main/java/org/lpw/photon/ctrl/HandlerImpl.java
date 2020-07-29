@@ -88,7 +88,7 @@ public class HandlerImpl implements Handler, MinuteJob {
         Set<Integer> set = new HashSet<>();
         futures.forEach((key, list) -> {
             if (list.isEmpty()) {
-                if (System.currentTimeMillis() - times.getOrDefault(key, 0L) > maxIdle * TimeUnit.Minute.getTime())
+                if (System.currentTimeMillis() - times.getOrDefault(key, 0L) > TimeUnit.Minute.getTime(maxIdle))
                     set.add(key);
 
                 return;

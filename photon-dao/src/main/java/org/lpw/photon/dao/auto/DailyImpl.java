@@ -44,11 +44,11 @@ public class DailyImpl implements Daily {
             if (string.startsWith("DROP TABLE"))
                 for (int i = modelTable.getDailyOverdue(), max = i << 1; i < max; i++)
                     executer.execute(dataSource, string.replaceFirst(tableName, modelTable.getTableName(
-                            new Date(now - i * TimeUnit.Day.getTime()))), false);
+                            new Date(now - TimeUnit.Day.getTime(i)))), false);
 
             for (int i = 0; i < 3; i++)
                 executer.execute(dataSource, string.replaceFirst(tableName, modelTable.getTableName(
-                        new Date(now + i * TimeUnit.Day.getTime()))), true);
+                        new Date(now + TimeUnit.Day.getTime(i)))), true);
         }
     }
 }

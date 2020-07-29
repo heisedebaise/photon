@@ -41,4 +41,14 @@ public enum TimeUnit {
     public long getTime() {
         return time;
     }
+
+    /**
+     * 获取时间值。
+     *
+     * @param n 时间。
+     * @return 时间值。
+     */
+    public long getTime(int n) {
+        return n * time;
+    }
 }

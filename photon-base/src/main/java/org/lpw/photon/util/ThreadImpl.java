@@ -16,12 +16,12 @@ public class ThreadImpl implements Thread {
 
     @Override
     public void sleep(int time, TimeUnit unit) {
-        sleep(time * unit.getTime());
+        sleep(unit.getTime(time));
     }
 
     @Override
     public void sleep(int min, int max, TimeUnit unit) {
-        sleep(generator.random(min * unit.getTime(), max * unit.getTime()));
+        sleep(generator.random(unit.getTime(min), unit.getTime(max)));
     }
 
     private void sleep(long time) {
