@@ -221,4 +221,9 @@ public class JsonImpl implements Json {
     public JSONObject copy(JSONObject object) {
         return object == null ? null : toObject(toString(object));
     }
+
+    @Override
+    public JSONArray copy(JSONArray array) {
+        return array == null ? null : toArray(toString(array));
+    }
 }

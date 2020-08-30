@@ -150,4 +150,12 @@ public interface Json {
      * @return 新JSON对象。
      */
     JSONObject copy(JSONObject object);
+
+    /**
+     * 复制。
+     *
+     * @param array 源JSON对象。
+     * @return 新JSON对象。
+     */
+    JSONArray copy(JSONArray array);
 }
