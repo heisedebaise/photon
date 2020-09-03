@@ -19,7 +19,7 @@ public class SignValidatorSupport extends ValidatorSupport implements SignValida
     private Header header;
     @Inject
     private TrustfulIp trustfulIp;
-    private ThreadLocal<Boolean> threadLocal = new ThreadLocal<>();
+    private final ThreadLocal<Boolean> threadLocal = new ThreadLocal<>();
 
     @Override
     public void setSignEnable(boolean enable) {
