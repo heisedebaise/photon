@@ -18,13 +18,13 @@ import java.util.Set;
  * @author lpw
  */
 public class SimpleUploadReader implements UploadReader {
-    private String name;
+    private final String name;
     private String fileName;
     private String contentType;
-    private String base64;
-    private String string;
-    private String url;
-    private Map<String, String> map;
+    private final String base64;
+    private final String string;
+    private final String url;
+    private final Map<String, String> map;
     private byte[] bytes;
     private InputStream inputStream;
 
