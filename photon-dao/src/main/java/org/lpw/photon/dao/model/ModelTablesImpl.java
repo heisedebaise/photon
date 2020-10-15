@@ -115,7 +115,7 @@ public class ModelTablesImpl implements ModelTables, ContextRefreshedListener {
 
     private void name(Class<? extends Model> modelClass, ModelTable modelTable, Model model) {
         try {
-            Field name = modelClass.getField("NAME");
+            Field name = modelClass.getDeclaredField("NAME");
             name.setAccessible(true);
             modelTable.setName((String) name.get(model));
         } catch (Exception e) {
