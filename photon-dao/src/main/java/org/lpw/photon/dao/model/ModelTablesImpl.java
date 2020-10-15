@@ -4,11 +4,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.lpw.photon.bean.BeanFactory;
 import org.lpw.photon.bean.ContextRefreshedListener;
 import org.lpw.photon.util.Converter;
+import org.lpw.photon.util.Logger;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Map;
@@ -23,6 +25,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ModelTablesImpl implements ModelTables, ContextRefreshedListener {
     @Inject
     private Converter converter;
+    @Inject
+    private Logger logger;
     @Inject
     private Optional<Set<Model>> models;
     private Map<Class<? extends Model>, ModelTable> map;
@@ -52,16 +56,19 @@ public class ModelTablesImpl implements ModelTables, ContextRefreshedListener {
             return;
 
         map = new ConcurrentHashMap<>();
-        models.ifPresent(set -> set.forEach(model -> parse(model.getClass())));
+        models.ifPresent(set -> set.forEach(model -> parse(model)));
     }
 
-    private void parse(Class<? extends Model> modelClass) {
+    private void parse(Model model) {
+        Class<? extends Model> modelClass = model.getClass();
         Table table = modelClass.getAnnotation(Table.class);
         if (table == null)
             return;
 
         ModelTable modelTable = BeanFactory.getBean(ModelTable.class);
         modelTable.setModelClass(modelClass);
+        name(modelClass, modelTable, model);
+
         DataSource dataSource = modelClass.getAnnotation(DataSource.class);
         if (dataSource != null)
             modelTable.setDataSource(dataSource.key());
@@ -104,6 +111,17 @@ public class ModelTablesImpl implements ModelTables, ContextRefreshedListener {
         }
 
         map.put(modelClass, modelTable);
+    }
+
+    private void name(Class<? extends Model> modelClass, ModelTable modelTable, Model model) {
+        try {
+            Field name = modelClass.getField("NAME");
+            name.setAccessible(true);
+            modelTable.setName((String) name.get(model));
+        } catch (Exception e) {
+            logger.warn(e, "获取Model NAME值时发生异常！");
+        }
+
     }
 
     private boolean startsWith(String name, char ch) {

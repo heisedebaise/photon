@@ -28,6 +28,20 @@ public interface ModelTable {
     void setModelClass(Class<? extends Model> modelClass);
 
     /**
+     * 获取NAME值。
+     *
+     * @return NAME值。
+     */
+    String getName();
+
+    /**
+     * 设置NAME值。
+     *
+     * @param name NAME值。
+     */
+    void setName(String name);
+
+    /**
      * 获取数据源配置。
      *
      * @return 数据源配置。
