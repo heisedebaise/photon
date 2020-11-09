@@ -4,6 +4,7 @@ import org.lpw.photon.crypto.Sign;
 import org.lpw.photon.ctrl.context.Header;
 import org.lpw.photon.ctrl.security.TrustfulIp;
 import org.lpw.photon.util.Logger;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.inject.Inject;
 
@@ -19,6 +20,8 @@ public class SignValidatorSupport extends ValidatorSupport implements SignValida
     private Header header;
     @Inject
     private TrustfulIp trustfulIp;
+    @Value("${photon.ctrl.illegal-sign:999995}")
+    private int failureCode;
     private final ThreadLocal<Boolean> threadLocal = new ThreadLocal<>();
 
     @Override
@@ -43,7 +46,7 @@ public class SignValidatorSupport extends ValidatorSupport implements SignValida
 
     @Override
     public int getFailureCode(ValidateWrapper validate) {
-        return 999995;
+        return failureCode;
     }
 
     @Override
