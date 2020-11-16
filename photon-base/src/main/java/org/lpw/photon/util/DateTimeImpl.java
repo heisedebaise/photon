@@ -25,9 +25,9 @@ public class DateTimeImpl implements DateTime {
     private Context context;
     @Inject
     private Logger logger;
-    private Map<String, FastDateFormat> dateFormatMap = new ConcurrentHashMap<>();
-    private Map<Locale, String> dateFormat = new ConcurrentHashMap<>();
-    private Map<Locale, String> dateTimeFormat = new ConcurrentHashMap<>();
+    private final Map<String, FastDateFormat> dateFormatMap = new ConcurrentHashMap<>();
+    private final Map<Locale, String> dateFormat = new ConcurrentHashMap<>();
+    private final Map<Locale, String> dateTimeFormat = new ConcurrentHashMap<>();
 
     @Override
     public java.sql.Date today() {
