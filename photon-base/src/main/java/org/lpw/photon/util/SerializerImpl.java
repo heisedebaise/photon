@@ -26,8 +26,8 @@ public class SerializerImpl implements Serializer {
     private Io io;
     @Inject
     private Logger logger;
-    private byte[] jsonObject = "json->object::".getBytes();
-    private byte[] jsonArray = "json->array::".getBytes();
+    private final byte[] jsonObject = "json->object::".getBytes();
+    private final byte[] jsonArray = "json->array::".getBytes();
 
     @Override
     public byte[] serialize(Object object) {
