@@ -188,7 +188,7 @@ public class ServiceHelperImpl implements ServiceHelper {
         cors.set(request, response);
         OutputStream outputStream = setContext(request, response, uri, sessionId);
         if (timeHash.isEnable() && !timeHash.valid(request.getIntHeader("time-hash")) && !status.isStatus(uri)
-                && (!ignoreTimeHash.isPresent() || !ignoreTimeHash.get().ignore())) {
+                && (ignoreTimeHash.isEmpty() || !ignoreTimeHash.get().ignore())) {
             if (logger.isDebugEnable())
                 logger.debug("请求[{}]TimeHash[{}]验证不通过。", uri, request.getIntHeader("time-hash"));
 

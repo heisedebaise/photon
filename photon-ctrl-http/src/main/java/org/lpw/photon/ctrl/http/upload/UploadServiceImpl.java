@@ -50,6 +50,9 @@ public class UploadServiceImpl implements UploadService, IgnoreUri, ContextRefre
 
     @Override
     public void upload(HttpServletRequest request, HttpServletResponse response, String uploader) {
+        if (logger.isDebugEnable())
+            logger.debug("开始处理HTTP文件上传。");
+
         cors.set(request, response);
         if (cors.is(request, response))
             return;
@@ -59,11 +62,29 @@ public class UploadServiceImpl implements UploadService, IgnoreUri, ContextRefre
             List<UploadReader> readers = new ArrayList<>();
             Map<String, String> map = new HashMap<>();
             request.getParameterMap().forEach((name, value) -> map.put(name, converter.toString(value)));
-            for (Part part : request.getParts())
-                if (!map.containsKey(part.getName()) && !validator.isEmpty(part.getSubmittedFileName()) && part.getSize() <= maxFileSize)
-                    readers.add(new HttpUploadReader(part, map));
-            if (readers.isEmpty())
+            for (Part part : request.getParts()) {
+                if (map.containsKey(part.getName()))
+                    continue;
+
+                if (validator.isEmpty(part.getSubmittedFileName())) {
+                    logger.warn(null, "上传文件名为空！");
+
+                    continue;
+                }
+
+                if (part.getSize() > maxFileSize) {
+                    logger.warn(null, "上传文件大小[{}]超过最大限制[{}:{}]！", part.getSize(), maxSize, maxFileSize);
+
+                    continue;
+                }
+
+                readers.add(new HttpUploadReader(part, map));
+            }
+            if (readers.isEmpty()) {
+                logger.warn(null, "上传文件流为空！");
+
                 return;
+            }
 
             response.setContentType("application/json");
             response.setCharacterEncoding(context.getCharset(null));
