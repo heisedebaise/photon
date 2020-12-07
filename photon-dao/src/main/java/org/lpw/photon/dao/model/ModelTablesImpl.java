@@ -84,7 +84,7 @@ public class ModelTablesImpl implements ModelTables, ContextRefreshedListener {
         Method[] methods = modelClass.getMethods();
         for (Method method : methods) {
             String name = method.getName();
-            if (name.length() < 3 || name.equals("setId"))
+            if (name.length() < 3 || name.equals("setId") || name.equals("getClass"))
                 continue;
 
             if (name.equals("getId")) {

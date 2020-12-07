@@ -53,15 +53,15 @@ public class ModelTableImpl implements ModelTable {
     private int dailyOverdue;
     private String idColumnName;
     private boolean uuid;
-    private Map<String, Method> getMethods = new HashMap<>();
-    private Map<String, Jsonable> jsonables = new HashMap<>();
-    private Map<String, ManyToOne> manyToOnes = new HashMap<>();
-    private Map<String, Method> setMethods = new HashMap<>();
-    private Map<String, Class<?>> types = new HashMap<>();
-    private Map<String, String> lowerCases = new HashMap<>();
-    private Map<String, String> columns = new HashMap<>();
-    private Set<String> natives = new HashSet<>();
-    private ThreadLocal<String> instantTableName = new ThreadLocal<>();
+    private final Map<String, Method> getMethods = new HashMap<>();
+    private final Map<String, Jsonable> jsonables = new HashMap<>();
+    private final Map<String, ManyToOne> manyToOnes = new HashMap<>();
+    private final Map<String, Method> setMethods = new HashMap<>();
+    private final Map<String, Class<?>> types = new HashMap<>();
+    private final Map<String, String> lowerCases = new HashMap<>();
+    private final Map<String, String> columns = new HashMap<>();
+    private final Set<String> natives = new HashSet<>();
+    private final ThreadLocal<String> instantTableName = new ThreadLocal<>();
 
     @Override
     public Class<? extends Model> getModelClass() {
@@ -320,8 +320,7 @@ public class ModelTableImpl implements ModelTable {
             StringBuilder sb = new StringBuilder().append(v);
             int indexOf = v.indexOf('.');
             int point = indexOf == -1 ? 0 : (v.length() - indexOf - 1);
-            for (int i = point; i < ns[0]; i++)
-                sb.append('0');
+            sb.append("0".repeat(Math.max(0, ns[0] - point)));
             if (indexOf > -1) {
                 if (point > ns[0])
                     sb.delete(indexOf + ns[0] + 1, sb.length());
