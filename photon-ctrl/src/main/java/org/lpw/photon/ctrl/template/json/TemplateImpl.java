@@ -75,7 +75,7 @@ public class TemplateImpl extends TemplateSupport {
     private Object pack(Object object) {
         if (object instanceof JSONObject) {
             JSONObject json = (JSONObject) object;
-            if (json.containsKey("code")) {
+            if (json.containsKey("code") && (json.containsKey("data") || json.containsKey("message"))) {
                 putIdTime(json);
 
                 return object;
