@@ -13,11 +13,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>20030203.000550</version>
-        </dependency>
-        <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-bundle</artifactId>
             <version>1.19.4</version>
