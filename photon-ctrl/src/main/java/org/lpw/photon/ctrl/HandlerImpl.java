@@ -29,9 +29,9 @@ public class HandlerImpl implements Handler, MinuteJob {
     private boolean queue;
     @Value("${photon.ctrl.handler.max-idle:30}")
     private int maxIdle;
-    private Map<Integer, ExecutorService> executors = new ConcurrentHashMap<>();
-    private Map<Integer, List<Future<?>>> futures = new ConcurrentHashMap<>();
-    private Map<Integer, Long> times = new ConcurrentHashMap<>();
+    private final Map<Integer, ExecutorService> executors = new ConcurrentHashMap<>();
+    private final Map<Integer, List<Future<?>>> futures = new ConcurrentHashMap<>();
+    private final Map<Integer, Long> times = new ConcurrentHashMap<>();
 
     @Override
     public <T> T call(String key, Callable<T> callable) throws Exception {

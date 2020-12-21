@@ -87,6 +87,15 @@ public interface UploadListener {
     }
 
     /**
+     * 是否自动解压缩。
+     *
+     * @return true-是；false-否。
+     */
+    default boolean unzip() {
+        return false;
+    }
+
+    /**
      * 上传完成。
      *
      * @param uploadReader 上传数据读取器。

@@ -6,7 +6,13 @@ import org.lpw.photon.bean.BeanFactory;
 import org.lpw.photon.bean.ContextRefreshedListener;
 import org.lpw.photon.storage.Storage;
 import org.lpw.photon.storage.Storages;
-import org.lpw.photon.util.*;
+import org.lpw.photon.util.DateTime;
+import org.lpw.photon.util.Generator;
+import org.lpw.photon.util.Image;
+import org.lpw.photon.util.Json;
+import org.lpw.photon.util.Logger;
+import org.lpw.photon.util.Message;
+import org.lpw.photon.util.Validator;
 import org.lpw.photon.wormhole.WormholeHelper;
 import org.springframework.stereotype.Service;
 
@@ -106,6 +112,8 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         if (object == null)
             object = save(name, uploadListener, uploadReader, contentType);
         uploadReader.delete();
+        if (uploadListener.unzip()) {
+        }
         uploadListener.complete(uploadReader, object);
 
         return object;
