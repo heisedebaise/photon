@@ -62,8 +62,8 @@ public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedList
     private ExecutorHelper executorHelper;
     @Inject
     private Optional<Permit> permit;
-    private ThreadLocal<Long> time = new ThreadLocal<>();
-    private ThreadLocal<Map<String, Object>> parameters = new ThreadLocal<>();
+    private final ThreadLocal<Long> time = new ThreadLocal<>();
+    private final ThreadLocal<Map<String, Object>> parameters = new ThreadLocal<>();
     private List<Interceptor> interceptors;
 
     @Override

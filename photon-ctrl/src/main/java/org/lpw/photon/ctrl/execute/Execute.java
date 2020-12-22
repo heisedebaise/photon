@@ -25,6 +25,13 @@ public @interface Execute {
     String name();
 
     /**
+     * 是否正则表达式。
+     *
+     * @return 是否正则表达式。
+     */
+    boolean regex() default false;
+
+    /**
      * 资源key。
      *
      * @return 资源key。

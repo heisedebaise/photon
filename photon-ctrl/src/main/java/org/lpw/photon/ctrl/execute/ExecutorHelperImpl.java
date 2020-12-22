@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import javax.inject.Inject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -37,9 +38,10 @@ public class ExecutorHelperImpl implements ExecutorHelper, FailureCode, ContextR
     private Request request;
     @Inject
     private Optional<Set<ExecuteListener>> listeners;
-    private Map<String, Executor> map;
-    private Map<String, String> codes;
-    private ThreadLocal<Executor> executors = new ThreadLocal<>();
+    private final Map<String, Executor> map = new HashMap<>();
+    private final Set<String> regexes = new HashSet<>();
+    private final Map<String, String> codes = new HashMap<>();
+    private final ThreadLocal<Executor> executors = new ThreadLocal<>();
 
     @Override
     public void set(String service) {
@@ -47,7 +49,7 @@ public class ExecutorHelperImpl implements ExecutorHelper, FailureCode, ContextR
         if (setByKey(service))
             return;
 
-        for (String regex : map.keySet())
+        for (String regex : regexes)
             if (validator.isMatchRegex(regex, service) && setByKey(regex))
                 return;
     }
@@ -99,15 +101,14 @@ public class ExecutorHelperImpl implements ExecutorHelper, FailureCode, ContextR
 
     @Override
     public void onContextRefreshed() {
-        if (map != null)
+        if (!map.isEmpty())
             return;
 
-        map = new HashMap<>();
-        codes = new HashMap<>();
         for (String name : BeanFactory.getBeanNames()) {
             Class<?> clazz = BeanFactory.getBeanClass(name);
             Execute classExecute = clazz.getAnnotation(Execute.class);
             String prefix = classExecute == null ? "" : classExecute.name();
+            boolean regex = classExecute != null && classExecute.regex();
             String prefixCode = classExecute == null ? "" : classExecute.code();
             for (Method method : clazz.getMethods()) {
                 Execute execute = method.getAnnotation(Execute.class);
@@ -120,6 +121,8 @@ public class ExecutorHelperImpl implements ExecutorHelper, FailureCode, ContextR
                 for (String service : converter.toArray(execute.name(), ",")) {
                     String key = prefix + service;
                     map.put(key, executor);
+                    if (regex || execute.regex())
+                        regexes.add(key);
                     codes.put(key, code);
                 }
                 listeners.ifPresent(set -> set.forEach(listener -> listener.definition(classExecute, execute, executor)));
