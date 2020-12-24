@@ -51,4 +51,13 @@ public enum TimeUnit {
     public long getTime(int n) {
         return n * time;
     }
+
+    /**
+     * 获取当前时间数。
+     *
+     * @return 当前时间数。
+     */
+    public long now() {
+        return System.currentTimeMillis() / time;
+    }
 }
