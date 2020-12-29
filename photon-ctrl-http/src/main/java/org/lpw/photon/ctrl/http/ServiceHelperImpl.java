@@ -218,7 +218,7 @@ public class ServiceHelperImpl implements ServiceHelper {
 
         response.setHeader("Cache-Control", "no-cache");
         String ifNoneMatch = request.getHeader("If-None-Match");
-        String lastModified = numeric.toString(file.lastModified(), "0");
+        String lastModified = numeric.toString(file.lastModified());
         if (notModified(ifNoneMatch, lastModified, uri))
             response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
         else

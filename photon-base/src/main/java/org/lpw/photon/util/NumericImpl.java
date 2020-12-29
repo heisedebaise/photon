@@ -242,6 +242,11 @@ public class NumericImpl implements Numeric {
     }
 
     @Override
+    public String toString(Number number) {
+        return toString(number, "0");
+    }
+
+    @Override
     public String toString(Number number, String format) {
         return formats.computeIfAbsent(format, DecimalFormat::new).format(number);
     }

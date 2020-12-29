@@ -163,6 +163,14 @@ public interface Numeric {
      * 按指定格式将数值格式化为字符串。
      *
      * @param number 要进行格式化的数值。
+     * @return 格式化后的数值字符串。
+     */
+    String toString(Number number);
+
+    /**
+     * 按指定格式将数值格式化为字符串。
+     *
+     * @param number 要进行格式化的数值。
      * @param format 目标格式。
      * @return 格式化后的数值字符串。
      */
