@@ -42,16 +42,18 @@ public interface Session {
      * 移除Session值。
      *
      * @param key 引用key。
+     * @return 值；如果不存在则返回null。
      */
-    void remove(String key);
+    <T> T remove(String key);
 
     /**
      * 移除Session值。
      *
      * @param id  Session ID。
      * @param key 引用key。
+     * @return 值；如果不存在则返回null。
      */
-    void remove(String id, String key);
+    <T> T remove(String id, String key);
 
     /**
      * 获得Session ID值。

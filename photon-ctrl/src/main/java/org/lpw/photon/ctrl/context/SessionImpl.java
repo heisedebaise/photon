@@ -45,15 +45,16 @@ public class SessionImpl implements Session, SessionAware {
     }
 
     @Override
-    public void remove(String key) {
-        remove(getId(), key);
+    public <T> T remove(String key) {
+        return remove(getId(), key);
     }
 
     @Override
-    public void remove(String id, String key) {
+    public <T> T remove(String id, String key) {
         String cacheKey = getCacheKey(id, key);
         context.removeThreadLocal(cacheKey);
-        cache.remove(cacheKey);
+
+        return cache.remove(cacheKey);
     }
 
     private String getCacheKey(String id, String key) {
