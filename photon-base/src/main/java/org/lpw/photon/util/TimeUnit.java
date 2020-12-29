@@ -60,4 +60,14 @@ public enum TimeUnit {
     public long now() {
         return System.currentTimeMillis() / time;
     }
+
+    /**
+     * 获取当前时间数。
+     *
+     * @param n 时间。
+     * @return 当前时间数。
+     */
+    public long now(int n) {
+        return System.currentTimeMillis() / n / time;
+    }
 }

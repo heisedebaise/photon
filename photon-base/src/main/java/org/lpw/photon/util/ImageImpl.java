@@ -113,14 +113,11 @@ public class ImageImpl implements Image {
     }
 
     private String toString(Format format) {
-        switch (format) {
-            case Jpeg:
-                return "JPEG";
-            case Gif:
-                return "GIF";
-            default:
-                return "PNG";
-        }
+        return switch (format) {
+            case Jpeg -> "JPEG";
+            case Gif -> "GIF";
+            default -> "PNG";
+        };
     }
 
     @Override
@@ -142,15 +139,11 @@ public class ImageImpl implements Image {
 
     @Override
     public Format formatFromContentType(String contentType) {
-        switch (contentType) {
-            case "image/jpeg":
-            case "image/jpg":
-                return Format.Jpeg;
-            case "image/gif":
-                return Format.Gif;
-            default:
-                return Format.Png;
-        }
+        return switch (contentType) {
+            case "image/jpeg", "image/jpg" -> Format.Jpeg;
+            case "image/gif" -> Format.Gif;
+            default -> Format.Png;
+        };
     }
 
     @Override
@@ -160,20 +153,14 @@ public class ImageImpl implements Image {
                 || (indexOf = name.lastIndexOf('.')) == -1)
             return false;
 
-        String suffix = name.substring(indexOf);
-        switch (contentType) {
-            case "image/jpeg":
-            case "image/jpg":
-                return suffix.equals(".jpg") || suffix.equals(".jpeg");
-            case "image/png":
-                return suffix.equals(".png");
-            case "image/gif":
-                return suffix.equals(".gif");
-            case "image/svg+xml":
-                return suffix.equals(".svg") || suffix.equals(".svg+xml");
-            default:
-                return false;
-        }
+        String suffix = name.substring(indexOf).toLowerCase();
+        return switch (contentType) {
+            case "image/jpeg", "image/jpg" -> suffix.equals(".jpg") || suffix.equals(".jpeg");
+            case "image/png" -> suffix.equals(".png");
+            case "image/gif" -> suffix.equals(".gif");
+            case "image/svg+xml" -> suffix.equals(".svg") || suffix.equals(".svg+xml");
+            default -> false;
+        };
     }
 
     @Override
