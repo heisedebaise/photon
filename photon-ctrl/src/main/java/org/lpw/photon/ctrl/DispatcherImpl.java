@@ -2,6 +2,7 @@ package org.lpw.photon.ctrl;
 
 import org.lpw.photon.atomic.Closables;
 import org.lpw.photon.atomic.Failable;
+import org.lpw.photon.bean.BeanFactory;
 import org.lpw.photon.bean.ContextRefreshedListener;
 import org.lpw.photon.ctrl.console.Console;
 import org.lpw.photon.ctrl.context.Header;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -57,14 +57,10 @@ public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedList
     @Inject
     private Validators validators;
     @Inject
-    private Optional<List<Interceptor>> interceptorsOptional;
-    @Inject
     private ExecutorHelper executorHelper;
-    @Inject
-    private Optional<Permit> permit;
     private final ThreadLocal<Long> time = new ThreadLocal<>();
     private final ThreadLocal<Map<String, Object>> parameters = new ThreadLocal<>();
-    private List<Interceptor> interceptors;
+    private final List<Interceptor> interceptors = new ArrayList<>();
 
     @Override
     public void execute() {
@@ -136,9 +132,6 @@ public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedList
 
     private Object exe() {
         try {
-            if (permit.isPresent() && !permit.get().allow())
-                return Failure.NotPermit;
-
             return new ExecuteInvocation(interceptors, validators, executorHelper.get()).invoke();
         } catch (Throwable e) {
             failables.forEach(failable -> failable.fail(e));
@@ -188,10 +181,8 @@ public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedList
 
     @Override
     public void onContextRefreshed() {
-        interceptors = new ArrayList<>();
-        interceptorsOptional.ifPresent(list -> {
-            interceptors.addAll(list);
-            interceptors.sort(Comparator.comparingInt(Interceptor::getSort));
-        });
+        interceptors.clear();
+        interceptors.addAll(BeanFactory.getBeans(Interceptor.class));
+        interceptors.sort(Comparator.comparingInt(Interceptor::getSort));
     }
 }

@@ -39,6 +39,13 @@ public @interface Execute {
     String key() default "";
 
     /**
+     * 授权。
+     *
+     * @return 授权。
+     */
+    String permit() default "";
+
+    /**
      * 验证规则集。
      *
      * @return 验证规则集。

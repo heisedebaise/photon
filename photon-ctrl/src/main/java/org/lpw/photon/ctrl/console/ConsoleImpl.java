@@ -57,23 +57,23 @@ public class ConsoleImpl implements Console, ContextRefreshedListener {
     @Override
     public JSONObject execute() {
         if (!isAllowIp())
-            return json(9901, null);
+            return json(999901, null);
 
         if (!sign.verify(request.getMap(), "photon-ctrl-console"))
-            return json(9995, null);
+            return json(999995, null);
 
         String beanName = request.get("beanName");
         if (validator.isEmpty(beanName))
-            return json(9902, null);
+            return json(999902, null);
 
         String fieldName = request.get("fieldName");
         String methodName = request.get("methodName");
         if (validator.isEmpty(methodName) && validator.isEmpty(fieldName))
-            return json(9903, null);
+            return json(999903, null);
 
         Object bean = BeanFactory.getBean(beanName);
         if (bean == null)
-            return json(9904, null);
+            return json(999904, null);
 
         List<Class<?>> classes = new ArrayList<>();
         List<Object> args = new ArrayList<>();
@@ -84,7 +84,7 @@ public class ConsoleImpl implements Console, ContextRefreshedListener {
         } catch (Exception e) {
             logger.warn(e, "执行控制器时发生异常！");
 
-            return json(9999, null);
+            return json(999909, null);
         }
     }
 

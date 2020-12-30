@@ -33,6 +33,13 @@ public interface Executor {
     String getKey();
 
     /**
+     * 获取授权。
+     *
+     * @return 授权。
+     */
+    String getPermit();
+
+    /**
      * 获取验证规则集。
      *
      * @return 验证规则集。
