@@ -26,6 +26,16 @@ public class IoImpl implements Io {
     private Validator validator;
 
     @Override
+    public boolean exists(File path) {
+        return path != null && path.exists();
+    }
+
+    @Override
+    public boolean exists(String path) {
+        return exists(new File(path));
+    }
+
+    @Override
     public void mkdirs(File file) {
         if (file == null || file.exists())
             return;

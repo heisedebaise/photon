@@ -12,6 +12,22 @@ import java.io.OutputStream;
  */
 public interface Io {
     /**
+     * 判断路径是否存在。
+     *
+     * @param path 目录。
+     * @return 如果存在则返回true；否则返回false。
+     */
+    boolean exists(File path);
+
+    /**
+     * 判断路径是否存在。
+     *
+     * @param path 目录。
+     * @return 如果存在则返回true；否则返回false。
+     */
+    boolean exists(String path);
+
+    /**
      * 创建目录（集）。
      *
      * @param file 目录。
