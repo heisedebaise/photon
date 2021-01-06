@@ -252,7 +252,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
     private void execute(HttpUriRequest request, Map<String, String> requestHeaders, Map<String, String> responseHeaders,
                          OutputStream outputStream) {
         if (!validator.isEmpty(requestHeaders))
-            requestHeaders.keySet().stream().filter(key -> !key.toLowerCase().equals("content-length"))
+            requestHeaders.keySet().stream().filter(key -> !key.equalsIgnoreCase("content-length"))
                     .forEach(key -> request.addHeader(key, requestHeaders.get(key)));
         try (CloseableHttpResponse response = HttpClients.custom().setConnectionManager(null).build()
                 .execute(request, HttpClientContext.create())) {
