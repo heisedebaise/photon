@@ -274,7 +274,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
             logger.info(null, "执行HTTP请求[{}:{}:{}]！", request.getMethod(), request.getURI(), statusCode);
         } catch (Throwable throwable) {
             request.abort();
-            logger.warn(throwable, "执行HTTP请求时发生异常[{}]！");
+            logger.warn(throwable, "执行HTTP请求时发生异常！");
         }
     }
 

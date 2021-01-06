@@ -87,4 +87,13 @@ public interface Digest {
      * @return HmacSHA1消息摘要；如果提取失败则返回null。
      */
     byte[] hmacSHA1(byte[] key, byte[] bytes);
+
+    /**
+     * SHA256withRSA消息摘要。
+     *
+     * @param key   私钥。
+     * @param bytes 源数据。
+     * @return SHA256withRSA消息摘要；如果提取失败则返回null。
+     */
+    byte[] sha256Rsa(byte[] key, byte[] bytes);
 }
