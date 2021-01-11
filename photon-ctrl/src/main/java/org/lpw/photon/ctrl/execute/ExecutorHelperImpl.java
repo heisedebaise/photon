@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author lpw
@@ -36,7 +37,7 @@ public class ExecutorHelperImpl implements ExecutorHelper, FailureCode, ContextR
     private Templates templates;
     @Inject
     private Request request;
-    private final Map<String, Executor> map = new HashMap<>();
+    private final Map<String, Executor> map = new ConcurrentHashMap<>();
     private final Set<String> regexes = new HashSet<>();
     private final Map<String, String> codes = new HashMap<>();
     private final ThreadLocal<Executor> executor = new ThreadLocal<>();
@@ -60,9 +61,15 @@ public class ExecutorHelperImpl implements ExecutorHelper, FailureCode, ContextR
         if (executor != null)
             return executor;
 
-        for (String regex : regexes)
-            if (validator.isMatchRegex(regex, uri))
-                return map.get(regex);
+        for (String regex : regexes) {
+            if (validator.isMatchRegex(regex, uri)) {
+                executor = map.get(regex);
+                if (executor != null)
+                    map.put(uri, executor);
+
+                return executor;
+            }
+        }
 
         return null;
     }
