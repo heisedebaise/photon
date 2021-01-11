@@ -9,9 +9,9 @@ public interface ExecutorHelper {
     /**
      * 设置当前线程正在执行的执行器。
      *
-     * @param service 服务名称。
+     * @param uri URI。
      */
-    void set(String service);
+    void set(String uri);
 
     /**
      * 获取当前线程正在执行的执行器。
@@ -19,4 +19,12 @@ public interface ExecutorHelper {
      * @return 执行器。
      */
     Executor get();
+
+    /**
+     * 获取执行器。
+     *
+     * @param uri URI。
+     * @return 执行器。
+     */
+    Executor get(String uri);
 }

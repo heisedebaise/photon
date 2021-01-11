@@ -42,30 +42,29 @@ public class ExecutorHelperImpl implements ExecutorHelper, FailureCode, ContextR
     private final ThreadLocal<Executor> executor = new ThreadLocal<>();
 
     @Override
-    public void set(String service) {
+    public void set(String uri) {
         executor.remove();
-        if (setByKey(service))
-            return;
-
-        for (String regex : regexes)
-            if (validator.isMatchRegex(regex, service) && setByKey(regex))
-                return;
-    }
-
-    private boolean setByKey(String key) {
-        Executor executor = map.get(key);
-        if (executor != null) {
+        Executor executor = get(uri);
+        if (executor != null)
             this.executor.set(executor);
-
-            return true;
-        }
-
-        return false;
     }
 
     @Override
     public Executor get() {
         return executor.get();
+    }
+
+    @Override
+    public Executor get(String uri) {
+        Executor executor = map.get(uri);
+        if (executor != null)
+            return executor;
+
+        for (String regex : regexes)
+            if (validator.isMatchRegex(regex, uri))
+                return map.get(regex);
+
+        return null;
     }
 
     @Override
