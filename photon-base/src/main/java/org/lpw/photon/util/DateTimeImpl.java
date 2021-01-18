@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,17 +18,15 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component("photon.util.date-time")
 public class DateTimeImpl implements DateTime {
+    private final String DATE_FORMAT = "yyyy-MM-dd";
+    private final String DATE_TIME_FORMAT = DATE_FORMAT + " HH:mm:ss";
+    private final String DATE_T_TIME_FORMAT = DATE_FORMAT + "THH:mm:ss";
+
     @Inject
     private Validator validator;
     @Inject
-    private Message message;
-    @Inject
-    private Context context;
-    @Inject
     private Logger logger;
     private final Map<String, FastDateFormat> dateFormatMap = new ConcurrentHashMap<>();
-    private final Map<Locale, String> dateFormat = new ConcurrentHashMap<>();
-    private final Map<Locale, String> dateTimeFormat = new ConcurrentHashMap<>();
 
     @Override
     public java.sql.Date today() {
@@ -126,7 +125,7 @@ public class DateTimeImpl implements DateTime {
 
     @Override
     public String toString(Date date) {
-        return toString(date, date instanceof Timestamp ? getDateTimeFormat() : getDateFormat());
+        return toString(date, date instanceof Timestamp ? DATE_TIME_FORMAT : DATE_FORMAT);
     }
 
     @Override
@@ -137,26 +136,24 @@ public class DateTimeImpl implements DateTime {
         if (date instanceof Date)
             return (Date) date;
 
-        if (date instanceof String) {
-            String dateFormat = getDateFormat();
-            String string = (String) date;
+        if (date instanceof LocalDateTime)
+            return new Date(((LocalDateTime) date).toInstant(ZoneOffset.ofHours(8)).toEpochMilli());
 
-            return toDate(string, string.length() == dateFormat.length() ? dateFormat : getDateTimeFormat());
+        if (date instanceof String) {
+            String string = (String) date;
+            switch (string.length()) {
+                case 10 -> toDate(string, DATE_FORMAT);
+                case 19 -> {
+                    if (string.indexOf(' ') > -1)
+                        return toDate(string, DATE_TIME_FORMAT);
+
+                    if (string.indexOf('T') > -1)
+                        return toDate(string, DATE_T_TIME_FORMAT);
+                }
+            }
         }
 
         return null;
-    }
-
-    private String getDateFormat() {
-        Locale locale = context.getLocale();
-
-        return dateFormat.computeIfAbsent(locale, l -> message.get("photon.format.date"));
-    }
-
-    private String getDateTimeFormat() {
-        Locale locale = context.getLocale();
-
-        return dateTimeFormat.computeIfAbsent(locale, l -> message.get("photon.format.date-time"));
     }
 
     @Override
@@ -179,7 +176,7 @@ public class DateTimeImpl implements DateTime {
 
     @Override
     public java.sql.Date toSqlDate(String date) {
-        return toSqlDate(date, getDateFormat());
+        return toSqlDate(date, DATE_FORMAT);
     }
 
     @Override
@@ -206,7 +203,7 @@ public class DateTimeImpl implements DateTime {
         if (dates != null)
             for (int i = 0; i < times.length; i++)
                 if (dates.length > i)
-                    times[i] = dates[i].length() == getDateTimeFormat().length() ? toTime(dates[i]) : (i == 0 ? getStart(dates[i]) : getEnd(dates[i]));
+                    times[i] = dates[i].length() == 19 ? toTime(dates[i]) : (i == 0 ? getStart(dates[i]) : getEnd(dates[i]));
 
         return times;
     }
