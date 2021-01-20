@@ -142,7 +142,9 @@ public class DateTimeImpl implements DateTime {
         if (date instanceof String) {
             String string = (String) date;
             switch (string.length()) {
-                case 10 -> toDate(string, DATE_FORMAT);
+                case 10 -> {
+                    return toDate(string, DATE_FORMAT);
+                }
                 case 19 -> {
                     if (string.indexOf(' ') > -1)
                         return toDate(string, DATE_TIME_FORMAT);
