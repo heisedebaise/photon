@@ -79,20 +79,10 @@ public interface UploadListener {
      * 获取图片大小。
      * 当上传文件为图片时，并且返回的图片大小（长、高）大于0时，自动将图片修改为长宽不超过设置值的图片，并进行压缩。
      *
-     * @param key 上传文件key。
-     * @return 图片大小[长, 高]，如果返回空或0集则表示不需要调整图片。
+     * @return 图片大小[长, 高]或[百分比]，如果返回null则表示不需要调整图片。
      */
-    default int[] getImageSize(String key) {
+    default int[] getImageSize() {
         return null;
-    }
-
-    /**
-     * 是否自动解压缩。
-     *
-     * @return true-是；false-否。
-     */
-    default boolean unzip() {
-        return false;
     }
 
     /**

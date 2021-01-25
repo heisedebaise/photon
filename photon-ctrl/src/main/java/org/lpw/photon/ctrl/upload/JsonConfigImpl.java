@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
  * @author lpw
  */
 public class JsonConfigImpl implements JsonConfig {
-    private Map<Pattern, String> map;
-    private int[] imageSize;
+    private final Map<Pattern, String> map;
+    private final int[] imageSize;
     private long lastModify;
 
     JsonConfigImpl() {
@@ -62,7 +62,7 @@ public class JsonConfigImpl implements JsonConfig {
     }
 
     @Override
-    public int[] getImageSize(String key) {
+    public int[] getImageSize() {
         return imageSize;
     }
 }

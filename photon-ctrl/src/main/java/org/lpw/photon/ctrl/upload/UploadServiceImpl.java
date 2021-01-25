@@ -112,8 +112,6 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         if (object == null)
             object = save(name, uploadListener, uploadReader, contentType);
         uploadReader.delete();
-        if (uploadListener.unzip()) {
-        }
         uploadListener.complete(uploadReader, object);
 
         return object;
@@ -166,9 +164,11 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         String path = newSavePath(contentType, uploadListener.getPath(uploadReader), suffix);
         object.put("path", path);
         uploadReader.write(storage, path);
-        String thumbnail = thumbnail(uploadListener.getImageSize(key), storage, contentType, path);
-        if (thumbnail != null)
-            object.put("thumbnail", thumbnail);
+        if (image.is(contentType, path)) {
+            String thumbnail = thumbnail(uploadListener.getImageSize(), storage, contentType, path);
+            if (thumbnail != null)
+                object.put("thumbnail", thumbnail);
+        }
         if (logger.isDebugEnable())
             logger.debug("保存上传文件[{}]。", object);
 
@@ -186,7 +186,7 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
     }
 
     private String thumbnail(int[] size, Storage storage, String contentType, String path) {
-        if (size == null || size.length != 2 || (size[0] <= 0 && size[1] <= 0))
+        if (size == null || size.length == 0)
             return null;
 
         try {
@@ -194,7 +194,7 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
             if (image == null)
                 return null;
 
-            image = this.image.thumbnail(image, size[0], size[1]);
+            image = size.length == 1 ? this.image.scale(image, 1.0D * size[0] / 100) : this.image.thumbnail(image, size[0], size[1]);
             if (image == null)
                 return null;
 
