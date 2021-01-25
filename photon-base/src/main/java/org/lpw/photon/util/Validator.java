@@ -41,6 +41,14 @@ public interface Validator {
     boolean isMatchRegex(String regex, String string);
 
     /**
+     * 验证字符串是否为ID格式。
+     *
+     * @param string 要进行验证的字符串。
+     * @return 如果是则返回true；否则返回false。
+     */
+    boolean isId(String string);
+
+    /**
      * 验证byte数组是否以指定byte数组开头。
      *
      * @param bytes  byte数组。

@@ -54,6 +54,11 @@ public class ValidatorImpl implements Validator {
     }
 
     @Override
+    public boolean isId(String string) {
+        return isMatchRegex("[\\da-f-]{36}", string) && string.split("-").length == 5;
+    }
+
+    @Override
     public boolean startsWith(byte[] bytes, byte[] prefix) {
         if (isEmpty(bytes) || isEmpty(prefix) || bytes.length < prefix.length)
             return false;
