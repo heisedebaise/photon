@@ -182,7 +182,7 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
 
         int indexOf = uploadReader.getFileName().lastIndexOf('.');
 
-        return indexOf == -1 ? "" : uploadReader.getFileName().substring(indexOf);
+        return indexOf == -1 ? "" : uploadReader.getFileName().substring(indexOf).toLowerCase();
     }
 
     private String thumbnail(int[] size, Storage storage, String contentType, String path) {
