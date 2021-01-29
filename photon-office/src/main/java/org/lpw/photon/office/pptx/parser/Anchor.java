@@ -6,8 +6,6 @@ import java.awt.geom.Rectangle2D;
 
 /**
  * 位置解析器。
- *
- * @author lpw
  */
 public interface Anchor {
     /**

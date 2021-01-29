@@ -6,9 +6,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.context.session")
 public class SessionImpl implements Session, SessionAware {
     private static final String ADAPTER = "photon.ctrl.context.session.adapter";

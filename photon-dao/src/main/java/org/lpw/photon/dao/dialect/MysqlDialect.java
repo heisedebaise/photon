@@ -2,9 +2,6 @@ package org.lpw.photon.dao.dialect;
 
 import org.springframework.stereotype.Repository;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.dialect.mysql")
 public class MysqlDialect extends DialectSupport {
     @Override

@@ -2,9 +2,6 @@ package org.lpw.photon.ctrl.context.json;
 
 import org.lpw.photon.ctrl.context.SessionAdapter;
 
-/**
- * @author lpw
- */
 public class JsonSessionAdapter implements SessionAdapter {
     private String sessionId;
 

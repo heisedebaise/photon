@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl;
 
 /**
  * 调度。用于对请求进行分发。
- *
- * @author lpw
  */
 public interface Dispatcher {
     /**

@@ -2,8 +2,6 @@ package org.lpw.photon.scheduler;
 
 /**
  * 每小时执行定时器任务，每小时执行一次任务。
- *
- * @author lpw
  */
 public interface HourJob {
     /**

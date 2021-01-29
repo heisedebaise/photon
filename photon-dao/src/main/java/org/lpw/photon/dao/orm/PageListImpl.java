@@ -12,9 +12,6 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.orm.page-list")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class PageListImpl<T extends Model> implements PageList<T> {

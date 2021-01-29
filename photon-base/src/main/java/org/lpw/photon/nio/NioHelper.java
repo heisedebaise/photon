@@ -2,9 +2,6 @@ package org.lpw.photon.nio;
 
 import io.netty.channel.ChannelHandlerContext;
 
-/**
- * @author lpw
- */
 public interface NioHelper {
     /**
      * 保存ChannelHandlerContext对象。

@@ -8,8 +8,6 @@ import java.util.List;
 
 /**
  * PPTx读取器。
- *
- * @author lpw
  */
 public interface PptxReader {
     /**

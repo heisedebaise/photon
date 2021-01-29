@@ -2,8 +2,6 @@ package org.lpw.photon.aio;
 
 /**
  * AIO服务器集。
- *
- * @author lpw
  */
 public interface AioServers {
     /**

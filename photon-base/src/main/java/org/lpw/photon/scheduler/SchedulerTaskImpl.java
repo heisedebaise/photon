@@ -12,9 +12,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TimerTask;
 
-/**
- * @author lpw
- */
 @Component("photon.scheduler.task")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class SchedulerTaskImpl extends TimerTask implements SchedulerTask {

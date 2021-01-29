@@ -7,8 +7,6 @@ import java.lang.reflect.Method;
 
 /**
  * 执行器。
- *
- * @author lpw
  */
 public interface Executor {
     /**

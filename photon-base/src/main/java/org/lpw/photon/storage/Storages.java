@@ -2,8 +2,6 @@ package org.lpw.photon.storage;
 
 /**
  * 文件存储处理器集。
- *
- * @author lpw
  */
 public interface Storages {
     /**

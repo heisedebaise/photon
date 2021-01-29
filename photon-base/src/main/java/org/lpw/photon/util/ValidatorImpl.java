@@ -7,9 +7,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
-/**
- * @author lpw
- */
 @Component("photon.util.validator")
 public class ValidatorImpl implements Validator {
     private final Map<String, Pattern> patterns = new ConcurrentHashMap<>();

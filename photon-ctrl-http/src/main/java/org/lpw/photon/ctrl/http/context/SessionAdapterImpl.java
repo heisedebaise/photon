@@ -2,9 +2,6 @@ package org.lpw.photon.ctrl.http.context;
 
 import org.lpw.photon.ctrl.context.SessionAdapter;
 
-/**
- * @author lpw
- */
 public class SessionAdapterImpl implements SessionAdapter {
     protected String sessionId;
 

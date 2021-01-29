@@ -8,8 +8,6 @@ import java.lang.annotation.Target;
 
 /**
  * 定义可转化为JSON的属性。
- *
- * @author lpw
  */
 @Documented
 @Target({ElementType.METHOD})

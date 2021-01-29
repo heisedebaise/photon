@@ -7,9 +7,6 @@ import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Component("photon.util.numeric")
 public class NumericImpl implements Numeric {
     private final String integerPattern = "^[+-]?\\d+$";

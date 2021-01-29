@@ -2,9 +2,6 @@ package org.lpw.photon.ctrl.validate;
 
 import org.springframework.stereotype.Controller;
 
-/**
- * @author lpw
- */
 @Controller(Validators.GREATER_THAN)
 public class GreaterThanValidatorImpl extends ValidatorSupport {
     @Override

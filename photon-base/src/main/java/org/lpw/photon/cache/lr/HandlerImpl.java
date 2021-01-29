@@ -5,9 +5,6 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Component("photon.cache.lr.handler")
 public class HandlerImpl implements Handler {
     @Inject

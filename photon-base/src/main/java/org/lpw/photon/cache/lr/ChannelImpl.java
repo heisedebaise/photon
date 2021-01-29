@@ -10,9 +10,6 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.util.Arrays;
 
-/**
- * @author lpw
- */
 @Component("photon.cache.lr.channel")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class ChannelImpl implements Channel, ClientListener {

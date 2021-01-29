@@ -16,9 +16,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.orm.hibernate")
 public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements HibernateOrm {
     private static final String[] ARG = {"?", ":arg", "arg"};

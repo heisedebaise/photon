@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.validate;
 
 /**
  * 验证规则。
- *
- * @author lpw
  */
 public interface ValidateWrapper {
     /**

@@ -6,8 +6,6 @@ import java.util.Map;
 
 /**
  * XML操作。
- *
- * @author lpw
  */
 public interface Xml {
     /**

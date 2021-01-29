@@ -22,9 +22,6 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * @author lpw
- */
 @Component("photon.office.pptx.parser.texture")
 public class TextureImpl implements Simple {
     @Inject

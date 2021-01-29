@@ -11,8 +11,6 @@ import java.util.Collection;
 
 /**
  * ORM支持类。
- *
- * @author lpw
  */
 public abstract class OrmSupport<Q extends Query> implements Orm<Q> {
     @Inject

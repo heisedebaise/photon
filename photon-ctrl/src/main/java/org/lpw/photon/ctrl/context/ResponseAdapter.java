@@ -5,8 +5,6 @@ import java.io.OutputStream;
 
 /**
  * 输出适配器。
- *
- * @author lpw
  */
 public interface ResponseAdapter {
     /**

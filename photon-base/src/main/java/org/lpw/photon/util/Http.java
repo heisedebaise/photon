@@ -7,8 +7,6 @@ import java.util.Map;
 
 /**
  * HTTP连接器。用于提交HTTP访问。
- *
- * @author lpw
  */
 public interface Http {
     /**

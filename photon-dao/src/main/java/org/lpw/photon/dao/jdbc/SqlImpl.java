@@ -9,9 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.jdbc.sql")
 public class SqlImpl extends JdbcSupport<PreparedStatement> implements Sql {
     @Override

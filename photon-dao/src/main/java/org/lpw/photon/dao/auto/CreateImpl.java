@@ -16,9 +16,6 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Repository(AutoModel.NAME + ".create")
 public class CreateImpl implements Create {
     @Inject

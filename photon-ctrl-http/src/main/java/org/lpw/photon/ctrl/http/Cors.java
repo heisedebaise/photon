@@ -6,9 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 跨域。
  */
-/**
- * @author lpw
- */
 public interface Cors {
     /**
      * 是否跨域请求。

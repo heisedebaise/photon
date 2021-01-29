@@ -1,8 +1,5 @@
 package org.lpw.photon.ctrl;
 
-/**
- * @author lpw
- */
 public interface Counter {
     /**
      * 增加访问计数。

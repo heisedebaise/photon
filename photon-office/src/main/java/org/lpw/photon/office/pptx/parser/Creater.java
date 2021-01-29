@@ -6,8 +6,6 @@ import org.lpw.photon.office.pptx.WriterContext;
 
 /**
  * 图形创建器。
- *
- * @author lpw
  */
 public interface Creater {
     /**

@@ -7,9 +7,6 @@ import org.springframework.stereotype.Controller;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.http.security-helper")
 public class SecurityHelperImpl implements SecurityHelper {
     @Inject

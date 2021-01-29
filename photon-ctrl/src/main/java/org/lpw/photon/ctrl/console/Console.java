@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * 控制台。
- *
- * @author lpw
  */
 public interface Console {
     /**

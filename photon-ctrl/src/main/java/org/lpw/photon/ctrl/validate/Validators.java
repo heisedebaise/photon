@@ -4,8 +4,6 @@ import org.lpw.photon.ctrl.template.Template;
 
 /**
  * 验证器集。
- *
- * @author lpw
  */
 public interface Validators {
     /**

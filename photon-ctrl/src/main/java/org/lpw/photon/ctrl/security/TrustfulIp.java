@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.security;
 
 /**
  * 可信任IP，即IP白名单。
- *
- * @author lpw
  */
 public interface TrustfulIp {
     /**

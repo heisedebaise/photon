@@ -2,8 +2,6 @@ package org.lpw.photon.dao.dialect;
 
 /**
  * 数据库方言。
- *
- * @author lpw
  */
 public interface Dialect {
     /**

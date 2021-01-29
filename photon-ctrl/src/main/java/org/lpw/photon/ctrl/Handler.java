@@ -5,8 +5,6 @@ import java.util.concurrent.Future;
 
 /**
  * 处理队列。
- *
- * @author lpw
  */
 public interface Handler {
     /**

@@ -5,9 +5,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Service("photon.script.arguments")
 public class ArgumentsImpl implements Arguments {
     protected ThreadLocal<Map<String, Object>> map = new ThreadLocal<>();

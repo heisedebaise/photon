@@ -19,9 +19,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.jdbc.data-source")
 public class DataSourceImpl implements org.lpw.photon.dao.jdbc.DataSource, ContextRefreshedListener {
     @Inject

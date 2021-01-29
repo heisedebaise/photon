@@ -10,9 +10,6 @@ import org.springframework.stereotype.Repository;
 import javax.inject.Inject;
 import java.sql.Date;
 
-/**
- * @author lpw
- */
 @Repository(AutoModel.NAME + ".daily")
 public class DailyImpl implements Daily {
     @Inject

@@ -2,8 +2,6 @@ package org.lpw.photon.nio;
 
 /**
  * 客户端监听器。用于处理来自服务端的信息。
- *
- * @author lpw
  */
 public interface ClientListener extends Listener {
     /**

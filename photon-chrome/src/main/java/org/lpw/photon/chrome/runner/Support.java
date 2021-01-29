@@ -11,9 +11,6 @@ import java.net.Socket;
 import java.util.Base64;
 import java.util.Random;
 
-/**
- * @author lpw
- */
 abstract class Support {
     private static final int BUFFER_SIZE = 1 << 16; //64K
     private String[] args;

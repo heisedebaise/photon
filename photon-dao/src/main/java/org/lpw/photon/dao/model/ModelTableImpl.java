@@ -27,9 +27,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Repository("photon.model.table")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class ModelTableImpl implements ModelTable {

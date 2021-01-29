@@ -5,8 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * 服务状态。
  * 用于查看当前服务状态。
- *
- * @author lpw
  */
 public interface Status {
     /**

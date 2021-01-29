@@ -17,9 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Component("photon.crypto.sign")
 public class SignImpl implements Sign, StorageListener {
     private static final String SIGN = "sign";

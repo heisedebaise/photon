@@ -15,9 +15,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * @author lpw
- */
 @Component("photon.aio.helper")
 public class AioHelperImpl implements AioHelper, MinuteJob {
     private static final int BUFFER_SZE = 4 * (1 << 10); // 4K

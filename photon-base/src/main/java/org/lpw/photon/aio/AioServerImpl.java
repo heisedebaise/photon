@@ -13,9 +13,6 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.util.concurrent.Executors;
 
-/**
- * @author lpw
- */
 @Component("photon.aio.server")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class AioServerImpl extends HandlerSupport implements AioServer, CompletionHandler<AsynchronousSocketChannel, Object> {

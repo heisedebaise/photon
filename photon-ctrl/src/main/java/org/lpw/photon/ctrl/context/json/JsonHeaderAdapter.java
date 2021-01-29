@@ -3,9 +3,6 @@ package org.lpw.photon.ctrl.context.json;
 import com.alibaba.fastjson.JSONObject;
 import org.lpw.photon.ctrl.context.HeaderAdapter;
 
-/**
- * @author lpw
- */
 public class JsonHeaderAdapter extends Support implements HeaderAdapter {
     private String ip;
 

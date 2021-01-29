@@ -4,9 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.io.OutputStream;
 
-/**
- * @author lpw
- */
 public interface ExcelWriter {
     /**
      * 输出Excel。

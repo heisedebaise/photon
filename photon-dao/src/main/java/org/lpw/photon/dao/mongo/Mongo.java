@@ -9,8 +9,6 @@ import org.lpw.photon.dao.model.Model;
 
 /**
  * MongoDB操作接口。
- *
- * @author lpw
  */
 public interface Mongo {
     /**

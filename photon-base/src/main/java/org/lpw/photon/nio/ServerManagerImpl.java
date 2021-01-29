@@ -12,9 +12,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Component("photon.nio.server-manager")
 public class ServerManagerImpl implements ServerManager, ContextRefreshedListener, ContextClosedListener {
     @Inject

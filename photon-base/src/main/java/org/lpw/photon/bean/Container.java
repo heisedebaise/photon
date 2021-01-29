@@ -2,9 +2,6 @@ package org.lpw.photon.bean;
 
 import java.util.Collection;
 
-/**
- * @author lpw
- */
 public interface Container {
     /**
      * 获取Bean实例。

@@ -2,8 +2,6 @@ package org.lpw.photon.nio;
 
 /**
  * 连接客户端。
- *
- * @author lpw
  */
 public interface Client {
     /**

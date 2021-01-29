@@ -1,8 +1,5 @@
 package org.lpw.photon.ctrl.context;
 
-/**
- * @author lpw
- */
 public interface HeaderAware {
     /**
      * 设置请求头适配器。

@@ -14,9 +14,6 @@ import java.security.PrivateKey;
 import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 
-/**
- * @author lpw
- */
 @Component("photon.crypto.digest")
 public class DigestImpl implements Digest {
     private static final String MD5 = "MD5";

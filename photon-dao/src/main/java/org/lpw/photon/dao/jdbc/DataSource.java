@@ -8,9 +8,6 @@ import org.lpw.photon.dao.dialect.Dialect;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 public interface DataSource extends ConnectionFactory<javax.sql.DataSource> {
     /**
      * 增加一次获取失败。

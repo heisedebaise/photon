@@ -6,9 +6,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Controller(Validators.TRUSTFUL_IP)
 public class TrustfulIpValidatorImpl extends ValidatorSupport {
     @Inject

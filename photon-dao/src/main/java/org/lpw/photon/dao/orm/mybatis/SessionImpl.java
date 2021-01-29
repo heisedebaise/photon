@@ -13,9 +13,6 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.orm.mybatis.session")
 public class SessionImpl extends ConnectionSupport<SqlSession> implements Session {
     @Inject

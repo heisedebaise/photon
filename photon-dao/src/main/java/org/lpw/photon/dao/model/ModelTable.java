@@ -9,8 +9,6 @@ import java.util.Set;
 
 /**
  * Model-Table映射关系表。
- *
- * @author lpw
  */
 public interface ModelTable {
     /**

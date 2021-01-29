@@ -3,8 +3,6 @@ package org.lpw.photon.dao.jdbc;
 
 /**
  * 搜集更新SQL，并在同一个事务中批量更新。
- *
- * @author lpw
  */
 public interface BatchUpdate {
     /**

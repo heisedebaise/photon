@@ -8,8 +8,6 @@ import java.util.Set;
 
 /**
  * 执行创建DDL。
- *
- * @author lpw
  */
 interface Create {
     /**

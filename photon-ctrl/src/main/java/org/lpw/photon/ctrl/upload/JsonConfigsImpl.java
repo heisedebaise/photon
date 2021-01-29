@@ -15,9 +15,6 @@ import java.io.File;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Service(UploadService.PREFIX + "json-configs")
 public class JsonConfigsImpl implements JsonConfigs, MinuteJob {
     @Inject

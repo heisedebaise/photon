@@ -2,8 +2,6 @@ package org.lpw.photon.storage;
 
 /**
  * 存储监听器。
- *
- * @author lpw
  */
 public interface StorageListener {
     /**

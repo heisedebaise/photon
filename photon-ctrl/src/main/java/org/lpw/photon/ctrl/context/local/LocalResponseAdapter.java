@@ -8,8 +8,6 @@ import java.io.OutputStream;
 
 /**
  * 基于内存的输出适配器实现。
- *
- * @author lpw
  */
 public class LocalResponseAdapter implements ResponseAdapter {
     protected OutputStream outputStream;

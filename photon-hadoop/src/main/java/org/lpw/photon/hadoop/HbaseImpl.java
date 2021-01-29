@@ -36,9 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Component("photon.hadoop.hbase")
 public class HbaseImpl implements Hbase, Closable, ContextRefreshedListener {
     @Inject

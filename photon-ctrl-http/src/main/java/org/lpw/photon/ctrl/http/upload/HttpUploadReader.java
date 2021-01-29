@@ -10,9 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 public class HttpUploadReader implements UploadReader {
     private Part part;
     private String name;

@@ -3,9 +3,6 @@ package org.lpw.photon.ctrl.http.upload;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * @author lpw
- */
 public interface UploadService {
     /**
      * 前缀。

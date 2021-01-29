@@ -15,9 +15,6 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Component("photon.office.pptx.parser.filp")
 public class FlipImpl implements Simple, Zero {
     @Inject

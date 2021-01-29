@@ -5,9 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * @author lpw
- */
 public interface ServiceHelper {
     /**
      * Session ID key。

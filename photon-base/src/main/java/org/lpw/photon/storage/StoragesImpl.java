@@ -13,9 +13,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Component("photon.storages")
 public class StoragesImpl implements Storages, ContextRefreshedListener, SecondsJob {
     @Inject

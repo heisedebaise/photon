@@ -5,9 +5,6 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 import java.io.IOException;
 
-/**
- * @author lpw
- */
 public final class CharTokenizer extends Tokenizer {
     private final CharTermAttribute charTermAttribute = addAttribute(CharTermAttribute.class);
 

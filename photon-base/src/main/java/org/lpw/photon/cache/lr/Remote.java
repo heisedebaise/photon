@@ -2,8 +2,6 @@ package org.lpw.photon.cache.lr;
 
 /**
  * 远程缓存。
- *
- * @author lpw
  */
 public interface Remote {
     /**

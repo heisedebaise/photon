@@ -23,9 +23,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Service("photon.ctrl.http.ws.helper")
 public class WsHelperImpl implements WsHelper, ContextClosedListener {
     @Inject

@@ -4,8 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 安全过滤支持。
- *
- * @author lpw
  */
 public interface SecurityHelper {
     /**

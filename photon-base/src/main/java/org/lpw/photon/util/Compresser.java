@@ -4,8 +4,6 @@ import java.io.OutputStream;
 
 /**
  * 压缩与解压缩。
- *
- * @author lpw
  */
 public interface Compresser {
     /**

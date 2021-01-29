@@ -4,8 +4,6 @@ import java.util.List;
 
 /**
  * Lucene全文检索。
- *
- * @author lpw
  */
 public interface LuceneHelper {
     /**

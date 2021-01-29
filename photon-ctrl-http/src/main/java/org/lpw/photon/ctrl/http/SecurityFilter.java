@@ -14,8 +14,6 @@ import java.io.IOException;
 
 /**
  * 安全过滤器。
- *
- * @author lpw
  */
 public class SecurityFilter implements Filter {
     private SecurityHelper securityHelper;

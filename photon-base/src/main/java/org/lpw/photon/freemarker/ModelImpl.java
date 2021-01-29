@@ -9,9 +9,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Controller("photon.freemarker.model")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class ModelImpl implements Model {

@@ -18,9 +18,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.handler")
 public class HandlerImpl implements Handler, MinuteJob {
     @Inject

@@ -4,8 +4,6 @@ import java.util.Map;
 
 /**
  * 签名。
- *
- * @author lpw
  */
 public interface Sign {
     /**

@@ -16,9 +16,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-/**
- * @author lpw
- */
 @Component("photon.util.zipper")
 public class ZipperImpl implements Zipper {
     @Inject

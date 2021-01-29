@@ -9,9 +9,6 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-/**
- * @author lpw
- */
 @ServerEndpoint(WsHelper.URI)
 public class WebSocket {
     private WsHelper wsHelper;

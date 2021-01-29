@@ -7,8 +7,6 @@ import java.util.Collection;
 
 /**
  * ORM接口。
- *
- * @author lpw
  */
 public interface Orm<Q extends Query> extends Atomicable {
     /**

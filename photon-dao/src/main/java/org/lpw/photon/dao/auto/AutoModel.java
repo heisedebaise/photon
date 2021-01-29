@@ -11,9 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 
-/**
- * @author lpw
- */
 @Component(AutoModel.NAME + ".model")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Entity(name = AutoModel.NAME)

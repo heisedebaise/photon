@@ -9,9 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Repository(AutoModel.NAME + "update")
 public class UpdateImpl implements Update {
     @Inject

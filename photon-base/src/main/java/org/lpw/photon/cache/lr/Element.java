@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 /**
  * 缓存元素。
- *
- * @author lpw
  */
 public class Element implements Comparable<Element>, Serializable {
     private static final long serialVersionUID = 2825385973125777861L;

@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.template;
 
 /**
  * 模板管理器。用于获取模板实例。
- *
- * @author lpw
  */
 public interface Templates {
     /**

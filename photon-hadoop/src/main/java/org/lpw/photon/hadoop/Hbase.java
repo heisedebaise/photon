@@ -9,8 +9,6 @@ import java.util.Map;
 
 /**
  * HBase数据库支持。
- *
- * @author lpw
  */
 public interface Hbase {
     /**

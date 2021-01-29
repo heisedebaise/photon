@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Component("photon.cache.lr.listener")
 public class ListenerImpl implements ServerListener {
     @Inject

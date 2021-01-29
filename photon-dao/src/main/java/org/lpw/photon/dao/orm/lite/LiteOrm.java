@@ -5,8 +5,6 @@ import org.lpw.photon.dao.orm.Orm;
 
 /**
  * 简单ORM。主要提供高效的ORM，但不提供自动外联合映射的功能。
- *
- * @author lpw
  */
 public interface LiteOrm extends Orm<LiteQuery> {
     /**

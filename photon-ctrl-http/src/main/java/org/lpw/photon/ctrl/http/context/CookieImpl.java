@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.http.cookie")
 public class CookieImpl implements org.lpw.photon.ctrl.http.context.Cookie, CookieAware {
     private Validator validator;

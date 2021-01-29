@@ -4,8 +4,6 @@ import java.util.Date;
 
 /**
  * Cookie管理。
- *
- * @author lpw
  */
 public interface Cookie {
     /**

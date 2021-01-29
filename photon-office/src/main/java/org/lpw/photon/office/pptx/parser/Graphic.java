@@ -6,8 +6,6 @@ import org.lpw.photon.office.pptx.ReaderContext;
 
 /**
  * 图表形状解析器。
- *
- * @author lpw
  */
 public interface Graphic extends Creater {
     /**

@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.context;
 
 /**
  * 输出参数注入器。用于设置输出参数。
- *
- * @author lpw
  */
 public interface ResponseAware {
     /**

@@ -14,9 +14,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Component("photon.nio.helper")
 public class NioHelperImpl implements NioHelper, ContextClosedListener, MinuteJob {
     @Inject

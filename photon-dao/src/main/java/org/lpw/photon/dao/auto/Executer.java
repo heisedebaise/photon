@@ -4,9 +4,6 @@ import org.lpw.photon.dao.model.Model;
 
 import java.util.Set;
 
-/**
- * @author lpw
- */
 public interface Executer {
     /**
      * 保存SQL。

@@ -28,9 +28,6 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Component("photon.office.pptx.parser.geometry")
 public class GeometryImpl implements Simple {
     @Inject

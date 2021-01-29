@@ -7,8 +7,6 @@ import java.util.Map;
 
 /**
  * 基于Map的请求参数适配器实现。
- *
- * @author lpw
  */
 public class LocalRequestAdapter implements RequestAdapter {
     protected String uri;

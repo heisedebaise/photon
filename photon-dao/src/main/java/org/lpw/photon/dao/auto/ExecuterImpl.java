@@ -21,9 +21,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Repository(AutoModel.NAME + ".executer")
 public class ExecuterImpl implements Executer, ContextRefreshedListener, DateJob {
     @Inject

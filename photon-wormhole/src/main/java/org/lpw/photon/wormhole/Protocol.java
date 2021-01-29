@@ -1,8 +1,5 @@
 package org.lpw.photon.wormhole;
 
-/**
- * @author lpw
- */
 public enum Protocol {
     Http("http://"),
     Https("https://"),

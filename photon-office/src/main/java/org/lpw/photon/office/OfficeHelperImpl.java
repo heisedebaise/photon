@@ -13,9 +13,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Component("photon.office.helper")
 public class OfficeHelperImpl implements OfficeHelper {
     @Inject

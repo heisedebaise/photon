@@ -5,8 +5,6 @@ import org.lpw.photon.atomic.Atomicable;
 /**
  * DAO连接。
  * 定义DAO连接接口。
- *
- * @author lpw
  */
 public interface Connection<T> extends Atomicable {
     /**

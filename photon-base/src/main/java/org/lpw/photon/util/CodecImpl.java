@@ -10,9 +10,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-/**
- * @author lpw
- */
 @Component("photon.util.coder")
 public class CodecImpl implements Codec {
     private static final char[] HEX = "0123456789abcdef".toCharArray();

@@ -7,8 +7,6 @@ import java.util.List;
 
 /**
  * 上传处理器。
- *
- * @author lpw
  */
 public interface Uploader {
     /**

@@ -6,8 +6,6 @@ import org.lpw.photon.office.MediaReader;
 
 /**
  * 写上下文。
- *
- * @author lpw
  */
 public class WriterContext {
     private MediaReader mediaReader;

@@ -7,8 +7,6 @@ import java.io.OutputStream;
 
 /**
  * PPTx写入器。
- *
- * @author lpw
  */
 public interface PptxWriter {
     /**

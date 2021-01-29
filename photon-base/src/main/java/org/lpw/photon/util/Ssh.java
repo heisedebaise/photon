@@ -5,8 +5,6 @@ import java.io.OutputStream;
 
 /**
  * SSH客户端。
- *
- * @author lpw
  */
 public interface Ssh {
     /**

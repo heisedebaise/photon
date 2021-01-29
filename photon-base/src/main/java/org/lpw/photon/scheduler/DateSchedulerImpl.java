@@ -7,9 +7,6 @@ import javax.inject.Inject;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Component("photon.scheduler.date")
 public class DateSchedulerImpl extends SchedulerSupport<DateJob> implements DateScheduler {
     @Inject

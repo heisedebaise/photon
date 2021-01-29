@@ -2,8 +2,6 @@ package org.lpw.photon.util;
 
 /**
  * 数值转换器。
- *
- * @author lpw
  */
 public interface Numeric {
     /**

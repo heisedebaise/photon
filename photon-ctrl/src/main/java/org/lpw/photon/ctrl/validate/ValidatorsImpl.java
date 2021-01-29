@@ -13,9 +13,6 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.validate.validators")
 public class ValidatorsImpl implements Validators {
     @Inject

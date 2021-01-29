@@ -2,8 +2,6 @@ package org.lpw.photon.util;
 
 /**
  * 时间单位。
- *
- * @author lpw
  */
 public enum TimeUnit {
     /**

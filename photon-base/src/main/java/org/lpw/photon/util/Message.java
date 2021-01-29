@@ -2,8 +2,6 @@ package org.lpw.photon.util;
 
 /**
  * 资源。用于获取项目中message.properties中的资源。
- *
- * @author lpw
  */
 public interface Message {
     /**

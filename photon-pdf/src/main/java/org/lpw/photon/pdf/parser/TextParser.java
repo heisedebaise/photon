@@ -38,9 +38,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author lpw
- */
 public class TextParser extends PDFTextStripper {
     private PdfHelper pdfHelper;
     private int pageHeight;

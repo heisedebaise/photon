@@ -9,9 +9,6 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
 
-/**
- * @author lpw
- */
 @Component("photon.util.ssh")
 public class SshImpl implements Ssh {
     @Inject

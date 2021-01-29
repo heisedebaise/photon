@@ -6,8 +6,6 @@ import org.lpw.photon.dao.orm.QuerySupport;
 
 /**
  * Lite检索构造器。用于构造非级联ORM检索语句。
- *
- * @author lpw
  */
 public class LiteQuery extends QuerySupport {
     private String select;

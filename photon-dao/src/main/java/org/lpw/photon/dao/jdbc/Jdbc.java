@@ -5,8 +5,6 @@ import org.lpw.photon.atomic.Atomicable;
 
 /**
  * JDBC操作接口。
- *
- * @author lpw
  */
 public interface Jdbc extends Atomicable {
     /**

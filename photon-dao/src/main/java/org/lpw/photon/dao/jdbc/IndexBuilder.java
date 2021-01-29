@@ -2,8 +2,6 @@ package org.lpw.photon.dao.jdbc;
 
 /**
  * 索引设置构建器。
- *
- * @author lpw
  */
 public class IndexBuilder {
     /**

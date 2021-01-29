@@ -7,9 +7,6 @@ import javax.inject.Inject;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 
-/**
- * @author lpw
- */
 class HandlerSupport {
     @Inject
     Logger logger;

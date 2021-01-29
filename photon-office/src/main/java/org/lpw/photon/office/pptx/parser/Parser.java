@@ -9,8 +9,6 @@ import org.lpw.photon.office.pptx.WriterContext;
 
 /**
  * 解析器。
- *
- * @author lpw
  */
 public interface Parser {
     /**

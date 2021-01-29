@@ -15,9 +15,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.util.Optional;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.context.response")
 public class ResponseImpl implements Response, ResponseAware {
     @Inject

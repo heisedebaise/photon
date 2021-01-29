@@ -5,9 +5,6 @@ import org.apache.lucene.analysis.LowerCaseFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 
-/**
- * @author lpw
- */
 public class CharAnalyzer extends Analyzer {
     @Override
     protected TokenStreamComponents createComponents(final String fieldName) {

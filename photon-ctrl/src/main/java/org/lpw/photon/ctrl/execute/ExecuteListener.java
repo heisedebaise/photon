@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.execute;
 
 /**
  * 执行配置监听器。
- *
- * @author lpw
  */
 public interface ExecuteListener {
     /**

@@ -10,8 +10,6 @@ import java.util.Map;
 
 /**
  * 请求。
- *
- * @author lpw
  */
 public interface Request {
     /**

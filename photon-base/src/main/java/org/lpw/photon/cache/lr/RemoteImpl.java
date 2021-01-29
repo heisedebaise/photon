@@ -24,9 +24,6 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * @author lpw
- */
 @Component("photon.cache.lr.remote")
 public class RemoteImpl implements Remote, MinuteJob, StorageListener, ContextRefreshedListener, ContextClosedListener {
     @Inject

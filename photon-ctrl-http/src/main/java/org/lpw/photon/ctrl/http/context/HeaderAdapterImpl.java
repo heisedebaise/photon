@@ -7,9 +7,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 public class HeaderAdapterImpl implements HeaderAdapter {
     protected HttpServletRequest request;
 

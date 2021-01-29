@@ -2,8 +2,6 @@ package org.lpw.photon.dao.auto;
 
 /**
  * 同步内存磁盘表数据。
- *
- * @author lpw
  */
 interface Memory {
     /**

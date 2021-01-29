@@ -6,8 +6,6 @@ import java.nio.channels.CompletionHandler;
 
 /**
  * 接收处理器。
- *
- * @author lpw
  */
 public interface ReceiveHandler extends CompletionHandler<Integer, Object> {
     /**

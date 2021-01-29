@@ -7,8 +7,6 @@ import java.io.InputStream;
 
 /**
  * 上传读取器。
- *
- * @author lpw
  */
 public interface UploadReader {
     /**

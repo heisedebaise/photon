@@ -9,9 +9,6 @@ import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 
-/**
- * @author lpw
- */
 @Component("photon.aio.client")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class AioClientImpl extends HandlerSupport implements AioClient, CompletionHandler<Void, Object> {

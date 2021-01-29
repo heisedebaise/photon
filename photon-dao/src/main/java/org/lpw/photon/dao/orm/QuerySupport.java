@@ -2,9 +2,6 @@ package org.lpw.photon.dao.orm;
 
 import org.lpw.photon.dao.model.Model;
 
-/**
- * @author lpw
- */
 public class QuerySupport implements Query {
     protected Class<? extends Model> modelClass;
     protected String dataSource;

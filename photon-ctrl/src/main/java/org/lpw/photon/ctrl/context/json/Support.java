@@ -5,9 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 public class Support {
     private JSONObject object;
     private Map<String, String> map;

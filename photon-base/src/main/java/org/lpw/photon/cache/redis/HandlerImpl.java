@@ -13,9 +13,6 @@ import redis.clients.jedis.JedisPoolConfig;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Component("photon.cache.redis.handler")
 public class HandlerImpl implements Handler, ContextRefreshedListener {
     @Inject

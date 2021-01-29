@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl;
 
 /**
  * 拦截器调用。
- *
- * @author lpw
  */
 public interface Invocation {
     /**

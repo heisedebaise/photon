@@ -11,9 +11,6 @@ import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Component("photon.util.json")
 public class JsonImpl implements Json {
     @Inject

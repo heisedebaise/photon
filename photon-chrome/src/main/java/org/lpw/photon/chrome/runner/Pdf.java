@@ -2,9 +2,6 @@ package org.lpw.photon.chrome.runner;
 
 import com.alibaba.fastjson.JSONObject;
 
-/**
- * @author lpw
- */
 public class Pdf extends Support {
     private String range = "";
 

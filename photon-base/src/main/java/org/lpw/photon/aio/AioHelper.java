@@ -5,8 +5,6 @@ import java.nio.channels.AsynchronousSocketChannel;
 
 /**
  * AIO支持。
- *
- * @author lpw
  */
 public interface AioHelper {
     /**

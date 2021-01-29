@@ -5,8 +5,6 @@ import org.apache.ibatis.session.RowBounds;
 
 /**
  * MyBatis参数构造器。
- *
- * @author lpw
  */
 public class MybatisBuilder {
     private String dataSource;

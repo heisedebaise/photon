@@ -4,8 +4,6 @@ import java.util.List;
 
 /**
  * SQL操作接口。
- *
- * @author lpw
  */
 public interface Sql extends Jdbc {
     /**

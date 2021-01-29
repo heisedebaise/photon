@@ -20,9 +20,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.execute.map")
 public class ExecutorHelperImpl implements ExecutorHelper, FailureCode, ContextRefreshedListener {
     @Inject

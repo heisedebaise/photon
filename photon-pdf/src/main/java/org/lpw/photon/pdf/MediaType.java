@@ -2,8 +2,6 @@ package org.lpw.photon.pdf;
 
 /**
  * 资源类型。
- *
- * @author lpw
  */
 public enum MediaType {
     /**

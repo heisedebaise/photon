@@ -10,9 +10,6 @@ import javax.inject.Inject;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 public abstract class CipherSupport implements Crypto {
     @Inject
     protected Validator validator;

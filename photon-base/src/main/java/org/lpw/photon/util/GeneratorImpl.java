@@ -5,9 +5,6 @@ import org.springframework.stereotype.Component;
 import java.util.Random;
 import java.util.UUID;
 
-/**
- * @author lpw
- */
 @Component("photon.util.generator")
 public class GeneratorImpl implements Generator {
     private final Random random = new Random();

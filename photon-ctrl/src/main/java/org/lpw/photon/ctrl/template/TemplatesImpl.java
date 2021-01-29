@@ -8,9 +8,6 @@ import org.springframework.stereotype.Controller;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.templates")
 public class TemplatesImpl implements Templates, ContextRefreshedListener {
     @Value("${photon.ctrl.template.type:json}")

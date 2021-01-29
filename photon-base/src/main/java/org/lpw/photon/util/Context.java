@@ -4,8 +4,6 @@ import java.util.Locale;
 
 /**
  * 运行上下文。
- *
- * @author lpw
  */
 public interface Context {
     /**

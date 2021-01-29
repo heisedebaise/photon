@@ -2,8 +2,6 @@ package org.lpw.photon.nio;
 
 /**
  * 服务器。用于管理端口监听。
- *
- * @author lpw
  */
 public interface Server {
     /**

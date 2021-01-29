@@ -4,8 +4,6 @@ import java.io.OutputStream;
 
 /**
  * 响应。
- *
- * @author lpw
  */
 public interface Response {
     /**

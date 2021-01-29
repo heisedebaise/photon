@@ -2,9 +2,6 @@ package org.lpw.photon.ctrl;
 
 import java.util.Map;
 
-/**
- * @author lpw
- */
 public interface Forward {
     /**
      * 跳转并执行指定URI请求。

@@ -43,9 +43,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Component("photon.util.http")
 public class HttpImpl implements Http, ContextRefreshedListener {
     @Inject

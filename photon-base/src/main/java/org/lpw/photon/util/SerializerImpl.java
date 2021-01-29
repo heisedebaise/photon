@@ -13,9 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- * @author lpw
- */
 @Component("photon.util.serializer")
 public class SerializerImpl implements Serializer {
     @Inject

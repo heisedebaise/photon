@@ -25,9 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.orm.mybatis.session-factory")
 public class SessionFactoryImpl implements SessionFactory, ContextRefreshedListener {
     @Inject

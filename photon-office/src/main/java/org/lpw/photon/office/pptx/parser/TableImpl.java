@@ -21,9 +21,6 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.awt.Color;
 
-/**
- * @author lpw
- */
 @Component("photon.office.pptx.parser.table")
 public class TableImpl implements Graphic {
     @Inject

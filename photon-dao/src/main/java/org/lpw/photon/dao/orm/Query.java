@@ -4,8 +4,6 @@ import org.lpw.photon.dao.model.Model;
 
 /**
  * 检索接口。
- *
- * @author lpw
  */
 public interface Query {
     /**

@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.context;
 
 /**
  * Session参数注入器。用于设置Session参数。
- *
- * @author lpw
  */
 public interface SessionAware {
     /**

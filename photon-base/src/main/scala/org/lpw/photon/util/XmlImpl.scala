@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component
 import scala.xml.{Node, XML}
 
 /**
-  * @author lpw
-  */
+   */
 @Component("photon.util.xml")
 class XmlImpl extends Xml {
     @Inject private val validator: Validator = null

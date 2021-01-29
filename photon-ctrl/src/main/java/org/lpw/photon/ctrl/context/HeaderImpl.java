@@ -10,9 +10,6 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.context.header")
 public class HeaderImpl implements Header, HeaderAware {
     private static final String ADAPTER = "photon.ctrl.context.header.adapter";

@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.awt.Color;
 
-/**
- * @author lpw
- */
 @Component("photon.pdf.helper")
 public class PdfHelperImpl implements PdfHelper {
     @Inject

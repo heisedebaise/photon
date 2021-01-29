@@ -7,8 +7,6 @@ import java.util.Map;
 
 /**
  * 基于Map的头信息适配器实现。
- *
- * @author lpw
  */
 public class LocalHeaderAdapter implements HeaderAdapter {
     protected String ip;

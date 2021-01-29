@@ -4,8 +4,6 @@ import java.util.Map;
 
 /**
  * 请求头适配器。
- *
- * @author lpw
  */
 public interface HeaderAdapter {
     /**

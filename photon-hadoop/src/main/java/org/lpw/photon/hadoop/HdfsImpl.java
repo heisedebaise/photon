@@ -21,9 +21,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author lpw
- */
 @Component("photon.hadoop.hdfs")
 public class HdfsImpl implements Hdfs, Storage, ContextRefreshedListener {
     @Inject

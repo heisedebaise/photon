@@ -5,8 +5,6 @@ import org.apache.poi.xslf.usermodel.XSLFSimpleShape;
 
 /**
  * 属性归零/重做接口。
- *
- * @author lpw
  */
 public interface Zero {
     /**

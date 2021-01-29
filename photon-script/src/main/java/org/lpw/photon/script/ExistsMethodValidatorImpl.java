@@ -6,9 +6,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Controller(ScriptService.VALIDATOR_EXISTS_METHOD)
 public class ExistsMethodValidatorImpl extends ValidatorSupport {
     private static final String DEFAULT_FAILURE_MESSAGE_KEY = "photon.script.method.not-exists";

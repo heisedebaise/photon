@@ -21,9 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Service("photon.ctrl.console")
 public class ConsoleImpl implements Console, ContextRefreshedListener {
     @Inject

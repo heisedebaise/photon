@@ -19,9 +19,6 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.http.redirect")
 public class RedirectImpl implements Redirect, StorageListener {
     @Inject

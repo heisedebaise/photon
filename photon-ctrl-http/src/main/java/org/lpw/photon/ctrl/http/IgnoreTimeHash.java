@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.http;
 
 /**
  * 忽略时间哈希校验。
- *
- * @author lpw
  */
 public interface IgnoreTimeHash {
     /**

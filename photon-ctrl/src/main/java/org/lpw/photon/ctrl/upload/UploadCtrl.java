@@ -6,9 +6,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Controller(UploadService.PREFIX + "ctrl")
 @Execute(name = "/photon/ctrl/", key = "photon.ctrl")
 public class UploadCtrl {

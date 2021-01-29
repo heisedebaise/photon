@@ -8,9 +8,6 @@ import org.apache.hadoop.hbase.filter.SingleColumnValueFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.lpw.photon.dao.model.Model;
 
-/**
- * @author lpw
- */
 public class HbaseQuery {
     enum Where {
         /**

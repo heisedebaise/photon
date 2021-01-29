@@ -1,8 +1,5 @@
 package org.lpw.photon.ctrl.validate;
 
-/**
- * @author lpw
- */
 public interface SignValidator {
     /**
      * 设置是否验证签名。

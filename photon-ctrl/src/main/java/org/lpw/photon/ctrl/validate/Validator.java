@@ -1,8 +1,5 @@
 package org.lpw.photon.ctrl.validate;
 
-/**
- * @author lpw
- */
 public interface Validator {
     /**
      * 验证参数是否合法。

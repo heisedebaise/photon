@@ -5,8 +5,6 @@ import java.io.OutputStream;
 
 /**
  * 输出模板。
- *
- * @author lpw
  */
 public interface Template {
     /**

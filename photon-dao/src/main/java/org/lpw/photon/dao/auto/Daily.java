@@ -2,8 +2,6 @@ package org.lpw.photon.dao.auto;
 
 /**
  * 维护每日表。
- *
- * @author lpw
  */
 public interface Daily {
     /**

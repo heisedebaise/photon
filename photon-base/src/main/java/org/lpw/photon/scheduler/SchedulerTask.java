@@ -4,8 +4,6 @@ import java.util.TimerTask;
 
 /**
  * 定时任务。
- *
- * @author lpw
  */
 public interface SchedulerTask {
     /**

@@ -8,9 +8,6 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * @author lpw
- */
 @Service(UploadService.PREFIX + "uploader")
 public class UploaderImpl implements Uploader {
     @Inject

@@ -7,8 +7,6 @@ import java.util.Iterator;
 
 /**
  * HibernateORM。主要提供基于Hibernate的ORM支持。
- *
- * @author lpw
  */
 public interface HibernateOrm extends Orm<HibernateQuery> {
     /**

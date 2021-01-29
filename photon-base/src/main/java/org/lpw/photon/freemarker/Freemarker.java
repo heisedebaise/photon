@@ -4,8 +4,6 @@ import java.io.OutputStream;
 
 /**
  * 模板文件解析器。
- *
- * @author lpw
  */
 public interface Freemarker {
     /**

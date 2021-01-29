@@ -20,9 +20,6 @@ import java.awt.Insets;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * @author lpw
- */
 @Component("photon.office.pptx.parser.image")
 public class ImageImpl implements Simple {
     @Inject

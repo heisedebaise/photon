@@ -2,8 +2,6 @@ package org.lpw.photon.dao.model;
 
 /**
  * 持久化模型定义。
- *
- * @author lpw
  */
 public interface Model {
     /**

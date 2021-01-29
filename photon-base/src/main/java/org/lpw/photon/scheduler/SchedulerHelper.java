@@ -4,8 +4,6 @@ import java.util.Date;
 
 /**
  * 定时任务支持。
- *
- * @author lpw
  */
 public interface SchedulerHelper {
     /**

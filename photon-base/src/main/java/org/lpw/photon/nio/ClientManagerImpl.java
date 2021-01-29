@@ -8,9 +8,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Component("photon.nio.client-manager")
 public class ClientManagerImpl implements ClientManager, ContextClosedListener {
     private Set<Client> clients = Collections.synchronizedSet(new HashSet<>());

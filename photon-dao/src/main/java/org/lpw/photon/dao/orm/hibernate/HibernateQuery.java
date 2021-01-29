@@ -5,8 +5,6 @@ import org.lpw.photon.dao.orm.QuerySupport;
 
 /**
  * Hibernate检索构造器。用于构造HibernateORM检索语句。
- *
- * @author lpw
  */
 public class HibernateQuery extends QuerySupport {
     /**

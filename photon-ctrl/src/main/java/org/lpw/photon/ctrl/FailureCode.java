@@ -3,8 +3,6 @@ package org.lpw.photon.ctrl;
 /**
  * 错误编码管理器。
  * 提供统一的错误编码获取功能，自动根据当前URI地址获取错误编码。
- *
- * @author lpw
  */
 public interface FailureCode {
     /**

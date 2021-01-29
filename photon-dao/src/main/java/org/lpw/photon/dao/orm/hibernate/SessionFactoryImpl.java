@@ -24,9 +24,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.orm.hibernate.session-factory")
 public class SessionFactoryImpl implements org.lpw.photon.dao.orm.hibernate.SessionFactory, ContextRefreshedListener {
     @Inject

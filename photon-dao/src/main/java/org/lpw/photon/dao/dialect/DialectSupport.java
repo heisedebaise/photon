@@ -2,8 +2,6 @@ package org.lpw.photon.dao.dialect;
 
 /**
  * 数据库方言支持。
- *
- * @author lpw
  */
 public abstract class DialectSupport implements Dialect {
     @Override

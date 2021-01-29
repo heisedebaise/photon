@@ -12,9 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.jdbc.sql-table")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class SqlTableImpl implements SqlTable {

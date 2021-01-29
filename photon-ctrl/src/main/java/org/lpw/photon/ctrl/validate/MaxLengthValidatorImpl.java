@@ -2,9 +2,6 @@ package org.lpw.photon.ctrl.validate;
 
 import org.springframework.stereotype.Controller;
 
-/**
- * @author lpw
- */
 @Controller(Validators.MAX_LENGTH)
 public class MaxLengthValidatorImpl extends ValidatorSupport {
     @Override

@@ -13,9 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * @author lpw
- */
 abstract class JdbcSupport<T extends PreparedStatement> implements Jdbc {
     @Inject
     Validator validator;

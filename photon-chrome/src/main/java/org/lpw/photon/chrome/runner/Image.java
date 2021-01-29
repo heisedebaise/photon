@@ -2,9 +2,6 @@ package org.lpw.photon.chrome.runner;
 
 import com.alibaba.fastjson.JSONObject;
 
-/**
- * @author lpw
- */
 public class Image extends Support {
     private double x = 0;
     private double y = 0;

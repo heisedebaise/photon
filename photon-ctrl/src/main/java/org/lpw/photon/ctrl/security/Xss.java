@@ -4,8 +4,6 @@ import java.util.Map;
 
 /**
  * XSS安全验证。
- *
- * @author lpw
  */
 public interface Xss {
     /**

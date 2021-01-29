@@ -11,9 +11,6 @@ import javax.inject.Inject;
 import java.util.Date;
 import java.util.Timer;
 
-/**
- * @author lpw
- */
 @Component("photon.scheduler.helper")
 public class SchedulerHelperImpl implements SchedulerHelper, ContextRefreshedListener, ContextClosedListener {
     @Inject

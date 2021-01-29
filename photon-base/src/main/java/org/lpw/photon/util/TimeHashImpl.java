@@ -3,9 +3,6 @@ package org.lpw.photon.util;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-/**
- * @author lpw
- */
 @Component("photon.util.time-hash")
 public class TimeHashImpl implements TimeHash {
     @Value("${photon.time-hash.range:0}")

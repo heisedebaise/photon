@@ -12,9 +12,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Component("photon.util.context")
 public class ContextImpl implements Context, Closable, ContextRefreshedListener {
     @Inject

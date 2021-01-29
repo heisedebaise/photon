@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.http.cors")
 public class CorsImpl implements Cors, StorageListener {
     @Inject

@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * @author lpw
- */
 public class ServiceFilter implements Filter {
     private ServiceHelper serviceHelper;
 

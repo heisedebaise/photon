@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * @author lpw
- */
 public class ResponseAdapterImpl implements ResponseAdapter {
     private String servletContextPath;
     private HttpServletResponse response;

@@ -2,8 +2,6 @@ package org.lpw.photon.util;
 
 /**
  * 生成器。
- *
- * @author lpw
  */
 public interface Generator {
     /**

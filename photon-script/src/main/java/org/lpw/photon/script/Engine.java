@@ -2,9 +2,6 @@ package org.lpw.photon.script;
 
 import java.util.List;
 
-/**
- * @author lpw
- */
 public interface Engine {
     /**
      * 重新加载脚本文件。

@@ -8,8 +8,6 @@ import java.util.Map;
 
 /**
  * MybatisOrm。主要提供基于MyBatis的ORM支持。
- *
- * @author lpw
  */
 public interface MybatisOrm extends Atomicable {
     /**

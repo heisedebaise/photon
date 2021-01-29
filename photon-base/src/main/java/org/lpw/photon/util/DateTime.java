@@ -5,8 +5,6 @@ import java.util.Date;
 
 /**
  * 日期时间工具。
- *
- * @author lpw
  */
 public interface DateTime {
     /**

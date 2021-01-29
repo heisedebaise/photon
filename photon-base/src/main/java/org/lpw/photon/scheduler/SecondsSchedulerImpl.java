@@ -7,9 +7,6 @@ import javax.inject.Inject;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Component("photon.scheduler.seconds")
 public class SecondsSchedulerImpl extends SchedulerSupport<SecondsJob> implements SecondsScheduler {
     @Inject

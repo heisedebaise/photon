@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * @author lpw
- */
 @Component("photon.office.pptx.parser")
 public class ParserImpl implements Parser, ContextRefreshedListener {
     private List<Simple> simples;

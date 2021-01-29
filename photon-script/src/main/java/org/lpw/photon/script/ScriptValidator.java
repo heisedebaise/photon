@@ -1,8 +1,5 @@
 package org.lpw.photon.script;
 
-/**
- * @author lpw
- */
 public interface ScriptValidator {
     /**
      * 脚本验证器。

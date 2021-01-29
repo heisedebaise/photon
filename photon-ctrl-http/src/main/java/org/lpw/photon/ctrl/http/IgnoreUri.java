@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.http;
 
 /**
  * 忽略URI地址。
- *
- * @author lpw
  */
 public interface IgnoreUri {
     /**

@@ -22,9 +22,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Component("photon.bean.container")
 public class ContainerImpl implements Container, ApplicationListener<ApplicationEvent>, ApplicationContextAware {
     @Inject

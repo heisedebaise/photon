@@ -8,8 +8,6 @@ import org.lpw.photon.office.MediaWriter;
 
 /**
  * 读上下文。
- *
- * @author lpw
  */
 public class ReaderContext {
     private MediaWriter mediaWriter;

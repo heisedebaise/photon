@@ -2,8 +2,6 @@ package org.lpw.photon.crypto;
 
 /**
  * 标准加解密。
- *
- * @author lpw
  */
 public interface Crypto {
     /**

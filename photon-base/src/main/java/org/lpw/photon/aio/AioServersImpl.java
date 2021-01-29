@@ -8,9 +8,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Component("photon.aio.servers")
 public class AioServersImpl implements AioServers, ContextClosedListener {
     private Set<AioServer> set = Collections.synchronizedSet(new HashSet<>());

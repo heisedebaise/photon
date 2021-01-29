@@ -5,9 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.Map;
 
-/**
- * @author lpw
- */
 public interface Json {
     /**
      * 添加数据。如果key已存在则自动添加为数组。

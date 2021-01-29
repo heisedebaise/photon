@@ -10,9 +10,6 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Component("photon.office.pptx.parser.rotation")
 public class RotationImpl implements Simple, Zero {
     @Inject

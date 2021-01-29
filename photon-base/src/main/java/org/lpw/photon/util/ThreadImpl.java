@@ -4,9 +4,6 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Component("photon.util.thread")
 public class ThreadImpl implements Thread {
     @Inject

@@ -2,9 +2,6 @@ package org.lpw.photon.bean;
 
 import java.lang.reflect.Field;
 
-/**
- * @author lpw
- */
 public class Injecter {
     protected Object bean;
     protected Field field;

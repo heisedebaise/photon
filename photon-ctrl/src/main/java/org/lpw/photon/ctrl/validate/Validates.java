@@ -8,8 +8,6 @@ import java.lang.annotation.Target;
 
 /**
  * 验证规则集。
- *
- * @author lpw
  */
 @Documented
 @Target({ElementType.TYPE, ElementType.METHOD})

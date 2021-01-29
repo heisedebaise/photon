@@ -2,8 +2,6 @@ package org.lpw.photon.util;
 
 /**
  * 日志管理器。
- *
- * @author lpw
  */
 public interface Logger {
     /**

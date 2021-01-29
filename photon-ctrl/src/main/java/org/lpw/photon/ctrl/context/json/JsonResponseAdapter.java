@@ -7,9 +7,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * @author lpw
- */
 public class JsonResponseAdapter implements ResponseAdapter {
     private ResponseSender responseSender;
     private String sessionId;

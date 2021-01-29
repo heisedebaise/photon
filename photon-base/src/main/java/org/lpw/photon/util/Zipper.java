@@ -9,8 +9,6 @@ import java.util.Map;
 
 /**
  * 压缩/解压缩工具。
- *
- * @author lpw
  */
 public interface Zipper {
     /**

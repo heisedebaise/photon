@@ -2,9 +2,6 @@ package org.lpw.photon.ctrl.validate;
 
 import org.springframework.stereotype.Controller;
 
-/**
- * @author lpw
- */
 @Controller(Validators.NOT_EMPTY)
 public class NotEmptyValidatorImpl extends ValidatorSupport {
     @Override

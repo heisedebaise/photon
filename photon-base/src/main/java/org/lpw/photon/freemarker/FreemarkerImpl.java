@@ -19,9 +19,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
-/**
- * @author lpw
- */
 @Component("photon.freemarker")
 public class FreemarkerImpl implements Freemarker {
     @Inject

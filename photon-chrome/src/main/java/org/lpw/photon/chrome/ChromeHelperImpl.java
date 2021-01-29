@@ -28,9 +28,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-/**
- * @author lpw
- */
 @Component("photon.chrome.helper")
 public class ChromeHelperImpl implements ChromeHelper, StorageListener, ContextRefreshedListener, ContextClosedListener {
     @Inject

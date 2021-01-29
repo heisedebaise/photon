@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * @author lpw
- */
 @MultipartConfig
 @WebServlet(name = "UploadServlet", urlPatterns = {UploadService.UPLOAD})
 public class UploadServlet extends HttpServlet {

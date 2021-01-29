@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.template;
 
 /**
  * 模板支持。
- *
- * @author lpw
  */
 public interface TemplateHelper {
     /**

@@ -2,8 +2,6 @@ package org.lpw.photon.bean;
 
 /**
  * 类重载器。
- *
- * @author lpw
  */
 public interface ClassReloader {
     /**

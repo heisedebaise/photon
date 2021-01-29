@@ -6,9 +6,6 @@ import javax.inject.Inject;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Component("photon.atomic.closables")
 public class ClosablesImpl implements Closables {
     @Inject

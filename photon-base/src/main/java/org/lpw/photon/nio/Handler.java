@@ -11,8 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 监听处理器。
- *
- * @author lpw
  */
 public abstract class Handler extends ChannelInboundHandlerAdapter {
     @Inject

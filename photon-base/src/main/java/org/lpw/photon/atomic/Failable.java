@@ -2,8 +2,6 @@ package org.lpw.photon.atomic;
 
 /**
  * 可失败事务。
- *
- * @author lpw
  */
 public interface Failable {
     /**

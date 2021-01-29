@@ -22,9 +22,6 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Service("photon.wormhole.helper")
 public class WormholeHelperImpl implements WormholeHelper, ContextRefreshedListener {
     @Inject

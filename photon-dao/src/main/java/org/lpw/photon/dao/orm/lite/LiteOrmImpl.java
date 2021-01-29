@@ -17,9 +17,6 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.orm.lite")
 public class LiteOrmImpl extends OrmSupport<LiteQuery> implements LiteOrm {
     @Inject

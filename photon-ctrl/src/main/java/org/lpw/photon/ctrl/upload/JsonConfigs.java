@@ -1,8 +1,5 @@
 package org.lpw.photon.ctrl.upload;
 
-/**
- * @author lpw
- */
 public interface JsonConfigs {
     /**
      * 获取JsonConfig实例。

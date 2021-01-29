@@ -13,9 +13,6 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.io.OutputStream;
 
-/**
- * @author lpw
- */
 @Component("photon.office.excel")
 public class ExcelWriterImpl implements ExcelWriter {
     @Inject

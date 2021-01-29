@@ -9,8 +9,6 @@ import java.util.List;
 
 /**
  * Hadoop文件系统支持。
- *
- * @author lpw
  */
 public interface Hdfs extends Closable {
     /**

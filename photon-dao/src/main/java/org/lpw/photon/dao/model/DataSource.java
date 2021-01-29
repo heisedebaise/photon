@@ -8,8 +8,6 @@ import java.lang.annotation.Target;
 
 /**
  * 数据源配置。
- *
- * @author lpw
  */
 @Documented
 @Target({ElementType.TYPE})

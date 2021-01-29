@@ -3,9 +3,6 @@ package org.lpw.photon.ctrl.context.json;
 import com.alibaba.fastjson.JSONObject;
 import org.lpw.photon.ctrl.context.RequestAdapter;
 
-/**
- * @author lpw
- */
 public class JsonRequestAdapter extends Support implements RequestAdapter {
     private int port;
     private String id;

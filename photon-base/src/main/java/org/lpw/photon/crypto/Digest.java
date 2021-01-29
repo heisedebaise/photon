@@ -2,8 +2,6 @@ package org.lpw.photon.crypto;
 
 /**
  * 消息摘要。
- *
- * @author lpw
  */
 public interface Digest {
     /**

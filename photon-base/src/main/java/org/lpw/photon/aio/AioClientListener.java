@@ -2,8 +2,6 @@ package org.lpw.photon.aio;
 
 /**
  * 客户端监听器。
- *
- * @author lpw
  */
 public interface AioClientListener extends AioListener {
     /**

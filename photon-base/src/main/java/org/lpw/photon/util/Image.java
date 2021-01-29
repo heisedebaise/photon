@@ -8,8 +8,6 @@ import java.io.OutputStream;
 
 /**
  * 图片操作工具。
- *
- * @author lpw
  */
 public interface Image {
     /**

@@ -12,9 +12,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- * @author lpw
- */
 @Component("photon.storage.disk")
 public class DiskStorageImpl implements Storage {
     @Inject

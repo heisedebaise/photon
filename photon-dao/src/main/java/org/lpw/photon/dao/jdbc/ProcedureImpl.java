@@ -10,9 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.jdbc.procedure")
 public class ProcedureImpl extends JdbcSupport<CallableStatement> implements Procedure {
     @Override

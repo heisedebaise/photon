@@ -2,9 +2,6 @@ package org.lpw.photon.ctrl.context;
 
 import java.util.Map;
 
-/**
- * @author lpw
- */
 public interface Header {
     /**
      * 获得请求头信息值。

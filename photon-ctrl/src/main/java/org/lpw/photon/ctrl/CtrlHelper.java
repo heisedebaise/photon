@@ -1,8 +1,5 @@
 package org.lpw.photon.ctrl;
 
-/**
- * @author lpw
- */
 public interface CtrlHelper {
     /**
      * 获取对外服务URL。

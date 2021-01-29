@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 public interface WormholeHelper {
     /**
      * 验证是否为图片URI地址。

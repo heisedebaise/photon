@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.execute;
 
 /**
  * 执行器支持。
- *
- * @author lpw
  */
 public interface ExecutorHelper {
     /**

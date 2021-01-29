@@ -17,9 +17,6 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.StringReader;
 
-/**
- * @author lpw
- */
 @Component("photon.util.image")
 public class ImageImpl implements Image {
     @Inject

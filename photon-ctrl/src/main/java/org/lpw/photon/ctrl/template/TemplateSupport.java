@@ -10,8 +10,6 @@ import javax.inject.Inject;
 
 /**
  * 模板支持类。
- *
- * @author lpw
  */
 public abstract class TemplateSupport implements Template {
     @Inject

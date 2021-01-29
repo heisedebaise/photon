@@ -5,8 +5,6 @@ import java.util.Set;
 
 /**
  * 转换器。提供常用转换操作。
- *
- * @author lpw
  */
 public interface Converter {
     /**

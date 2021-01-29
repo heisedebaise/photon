@@ -15,9 +15,6 @@ import java.sql.Savepoint;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.jdbc.connection")
 public class ConnectionImpl extends ConnectionSupport<Connection> implements org.lpw.photon.dao.jdbc.Connection {
     @Inject

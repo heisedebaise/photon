@@ -5,8 +5,6 @@ import java.io.OutputStream;
 
 /**
  * 二维码读写工具。
- *
- * @author lpw
  */
 public interface QrCode {
     /**

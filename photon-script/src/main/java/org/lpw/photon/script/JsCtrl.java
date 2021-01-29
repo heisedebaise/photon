@@ -12,9 +12,6 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Controller("photon.script.js.ctrl")
 @Execute(name = "/photon/script/", key = "photon.script", code = "99")
 public class JsCtrl {

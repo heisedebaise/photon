@@ -5,8 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Cookie织入器。
- *
- * @author lpw
  */
 public interface CookieAware {
     /**

@@ -7,8 +7,6 @@ import java.util.List;
 
 /**
  * PDF读取器。
- *
- * @author lpw
  */
 public interface PdfReader {
     /**

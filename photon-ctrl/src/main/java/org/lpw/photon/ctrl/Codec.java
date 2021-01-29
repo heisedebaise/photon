@@ -2,9 +2,6 @@ package org.lpw.photon.ctrl;
 
 import java.util.Map;
 
-/**
- * @author lpw
- */
 public interface Codec {
     /**
      * 对请求参数进行解码。

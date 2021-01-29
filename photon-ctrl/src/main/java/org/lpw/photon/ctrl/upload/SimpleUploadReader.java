@@ -14,9 +14,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 public class SimpleUploadReader implements UploadReader {
     private final String name;
     private String fileName;

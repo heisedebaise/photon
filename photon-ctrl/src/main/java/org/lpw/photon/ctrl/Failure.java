@@ -1,8 +1,5 @@
 package org.lpw.photon.ctrl;
 
-/**
- * @author lpw
- */
 public enum Failure {
     /**
      * 无权限。

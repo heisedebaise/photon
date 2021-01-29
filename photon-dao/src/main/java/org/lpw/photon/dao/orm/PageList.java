@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-/**
- * @author lpw
- */
 public interface PageList<T extends Model> {
     /**
      * 设置分页信息。

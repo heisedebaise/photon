@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.context;
 
 /**
  * Session适配器。
- *
- * @author lpw
  */
 public interface SessionAdapter {
     /**

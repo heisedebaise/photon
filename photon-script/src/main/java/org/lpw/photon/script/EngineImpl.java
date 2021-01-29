@@ -22,9 +22,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author lpw
- */
 @Service("photon.script.engine")
 public class EngineImpl implements Engine, StorageListener {
     private static final String METHOD = "();";

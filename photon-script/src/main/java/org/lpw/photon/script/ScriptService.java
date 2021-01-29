@@ -2,9 +2,6 @@ package org.lpw.photon.script;
 
 import com.alibaba.fastjson.JSONObject;
 
-/**
- * @author lpw
- */
 public interface ScriptService {
     /**
      * 脚本方法名是否存在验证器。

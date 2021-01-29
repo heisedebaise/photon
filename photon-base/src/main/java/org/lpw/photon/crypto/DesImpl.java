@@ -2,9 +2,6 @@ package org.lpw.photon.crypto;
 
 import org.springframework.stereotype.Component;
 
-/**
- * @author lpw
- */
 @Component("photon.crypto.des")
 public class DesImpl extends CipherSupport implements Des {
     @Override

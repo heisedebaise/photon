@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl;
 
 /**
  * 控制层拦截器。
- *
- * @author lpw
  */
 public interface Interceptor {
     /**

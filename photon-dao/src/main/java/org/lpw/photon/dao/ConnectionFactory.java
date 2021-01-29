@@ -5,8 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * DAO连接工厂。
  * 定义DAO连接工厂接口。
- *
- * @author lpw
  */
 public interface ConnectionFactory<T> {
     /**

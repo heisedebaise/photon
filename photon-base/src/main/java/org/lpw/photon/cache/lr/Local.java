@@ -2,8 +2,6 @@ package org.lpw.photon.cache.lr;
 
 /**
  * 本地缓存。
- *
- * @author lpw
  */
 public interface Local {
     /**

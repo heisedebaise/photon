@@ -6,9 +6,6 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Service("photon.script.service")
 public class ScriptServiceImpl implements ScriptService {
     private static final String METHOD = "photon.validate";

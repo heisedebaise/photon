@@ -2,8 +2,6 @@ package org.lpw.photon.ctrl.context;
 
 /**
  * 请求参数注入器。用于设置请求参数。
- *
- * @author lpw
  */
 public interface RequestAware {
     /**

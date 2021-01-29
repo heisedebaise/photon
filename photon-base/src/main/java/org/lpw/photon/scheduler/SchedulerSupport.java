@@ -16,8 +16,6 @@ import java.util.concurrent.Executors;
 
 /**
  * 定时器支持类。
- *
- * @author lpw
  */
 public abstract class SchedulerSupport<T> implements ContextRefreshedListener, ContextClosedListener {
     @Inject

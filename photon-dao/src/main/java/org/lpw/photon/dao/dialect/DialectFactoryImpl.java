@@ -7,9 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.dialect.factory")
 public class DialectFactoryImpl implements DialectFactory, ContextRefreshedListener {
     protected Map<String, Dialect> dialects;

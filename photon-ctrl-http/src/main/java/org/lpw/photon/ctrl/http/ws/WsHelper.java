@@ -6,8 +6,6 @@ import javax.websocket.Session;
 
 /**
  * WebSocket支持类。
- *
- * @author lpw
  */
 public interface WsHelper extends ResponseSender {
     /**

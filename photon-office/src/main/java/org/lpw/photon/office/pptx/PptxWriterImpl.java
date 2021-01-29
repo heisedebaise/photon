@@ -20,9 +20,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
 
-/**
- * @author lpw
- */
 @Component("photon.office.pptx.writer")
 public class PptxWriterImpl implements PptxWriter {
     @Inject

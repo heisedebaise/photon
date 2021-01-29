@@ -1,8 +1,5 @@
 package org.lpw.photon.ctrl.context;
 
-/**
- * @author lpw
- */
 public interface Session {
     /**
      * 设置Session值。

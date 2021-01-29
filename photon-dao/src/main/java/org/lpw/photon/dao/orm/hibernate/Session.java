@@ -4,8 +4,6 @@ import org.lpw.photon.dao.Connection;
 
 /**
  * Hibernate Session管理器。
- *
- * @author lpw
  */
 public interface Session extends Connection<org.hibernate.Session> {
 }

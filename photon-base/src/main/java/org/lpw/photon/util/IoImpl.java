@@ -13,9 +13,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-/**
- * @author lpw
- */
 @Component("photon.util.io")
 public class IoImpl implements Io {
     private static final int BUFFER_SIZE = 1024;

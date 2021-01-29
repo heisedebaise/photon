@@ -11,9 +11,6 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-/**
- * @author lpw
- */
 @Component("photon.nio.server")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Sharable

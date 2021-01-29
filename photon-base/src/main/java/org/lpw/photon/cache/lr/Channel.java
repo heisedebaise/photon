@@ -2,8 +2,6 @@ package org.lpw.photon.cache.lr;
 
 /**
  * 远程缓存客户端通道。
- *
- * @author lpw
  */
 public interface Channel {
     enum State {

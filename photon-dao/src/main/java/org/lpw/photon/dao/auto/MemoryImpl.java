@@ -10,9 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Repository(AutoModel.NAME + ".memory")
 public class MemoryImpl implements Memory {
     @Inject

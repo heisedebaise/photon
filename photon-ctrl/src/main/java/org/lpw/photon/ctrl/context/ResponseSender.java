@@ -4,8 +4,6 @@ import java.io.ByteArrayOutputStream;
 
 /**
  * 输出发送器。
- *
- * @author lpw
  */
 public interface ResponseSender {
     /**

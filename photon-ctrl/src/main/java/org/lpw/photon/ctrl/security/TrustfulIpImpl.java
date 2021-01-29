@@ -13,9 +13,6 @@ import javax.inject.Inject;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.security.trustful-ip")
 public class TrustfulIpImpl implements TrustfulIp, StorageListener {
     @Inject

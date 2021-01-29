@@ -29,9 +29,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Service(UploadService.PREFIX + "helper")
 public class UploadServiceImpl implements UploadService, IgnoreUri, ContextRefreshedListener {
     @Inject

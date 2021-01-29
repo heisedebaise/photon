@@ -11,9 +11,6 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.io.InputStream;
 
-/**
- * @author lpw
- */
 @Component("photon.office.excel.reader")
 public class ExcelReaderImpl implements ExcelReader {
     @Inject

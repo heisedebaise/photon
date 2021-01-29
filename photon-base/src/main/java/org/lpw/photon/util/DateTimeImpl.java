@@ -13,9 +13,6 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Component("photon.util.date-time")
 public class DateTimeImpl implements DateTime {
     private final String DATE_FORMAT = "yyyy-MM-dd";

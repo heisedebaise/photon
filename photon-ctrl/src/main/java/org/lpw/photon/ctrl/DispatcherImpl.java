@@ -25,9 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.dispatcher")
 public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedListener {
     @Inject

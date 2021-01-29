@@ -2,8 +2,6 @@ package org.lpw.photon.dao.dialect;
 
 /**
  * 方言工厂。
- *
- * @author lpw
  */
 public interface DialectFactory {
     /**

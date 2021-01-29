@@ -8,9 +8,6 @@ import org.lpw.photon.util.Numeric;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 public abstract class ValidatorSupport implements Validator {
     @Inject
     protected org.lpw.photon.util.Validator validator;

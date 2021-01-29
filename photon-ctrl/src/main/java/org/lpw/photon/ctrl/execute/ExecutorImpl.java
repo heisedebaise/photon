@@ -5,9 +5,6 @@ import org.lpw.photon.ctrl.validate.Validate;
 
 import java.lang.reflect.Method;
 
-/**
- * @author lpw
- */
 public class ExecutorImpl implements Executor {
     private final Object bean;
     private final Method method;

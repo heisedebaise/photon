@@ -6,8 +6,6 @@ import java.io.IOException;
 
 /**
  * 上传文件处理监听器。
- *
- * @author lpw
  */
 public interface UploadListener {
     /**

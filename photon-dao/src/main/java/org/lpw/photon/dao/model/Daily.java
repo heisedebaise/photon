@@ -8,8 +8,6 @@ import java.lang.annotation.Target;
 
 /**
  * 每日表。
- *
- * @author lpw
  */
 @Documented
 @Target({ElementType.TYPE})

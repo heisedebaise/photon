@@ -12,9 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-/**
- * @author lpw
- */
 @Component("photon.cache")
 public class CacheImpl implements Cache, ContextRefreshedListener {
     @Inject

@@ -7,9 +7,6 @@ import org.lpw.photon.ctrl.validate.Validators;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author lpw
- */
 public class ExecuteInvocation implements Invocation, Interceptor {
     protected List<Interceptor> interceptors;
     protected Validators validators;

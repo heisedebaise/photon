@@ -10,8 +10,6 @@ import java.lang.annotation.Target;
 
 /**
  * 执行器。用于标注执行服务。
- *
- * @author lpw
  */
 @Documented
 @Target({ElementType.TYPE, ElementType.METHOD})

@@ -15,9 +15,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 public class RequestAdapterImpl implements RequestAdapter {
     private HttpServletRequest request;
     private String url;

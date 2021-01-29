@@ -11,9 +11,6 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Component("photon.util.message")
 public class MessageImpl implements Message, ContextRefreshedListener {
     @Inject

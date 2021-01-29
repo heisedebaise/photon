@@ -12,9 +12,6 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.awt.geom.Rectangle2D;
 
-/**
- * @author lpw
- */
 @Component("photon.office.pptx.parser.anchor")
 public class AnchorImpl implements Simple, Graphic, Anchor {
     @Inject

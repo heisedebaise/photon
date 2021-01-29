@@ -31,9 +31,6 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Component("photon.util.qr-code")
 public class QrCodeImpl implements QrCode {
     private static final int WHITE = Color.WHITE.getRGB();

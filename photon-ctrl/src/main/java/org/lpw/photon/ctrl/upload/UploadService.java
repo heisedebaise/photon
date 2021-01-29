@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 public interface UploadService {
     /**
      * 前缀。

@@ -7,8 +7,6 @@ import java.io.OutputStream;
 
 /**
  * IO操作工具集。
- *
- * @author lpw
  */
 public interface Io {
     /**

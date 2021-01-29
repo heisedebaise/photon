@@ -4,8 +4,6 @@ import java.util.Map;
 
 /**
  * 脚本请求参数集。
- *
- * @author lpw
  */
 public interface Arguments {
     /**

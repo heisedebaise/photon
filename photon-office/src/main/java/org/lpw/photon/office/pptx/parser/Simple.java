@@ -7,8 +7,6 @@ import org.lpw.photon.office.pptx.WriterContext;
 
 /**
  * 简单形状解析器。
- *
- * @author lpw
  */
 public interface Simple extends Creater {
     /**

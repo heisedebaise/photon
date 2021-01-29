@@ -30,9 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Component("photon.bean.class-reloader")
 public class ClassReloaderImpl implements ClassReloader, StorageListener, ApplicationContextAware {
     @Inject

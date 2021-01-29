@@ -15,9 +15,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Service("photon.ctrl.status")
 public class StatusImpl implements Status, ContextRefreshedListener {
     @Inject

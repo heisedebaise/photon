@@ -2,9 +2,6 @@ package org.lpw.photon.ctrl.template;
 
 import org.springframework.stereotype.Controller;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.template.helper")
 public class TemplateHelperImpl implements TemplateHelper {
     protected ThreadLocal<String> template = new ThreadLocal<>();

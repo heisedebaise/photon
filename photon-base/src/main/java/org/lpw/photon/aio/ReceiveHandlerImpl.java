@@ -9,9 +9,6 @@ import javax.inject.Inject;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 
-/**
- * @author lpw
- */
 @Component("photon.aio.handler.receive")
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class ReceiveHandlerImpl implements ReceiveHandler {

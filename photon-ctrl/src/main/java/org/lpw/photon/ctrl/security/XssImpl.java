@@ -15,9 +15,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.security.xss")
 public class XssImpl implements Xss, StorageListener {
     private static final Pattern SCRIPT = Pattern.compile("<\\s*/?\\s*[sS]\\s*[cC]\\s*[rR]\\s*[iI]\\s*[pP]\\s*[tT].*>");

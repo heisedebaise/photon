@@ -7,8 +7,6 @@ import java.util.function.Consumer;
 
 /**
  * SQL检索结果二维表。
- *
- * @author lpw
  */
 public interface SqlTable {
     /**

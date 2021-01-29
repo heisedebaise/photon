@@ -7,9 +7,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Controller(ScriptValidator.NAME)
 public class ScriptValidatorImpl extends ValidatorSupport {
     @Inject

@@ -23,9 +23,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.socket.server-listener")
 public class ServerListenerImpl implements ServerListener {
     @Inject

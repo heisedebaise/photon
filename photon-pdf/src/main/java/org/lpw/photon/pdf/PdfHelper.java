@@ -4,9 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.awt.Color;
 
-/**
- * @author lpw
- */
 public interface PdfHelper {
     /**
      * 是否为PDF文件。

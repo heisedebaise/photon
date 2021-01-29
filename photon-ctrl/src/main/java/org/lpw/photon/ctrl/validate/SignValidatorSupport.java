@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 public class SignValidatorSupport extends ValidatorSupport implements SignValidator {
     @Inject
     private Sign sign;

@@ -2,8 +2,6 @@ package org.lpw.photon.util;
 
 /**
  * 编码/解码器。
- *
- * @author lpw
  */
 public interface Codec {
     /**

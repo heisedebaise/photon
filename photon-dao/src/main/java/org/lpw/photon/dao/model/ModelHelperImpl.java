@@ -22,9 +22,6 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-/**
- * @author lpw
- */
 @Repository("photon.model.helper")
 public class ModelHelperImpl implements ModelHelper {
     @Inject

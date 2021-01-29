@@ -4,9 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.awt.Color;
 
-/**
- * @author lpw
- */
 public interface OfficeHelper {
     /**
      * 是否为Excel文件。

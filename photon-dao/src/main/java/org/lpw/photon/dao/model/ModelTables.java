@@ -4,8 +4,6 @@ import java.util.Set;
 
 /**
  * Model-Table集。用于保存所有Model-Table映射关系表，并提供查询。
- *
- * @author lpw
  */
 public interface ModelTables {
     /**

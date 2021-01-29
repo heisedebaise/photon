@@ -16,9 +16,6 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.template.json")
 public class TemplateImpl extends TemplateSupport {
     @Inject

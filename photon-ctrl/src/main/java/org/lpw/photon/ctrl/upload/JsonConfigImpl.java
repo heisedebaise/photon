@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-/**
- * @author lpw
- */
 public class JsonConfigImpl implements JsonConfig {
     private final Map<Pattern, String> map;
     private final int[] imageSize;

@@ -2,9 +2,6 @@ package org.lpw.photon.ctrl.validate;
 
 import org.springframework.stereotype.Controller;
 
-/**
- * @author lpw
- */
 @Controller(Validators.MIN_LENGTH)
 public class MinLengthValidatorImpl extends ValidatorSupport {
     @Override

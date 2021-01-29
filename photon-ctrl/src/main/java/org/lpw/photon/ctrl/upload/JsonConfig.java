@@ -1,8 +1,5 @@
 package org.lpw.photon.ctrl.upload;
 
-/**
- * @author lpw
- */
 public interface JsonConfig extends UploadListener {
     /**
      * 添加保存路径设置。

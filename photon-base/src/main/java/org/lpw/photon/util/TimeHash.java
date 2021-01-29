@@ -2,8 +2,6 @@ package org.lpw.photon.util;
 
 /**
  * 时间Hash算法与验证。
- *
- * @author lpw
  */
 public interface TimeHash {
     /**

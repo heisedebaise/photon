@@ -36,9 +36,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Component("photon.lucene.helper")
 public class LuceneHelperImpl implements LuceneHelper {
     @Inject

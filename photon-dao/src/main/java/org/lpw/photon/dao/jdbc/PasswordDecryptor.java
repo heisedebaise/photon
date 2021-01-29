@@ -1,8 +1,5 @@
 package org.lpw.photon.dao.jdbc;
 
-/**
- * @author lpw
- */
 public interface PasswordDecryptor {
     /**
      * 解密密码。

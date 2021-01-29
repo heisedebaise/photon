@@ -4,8 +4,6 @@ import org.lpw.photon.ctrl.context.ResponseSender;
 
 /**
  * Socket支持。
- *
- * @author lpw
  */
 public interface SocketHelper extends ResponseSender {
     /**

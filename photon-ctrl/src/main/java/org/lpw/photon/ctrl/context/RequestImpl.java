@@ -19,9 +19,6 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.context.request")
 public class RequestImpl implements Request, RequestAware {
     private static final String ADAPTER = "photon.ctrl.context.request.adapter";

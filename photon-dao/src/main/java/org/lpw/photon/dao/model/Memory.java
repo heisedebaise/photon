@@ -8,8 +8,6 @@ import java.lang.annotation.Target;
 
 /**
  * 内存表定义。
- *
- * @author lpw
  */
 @Documented
 @Target({ElementType.TYPE})

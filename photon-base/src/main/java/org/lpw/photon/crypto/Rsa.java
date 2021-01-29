@@ -4,8 +4,6 @@ import java.io.OutputStream;
 
 /**
  * RSA非对称加解密。
- *
- * @author lpw
  */
 public interface Rsa {
     /**

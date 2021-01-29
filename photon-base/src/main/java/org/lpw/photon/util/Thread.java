@@ -2,8 +2,6 @@ package org.lpw.photon.util;
 
 /**
  * 提供简化的线程操作工具集。
- *
- * @author lpw
  */
 public interface Thread {
     /**

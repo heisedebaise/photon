@@ -4,9 +4,6 @@ import org.lpw.photon.util.Converter;
 import org.lpw.photon.util.DateTime;
 import org.lpw.photon.util.Message;
 
-/**
- * @author lpw
- */
 public interface Model {
     /**
      * 获取转换器。

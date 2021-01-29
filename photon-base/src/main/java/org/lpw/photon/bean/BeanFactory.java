@@ -9,8 +9,6 @@ import java.util.Collection;
 
 /**
  * Bean实例工厂，用于获取Bean实例。
- *
- * @author lpw
  */
 @Component("photon.bean.factory")
 public class BeanFactory implements ApplicationContextAware {

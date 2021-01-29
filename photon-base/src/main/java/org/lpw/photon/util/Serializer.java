@@ -5,8 +5,6 @@ import java.io.OutputStream;
 
 /**
  * 序列化。
- *
- * @author lpw
  */
 public interface Serializer {
     /**

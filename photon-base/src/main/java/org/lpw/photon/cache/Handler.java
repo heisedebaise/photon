@@ -2,8 +2,6 @@ package org.lpw.photon.cache;
 
 /**
  * 缓存处理器。
- *
- * @author lpw
  */
 public interface Handler {
     /**

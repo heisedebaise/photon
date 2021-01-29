@@ -2,8 +2,6 @@ package org.lpw.photon.util;
 
 /**
  * 验证器。用于提供常用验证。
- *
- * @author lpw
  */
 public interface Validator {
     /**

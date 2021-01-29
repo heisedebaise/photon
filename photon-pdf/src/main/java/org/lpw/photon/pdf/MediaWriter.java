@@ -4,8 +4,6 @@ import java.io.InputStream;
 
 /**
  * 媒体资源输出器。
- *
- * @author lpw
  */
 public interface MediaWriter {
     /**

@@ -12,8 +12,6 @@ import java.util.function.Function;
 
 /**
  * Model支持类。用于操作Model属性。
- *
- * @author lpw
  */
 public interface ModelHelper {
     /**

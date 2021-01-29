@@ -4,9 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-/**
- * @author lpw
- */
 @Component("photon.util.logger")
 public class LoggerImpl implements org.lpw.photon.util.Logger {
     private static final String[] THROWABLES = {"< ", " > ", "    "};

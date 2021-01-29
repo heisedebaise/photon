@@ -7,8 +7,6 @@ import java.io.InputStream;
 
 /**
  * Excel读取器。
- *
- * @author lpw
  */
 public interface ExcelReader {
     /**

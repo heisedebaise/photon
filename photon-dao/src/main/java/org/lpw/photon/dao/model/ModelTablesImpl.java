@@ -18,9 +18,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Repository("photon.model.tables")
 public class ModelTablesImpl implements ModelTables, ContextRefreshedListener {
     @Inject

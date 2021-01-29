@@ -9,8 +9,6 @@ import javax.persistence.MappedSuperclass;
 
 /**
  * Model支持类，主键ID使用UUID。
- *
- * @author lpw
  */
 @MappedSuperclass
 public class ModelSupport implements Model {

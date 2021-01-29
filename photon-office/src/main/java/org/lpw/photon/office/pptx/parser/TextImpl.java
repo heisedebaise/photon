@@ -15,9 +15,6 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author lpw
- */
 @Component("photon.office.pptx.parser.text")
 public class TextImpl implements Simple {
     @Inject

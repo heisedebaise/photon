@@ -5,9 +5,6 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Component("photon.crypto.xor-shift")
 public class XorShiftImpl implements XorShift {
     @Inject

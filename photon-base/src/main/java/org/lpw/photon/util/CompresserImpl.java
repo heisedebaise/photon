@@ -9,9 +9,6 @@ import java.io.OutputStream;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-/**
- * @author lpw
- */
 @Component("photon.util.compresser")
 public class CompresserImpl implements Compresser {
     @Inject

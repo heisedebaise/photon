@@ -4,8 +4,6 @@ package org.lpw.photon.chrome;
  * Google Chrome DevTools协议工具。
  * https://chromedevtools.github.io/devtools-protocol/
  * https://github.com/ChromeDevTools/awesome-chrome-devtools
- *
- * @author lpw
  */
 public interface ChromeHelper {
     /**

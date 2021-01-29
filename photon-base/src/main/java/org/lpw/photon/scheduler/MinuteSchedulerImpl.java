@@ -7,9 +7,6 @@ import javax.inject.Inject;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Component("photon.scheduler.minute")
 public class MinuteSchedulerImpl extends SchedulerSupport<MinuteJob> implements MinuteScheduler {
     @Inject

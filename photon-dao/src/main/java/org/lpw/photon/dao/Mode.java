@@ -2,8 +2,6 @@ package org.lpw.photon.dao;
 
 /**
  * 数据库操作方式。
- *
- * @author lpw
  */
 public enum Mode {
     /**

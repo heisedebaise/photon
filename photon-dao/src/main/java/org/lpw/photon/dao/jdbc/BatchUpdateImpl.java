@@ -10,9 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Repository("photon.dao.jdbc.batch-update")
 public class BatchUpdateImpl implements BatchUpdate {
     @Inject

@@ -2,8 +2,6 @@ package org.lpw.photon.bean;
 
 /**
  * Bean环境初始化监听器。
- *
- * @author lpw
  */
 public interface ContextRefreshedListener {
     /**

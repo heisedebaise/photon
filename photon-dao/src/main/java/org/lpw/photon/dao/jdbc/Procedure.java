@@ -2,8 +2,6 @@ package org.lpw.photon.dao.jdbc;
 
 /**
  * 存储过程操作接口。
- *
- * @author lpw
  */
 public interface Procedure extends Jdbc {
     /**

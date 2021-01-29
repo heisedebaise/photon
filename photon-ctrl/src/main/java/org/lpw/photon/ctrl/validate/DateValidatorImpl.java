@@ -5,9 +5,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
 
-/**
- * @author lpw
- */
 @Controller(Validators.DATE_TIME)
 public class DateValidatorImpl extends ValidatorSupport {
     @Inject

@@ -2,8 +2,6 @@ package org.lpw.photon.office;
 
 /**
  * 资源类型。
- *
- * @author lpw
  */
 public enum MediaType {
     /**

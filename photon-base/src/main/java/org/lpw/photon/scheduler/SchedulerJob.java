@@ -2,8 +2,6 @@ package org.lpw.photon.scheduler;
 
 /**
  * 定时任务。
- *
- * @author lpw
  */
 public interface SchedulerJob {
     /**

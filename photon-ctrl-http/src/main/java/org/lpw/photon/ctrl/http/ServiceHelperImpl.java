@@ -36,9 +36,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-/**
- * @author lpw
- */
 @Controller("photon.ctrl.http.service.helper")
 public class ServiceHelperImpl implements ServiceHelper {
     private static final String ROOT = "/";

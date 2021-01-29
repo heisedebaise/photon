@@ -19,9 +19,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author lpw
- */
 @Component("photon.cache.lr.local")
 public class LocalImpl implements Local, MinuteJob {
     @Inject

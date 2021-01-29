@@ -2,8 +2,6 @@ package org.lpw.photon.bean;
 
 /**
  * Bean环境关闭监听器。
- *
- * @author lpw
  */
 public interface ContextClosedListener {
     /**
