@@ -69,4 +69,12 @@ public interface UploadService {
      * @return 文件路径。
      */
     String newSavePath(String contentType, String name, String suffix);
+
+    /**
+     * 获取Content-Type。
+     *
+     * @param uri URI。
+     * @return Content-Type，失败则返回null。
+     */
+    String getContentType(String uri);
 }

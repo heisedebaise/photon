@@ -239,6 +239,17 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
     }
 
     @Override
+    public String getContentType(String uri) {
+        int indexOf = uri.lastIndexOf(ROOT);
+        if (indexOf == -1)
+            return null;
+
+        String[] ct = uri.substring(indexOf + ROOT.length()).split("/");
+
+        return ct.length > 1 ? (ct[0] + "/" + ct[1]) : null;
+    }
+
+    @Override
     public int getContextRefreshedSort() {
         return 19;
     }
