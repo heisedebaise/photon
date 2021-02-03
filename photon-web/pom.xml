@@ -6,7 +6,7 @@
 
     <groupId>org.lpw.photon</groupId>
     <artifactId>photon-web</artifactId>
-    <version>0.2</version>
+    <version>1.0</version>
     <packaging>war</packaging>
 
     <name>photon-web</name>
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>org.lpw.photon</groupId>
             <artifactId>photon-ctrl-http</artifactId>
-            <version>0.2</version>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 </project>

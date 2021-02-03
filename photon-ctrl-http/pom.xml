@@ -6,7 +6,7 @@
 
     <groupId>org.lpw.photon</groupId>
     <artifactId>photon-ctrl-http</artifactId>
-    <version>0.2</version>
+    <version>1.0</version>
 
     <name>photon-ctrl-http</name>
     <url>https://github.com/heisedebaise/photon</url>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.lpw.photon</groupId>
             <artifactId>photon-ctrl</artifactId>
-            <version>0.2</version>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 </project>

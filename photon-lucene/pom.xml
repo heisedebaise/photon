@@ -6,7 +6,7 @@
 
     <groupId>org.lpw.photon</groupId>
     <artifactId>photon-lucene</artifactId>
-    <version>0.2</version>
+    <version>1.0</version>
 
     <name>photon-lucene</name>
     <url>https://github.com/heisedebaise/photon</url>
@@ -15,22 +15,22 @@
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-backward-codecs</artifactId>
-            <version>8.7.0</version>
+            <version>8.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-analyzers-common</artifactId>
-            <version>8.7.0</version>
+            <version>8.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-queryparser</artifactId>
-            <version>8.7.0</version>
+            <version>8.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.lpw.photon</groupId>
             <artifactId>photon-base</artifactId>
-            <version>0.2</version>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 </project>
