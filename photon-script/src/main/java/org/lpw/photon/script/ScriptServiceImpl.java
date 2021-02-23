@@ -8,8 +8,6 @@ import javax.inject.Inject;
 
 @Service("photon.script.service")
 public class ScriptServiceImpl implements ScriptService {
-    private static final String METHOD = "photon.validate";
-
     @Inject
     private Engine engine;
     @Inject
@@ -20,6 +18,6 @@ public class ScriptServiceImpl implements ScriptService {
         arguments.set("parameter", parameter);
         arguments.set("names", names);
 
-        return JSON.parseObject(engine.execute(METHOD).toString());
+        return JSON.parseObject(engine.execute("photon.validate").toString());
     }
 }

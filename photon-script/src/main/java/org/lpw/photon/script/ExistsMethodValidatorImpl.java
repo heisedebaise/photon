@@ -8,8 +8,6 @@ import javax.inject.Inject;
 
 @Controller(ScriptService.VALIDATOR_EXISTS_METHOD)
 public class ExistsMethodValidatorImpl extends ValidatorSupport {
-    private static final String DEFAULT_FAILURE_MESSAGE_KEY = "photon.script.method.not-exists";
-
     @Inject
     private Engine engine;
 
@@ -20,6 +18,6 @@ public class ExistsMethodValidatorImpl extends ValidatorSupport {
 
     @Override
     protected String getDefaultFailureMessageKey() {
-        return DEFAULT_FAILURE_MESSAGE_KEY;
+        return "photon.script.method.not-exists";
     }
 }

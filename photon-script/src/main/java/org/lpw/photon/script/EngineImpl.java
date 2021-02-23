@@ -51,7 +51,7 @@ public class EngineImpl implements Engine, StorageListener {
             ScriptEngine engine = manager.getEngineByName("js");
             engine.eval(read());
             this.engine = engine;
-        } catch (ScriptException | IOException e) {
+        } catch (Exception e) {
             logger.warn(e, "重新载入脚本时发生异常！");
         }
     }
