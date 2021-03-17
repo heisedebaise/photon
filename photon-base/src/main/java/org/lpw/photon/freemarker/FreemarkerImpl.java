@@ -93,12 +93,12 @@ public class FreemarkerImpl implements Freemarker {
         if (configuration == null) {
             synchronized (this) {
                 if (configuration == null) {
-                    configuration = new Configuration(Configuration.VERSION_2_3_27);
+                    configuration = new Configuration(Configuration.VERSION_2_3_31);
                     configuration.setTemplateLoader(new MultiTemplateLoader(new TemplateLoader[]{
                             new FileTemplateLoader(new File(context.getAbsolutePath(root))),
                             stringTemplateLoader = new StringTemplateLoader()
                     }));
-                    configuration.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_27));
+                    configuration.setObjectWrapper(new DefaultObjectWrapper(Configuration.VERSION_2_3_31));
                     configuration.setTemplateExceptionHandler((e, env, out) -> logger.warn(e, "解析FreeMarker模板时发生异常！"));
                 }
             }
