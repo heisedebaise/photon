@@ -1,5 +1,6 @@
 package org.lpw.photon.freemarker;
 
+import org.lpw.photon.util.Codec;
 import org.lpw.photon.util.Converter;
 import org.lpw.photon.util.DateTime;
 import org.lpw.photon.util.Message;
@@ -25,6 +26,13 @@ public interface Model {
      * @return 日期时间处理器。
      */
     DateTime getDatetime();
+
+    /**
+     * 获取编码/解码器。
+     *
+     * @return 编码/解码器。
+     */
+    Codec getCodec();
 
     /**
      * 获取数据实例。

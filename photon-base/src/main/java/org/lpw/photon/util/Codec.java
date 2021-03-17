@@ -94,4 +94,12 @@ public interface Codec {
      * @return 字符串。
      */
     String charset(String string, String charset);
+
+    /**
+     * 转化字符串为UNICODE码字符串。
+     *
+     * @param string 字符串。
+     * @return UNICODE码字符串。
+     */
+    String unicode(String string);
 }

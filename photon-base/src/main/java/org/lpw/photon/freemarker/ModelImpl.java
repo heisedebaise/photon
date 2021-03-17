@@ -1,5 +1,6 @@
 package org.lpw.photon.freemarker;
 
+import org.lpw.photon.util.Codec;
 import org.lpw.photon.util.Converter;
 import org.lpw.photon.util.DateTime;
 import org.lpw.photon.util.Message;
@@ -18,6 +19,8 @@ public class ModelImpl implements Model {
     private Message message;
     @Inject
     private DateTime dateTime;
+    @Inject
+    private Codec codec;
     private Object data;
 
     @Override
@@ -33,6 +36,11 @@ public class ModelImpl implements Model {
     @Override
     public DateTime getDatetime() {
         return dateTime;
+    }
+
+    @Override
+    public Codec getCodec() {
+        return codec;
     }
 
     @Override

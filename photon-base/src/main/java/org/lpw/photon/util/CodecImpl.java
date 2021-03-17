@@ -17,6 +17,8 @@ public class CodecImpl implements Codec {
     @Inject
     private Context context;
     @Inject
+    private Validator validator;
+    @Inject
     private Logger logger;
     private final Charset charset = StandardCharsets.ISO_8859_1;
 
@@ -101,5 +103,17 @@ public class CodecImpl implements Codec {
     @Override
     public String charset(String string, String charset) {
         return string == null ? null : new String(string.getBytes(this.charset), Charset.forName(charset));
+    }
+
+    @Override
+    public String unicode(String string) {
+        if (validator.isEmpty(string))
+            return "";
+
+        StringBuilder sb = new StringBuilder();
+        for (char ch : string.toCharArray())
+            sb.append("\\u").append(Integer.toHexString(ch));
+
+        return sb.toString();
     }
 }
