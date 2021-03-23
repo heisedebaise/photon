@@ -111,8 +111,12 @@ public class CodecImpl implements Codec {
             return "";
 
         StringBuilder sb = new StringBuilder();
-        for (char ch : string.toCharArray())
-            sb.append("\\u").append(Integer.toHexString(ch));
+        for (char ch : string.toCharArray()) {
+            if (ch < 0x80)
+                sb.append(ch);
+            else
+                sb.append("\\u").append(Integer.toHexString(ch));
+        }
 
         return sb.toString();
     }
