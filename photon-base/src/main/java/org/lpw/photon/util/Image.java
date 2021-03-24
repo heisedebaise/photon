@@ -29,6 +29,19 @@ public interface Image {
     }
 
     /**
+     * PNG Content Type.
+     */
+    String CONTENT_TYPE_PNG = "image/png";
+    /**
+     * JPEG Content Type.
+     */
+    String CONTENT_TYPE_JPEG = "image/jpeg";
+    /**
+     * GIF Content type.
+     */
+    String CONTENT_TYPE_GIF = "image/gif";
+
+    /**
      * 读取图片。
      *
      * @param bytes 图片数据流。
