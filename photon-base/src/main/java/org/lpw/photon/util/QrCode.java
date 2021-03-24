@@ -8,6 +8,11 @@ import java.io.OutputStream;
  */
 public interface QrCode {
     /**
+     * 二维码图片ContentType。
+     */
+    String CONTENT_TYPE = Image.CONTENT_TYPE_PNG;
+
+    /**
      * 生成二维码图片。
      *
      * @param content 二维码内容。
