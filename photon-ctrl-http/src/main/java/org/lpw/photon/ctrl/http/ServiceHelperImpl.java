@@ -184,6 +184,7 @@ public class ServiceHelperImpl implements ServiceHelper {
     private boolean service(HttpServletRequest request, HttpServletResponse response, String uri, String sessionId) throws IOException {
         cors.set(request, response);
         OutputStream outputStream = setContext(request, response, uri, sessionId);
+        response.setHeader("Cache-Control", "no-cache");
         if (timeHash.isEnable() && !timeHash.valid(request.getIntHeader("time-hash")) && !status.isStatus(uri)
                 && (ignoreTimeHash.isEmpty() || !ignoreTimeHash.get().ignore())) {
             if (logger.isDebugEnable())
@@ -192,7 +193,6 @@ public class ServiceHelperImpl implements ServiceHelper {
             return false;
         }
 
-        response.setHeader("Cache-Control", "no-cache");
         dispatcher.execute();
         outputStream.flush();
         outputStream.close();
@@ -214,7 +214,6 @@ public class ServiceHelperImpl implements ServiceHelper {
         if (file.isDirectory())
             return true;
 
-//        response.setHeader("Cache-Control", "no-cache");
         String ifNoneMatch = request.getHeader("If-None-Match");
         String lastModified = numeric.toString(file.lastModified());
         if (notModified(ifNoneMatch, lastModified, uri))
