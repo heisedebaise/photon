@@ -192,6 +192,7 @@ public class ServiceHelperImpl implements ServiceHelper {
             return false;
         }
 
+        response.setHeader("Cache-Control", "no-cache");
         dispatcher.execute();
         outputStream.flush();
         outputStream.close();
@@ -213,6 +214,7 @@ public class ServiceHelperImpl implements ServiceHelper {
         if (file.isDirectory())
             return true;
 
+//        response.setHeader("Cache-Control", "no-cache");
         String ifNoneMatch = request.getHeader("If-None-Match");
         String lastModified = numeric.toString(file.lastModified());
         if (notModified(ifNoneMatch, lastModified, uri))
