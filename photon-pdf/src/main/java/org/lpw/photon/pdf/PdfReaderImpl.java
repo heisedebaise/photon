@@ -2,6 +2,7 @@ package org.lpw.photon.pdf;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.rendering.ImageType;
@@ -33,7 +34,7 @@ public class PdfReaderImpl implements PdfReader {
         JSONObject object = new JSONObject();
         JSONArray pages = new JSONArray();
         int pageHeight = 0;
-        try (PDDocument pdDocument = PDDocument.load(inputStream)) {
+        try (PDDocument pdDocument = Loader.loadPDF(inputStream)) {
             int size = pdDocument.getNumberOfPages();
             if (size == 0)
                 return object;
@@ -112,7 +113,7 @@ public class PdfReaderImpl implements PdfReader {
     private String image(InputStream inputStream, MediaWriter mediaWriter, MediaType mediaType, float scale, int width, boolean argb, int page) {
         if (scale <= 0.0f && width <= 0)
             scale = 1.0f;
-        try (PDDocument document = PDDocument.load(inputStream)) {
+        try (PDDocument document = Loader.loadPDF(inputStream)) {
             if (width > 0)
                 scale = width / document.getPage(page).getCropBox().getWidth();
 
@@ -130,7 +131,7 @@ public class PdfReaderImpl implements PdfReader {
         if (scale <= 0.0f && width <= 0)
             scale = 1.0f;
         List<String> list = new ArrayList<>();
-        try (PDDocument document = PDDocument.load(inputStream)) {
+        try (PDDocument document = Loader.loadPDF(inputStream)) {
             PDFRenderer renderer = new PDFRenderer(document);
             BufferedImage together = null;
             for (int i = 0, size = document.getNumberOfPages(); i < size; i++) {
