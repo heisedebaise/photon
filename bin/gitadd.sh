@@ -4,6 +4,7 @@ git add bin
 git add LICENSE
 git add pom.xml
 git add README.md
+git add .gitignore
 
 for name in photon-*
 do
