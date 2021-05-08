@@ -6,7 +6,7 @@ package org.lpw.photon.util;
 public interface Codec {
     /**
      * 将byte数据转化为hex字符串。
-     *
+     * 
      * @param bytes byte数据。
      * @return hex字符串。
      */

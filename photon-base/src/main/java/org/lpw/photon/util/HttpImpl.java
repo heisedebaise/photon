@@ -58,8 +58,6 @@ public class HttpImpl implements Http, ContextRefreshedListener {
     @Inject
     private Io io;
     @Inject
-    private TimeHash timeHash;
-    @Inject
     private Logger logger;
     @Value("${photon.http.pool.max:256}")
     private int max;
@@ -85,7 +83,8 @@ public class HttpImpl implements Http, ContextRefreshedListener {
             return "";
 
         StringBuilder sb = new StringBuilder();
-        parameters.forEach((name, value) -> sb.append('&').append(name).append('=').append(codec.encodeUrl(value, charset)));
+        parameters.forEach(
+                (name, value) -> sb.append('&').append(name).append('=').append(codec.encodeUrl(value, charset)));
 
         return sb.substring(1);
     }
@@ -104,7 +103,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
 
     @Override
     public void get(String url, Map<String, String> requestHeaders, String parameters,
-                    Map<String, String> responseHeaders, OutputStream outputStream) {
+            Map<String, String> responseHeaders, OutputStream outputStream) {
         if (validator.isEmpty(url))
             return;
 
@@ -131,7 +130,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
 
     @Override
     public void post(String url, Map<String, String> requestHeaders, Map<String, String> parameters, String charset,
-                     Map<String, String> responseHeaders, OutputStream outputStream) {
+            Map<String, String> responseHeaders, OutputStream outputStream) {
         postByEntity(url, requestHeaders, toEntity(parameters, charset), responseHeaders, outputStream);
     }
 
@@ -157,7 +156,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
 
     @Override
     public void post(String url, Map<String, String> requestHeaders, String content, String charset,
-                     Map<String, String> responseHeaders, OutputStream outputStream) {
+            Map<String, String> responseHeaders, OutputStream outputStream) {
         postByEntity(url, requestHeaders, toEntity(content, charset), responseHeaders, outputStream);
     }
 
@@ -174,7 +173,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
 
     @Override
     public void post(String url, Map<String, String> requestHeaders, InputStream inputStream,
-                     Map<String, String> responseHeaders, OutputStream outputStream) {
+            Map<String, String> responseHeaders, OutputStream outputStream) {
         postByEntity(url, requestHeaders, toEntity(inputStream), responseHeaders, outputStream);
     }
 
@@ -183,13 +182,14 @@ public class HttpImpl implements Http, ContextRefreshedListener {
     }
 
     @Override
-    public String upload(String url, Map<String, String> requestHeaders, Map<String, String> parameters, Map<String, File> files) {
+    public String upload(String url, Map<String, String> requestHeaders, Map<String, String> parameters,
+            Map<String, File> files) {
         return upload(url, requestHeaders, parameters, files, null);
     }
 
     @Override
     public String upload(String url, Map<String, String> requestHeaders, Map<String, String> parameters,
-                         Map<String, File> files, String charset) {
+            Map<String, File> files, String charset) {
         if (validator.isEmpty(files))
             return post(url, requestHeaders, parameters, charset);
 
@@ -228,7 +228,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
     }
 
     private void postByEntity(String url, Map<String, String> requestHeaders, HttpEntity entity,
-                              Map<String, String> responseHeaders, OutputStream outputStream) {
+            Map<String, String> responseHeaders, OutputStream outputStream) {
         if (validator.isEmpty(url))
             return;
 
@@ -246,13 +246,13 @@ public class HttpImpl implements Http, ContextRefreshedListener {
         return RequestConfig.custom().setConnectTimeout(connectTimeout).setSocketTimeout(readTimeout).build();
     }
 
-    private void execute(HttpUriRequest request, Map<String, String> requestHeaders, Map<String, String> responseHeaders,
-                         OutputStream outputStream) {
+    private void execute(HttpUriRequest request, Map<String, String> requestHeaders,
+            Map<String, String> responseHeaders, OutputStream outputStream) {
         if (!validator.isEmpty(requestHeaders))
             requestHeaders.keySet().stream().filter(key -> !key.equalsIgnoreCase("content-length"))
                     .forEach(key -> request.addHeader(key, requestHeaders.get(key)));
-        try (CloseableHttpResponse response = HttpClients.custom().setConnectionManager(null).build()
-                .execute(request, HttpClientContext.create())) {
+        try (CloseableHttpResponse response = HttpClients.custom().setConnectionManager(null).build().execute(request,
+                HttpClientContext.create())) {
             int statusCode = response.getStatusLine().getStatusCode();
             this.statusCode.set(statusCode);
             HttpEntity httpEntity = response.getEntity();
@@ -299,7 +299,7 @@ public class HttpImpl implements Http, ContextRefreshedListener {
     public void onContextRefreshed() {
         try {
             SSLContext sslContext = SSLContext.getInstance("SSLv3");
-            sslContext.init(null, new TrustManager[]{new X509TrustManager() {
+            sslContext.init(null, new TrustManager[] { new X509TrustManager() {
                 public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
                 }
 
@@ -309,10 +309,12 @@ public class HttpImpl implements Http, ContextRefreshedListener {
                 public X509Certificate[] getAcceptedIssuers() {
                     return new X509Certificate[0];
                 }
-            }}, null);
-            SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE);
+            } }, null);
+            SSLConnectionSocketFactory sslConnectionSocketFactory = new SSLConnectionSocketFactory(sslContext,
+                    NoopHostnameVerifier.INSTANCE);
             Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
-                    .register("http", PlainConnectionSocketFactory.INSTANCE).register("https", sslConnectionSocketFactory).build();
+                    .register("http", PlainConnectionSocketFactory.INSTANCE)
+                    .register("https", sslConnectionSocketFactory).build();
             manager = new PoolingHttpClientConnectionManager(registry);
             manager.setMaxTotal(max);
             manager.setDefaultMaxPerRoute(max >> 3);

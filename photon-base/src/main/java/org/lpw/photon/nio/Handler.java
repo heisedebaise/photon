@@ -1,18 +1,20 @@
 package org.lpw.photon.nio;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import org.lpw.photon.util.Logger;
-
-import javax.inject.Inject;
 import java.io.ByteArrayOutputStream;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.inject.Inject;
+
+import org.lpw.photon.util.Logger;
+
+import io.netty.channel.ChannelHandlerAdapter;
+import io.netty.channel.ChannelHandlerContext;
+
 /**
  * 监听处理器。
  */
-public abstract class Handler extends ChannelInboundHandlerAdapter {
+public abstract class Handler extends ChannelHandlerAdapter {
     @Inject
     protected Logger logger;
     @Inject
