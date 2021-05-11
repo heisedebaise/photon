@@ -38,6 +38,7 @@ public class TemplateImpl extends TemplateSupport {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void process(String name, Object data, OutputStream outputStream) throws IOException {
         if (data instanceof Failure) {
             write(getFailure((Failure) data), outputStream);

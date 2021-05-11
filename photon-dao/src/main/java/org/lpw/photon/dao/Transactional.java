@@ -16,7 +16,7 @@ public class Transactional {
     @Inject
     private Logger logger;
     @Inject
-    private Optional<Set<Connection>> connections;
+    private Optional<Set<Connection<?>>> connections;
 
     @Around("execution(* *(..)) && @annotation(javax.transaction.Transactional)")
     public Object around(ProceedingJoinPoint point) throws Throwable {
