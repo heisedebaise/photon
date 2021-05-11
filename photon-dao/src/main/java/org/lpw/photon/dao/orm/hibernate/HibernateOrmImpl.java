@@ -18,7 +18,7 @@ import java.util.List;
 
 @Repository("photon.dao.orm.hibernate")
 public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements HibernateOrm {
-    private static final String[] ARG = {"?", ":arg", "arg"};
+    private static final String[] ARG = { "?", ":arg", "arg" };
 
     @Inject
     private Converter converter;
@@ -35,7 +35,8 @@ public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements Hibe
         if (lock) {
             session.beginTransaction();
 
-            return session.get(getDataSource(dataSource, null, null, modelClass), Mode.Write).get(modelClass, (Object) id, LockOptions.UPGRADE);
+            return session.get(getDataSource(dataSource, null, null, modelClass), Mode.Write).get(modelClass,
+                    (Object) id, LockOptions.UPGRADE);
         }
 
         return session.get(getDataSource(dataSource, null, null, modelClass), Mode.Read).get(modelClass, (Object) id);
@@ -45,7 +46,7 @@ public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements Hibe
     @Override
     public <T extends Model> T findOne(HibernateQuery query, Object[] args) {
         query.size(1).page(1);
-        List<T> list = createQuery(getDataSource(null, query, null, null), Mode.Read, getQueryHql(query),
+        List<T> list = (List<T>) createQuery(getDataSource(null, query, null, null), Mode.Read, getQueryHql(query),
                 args, query.isLocked(), 1, 1).list();
 
         return list.isEmpty() ? null : list.get(0);
@@ -56,8 +57,9 @@ public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements Hibe
     public <T extends Model> PageList<T> query(HibernateQuery query, Object[] args) {
         PageList<T> models = BeanFactory.getBean(PageList.class);
         if (query.getSize() > 0)
-            models.setPage(query.isCountable() ? count(query, args) : query.getSize() * query.getPage(), query.getSize(), query.getPage());
-        models.setList(createQuery(getDataSource(null, query, null, null), Mode.Read, getQueryHql(query),
+            models.setPage(query.isCountable() ? count(query, args) : query.getSize() * query.getPage(),
+                    query.getSize(), query.getPage());
+        models.setList((List<T>) createQuery(getDataSource(null, query, null, null), Mode.Read, getQueryHql(query),
                 args, query.isLocked(), models.getSize(), models.getNumber()).list());
 
         return models;
@@ -66,8 +68,8 @@ public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements Hibe
     @SuppressWarnings("unchecked")
     @Override
     public <T extends Model> Iterator<T> iterate(HibernateQuery query, Object[] args) {
-        return createQuery(getDataSource(null, query, null, null), Mode.Read, getQueryHql(query),
-                args, query.isLocked(), query.getSize(), query.getPage()).list().iterator();
+        return (Iterator<T>) createQuery(getDataSource(null, query, null, null), Mode.Read, getQueryHql(query), args,
+                query.isLocked(), query.getSize(), query.getPage()).list().iterator();
     }
 
     private StringBuilder getQueryHql(HibernateQuery query) {
@@ -90,8 +92,9 @@ public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements Hibe
         if (!validator.isEmpty(query.getGroup()))
             hql.append(" GROUP BY ").append(query.getGroup());
 
-        return numeric.toInt(createQuery(getDataSource(null, query, null, null), Mode.Read, hql, args,
-                query.isLocked(), 0, 0).list().get(0));
+        return numeric
+                .toInt(createQuery(getDataSource(null, query, null, null), Mode.Read, hql, args, query.isLocked(), 0, 0)
+                        .list().get(0));
     }
 
     @Override
@@ -128,7 +131,8 @@ public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements Hibe
         if (!validator.isEmpty(query.getWhere()))
             hql.append(" WHERE ").append(query.getWhere());
 
-        createQuery(getDataSource(null, query, null, null), Mode.Write, hql, args, query.isLocked(), 0, 0).executeUpdate();
+        createQuery(getDataSource(null, query, null, null), Mode.Write, hql, args, query.isLocked(), 0, 0)
+                .executeUpdate();
 
         return true;
     }
@@ -152,25 +156,28 @@ public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements Hibe
         if (!validator.isEmpty(query.getWhere()))
             hql.append(" WHERE ").append(query.getWhere());
 
-        createQuery(getDataSource(null, query, null, null), Mode.Write, hql, args, query.isLocked(), 0, 0).executeUpdate();
+        createQuery(getDataSource(null, query, null, null), Mode.Write, hql, args, query.isLocked(), 0, 0)
+                .executeUpdate();
 
         return true;
     }
 
     @Override
     public <T extends Model> boolean deleteById(String dataSource, Class<T> modelClass, String id) {
-        return delete(new HibernateQuery(modelClass).dataSource(dataSource).where("id=?"), new Object[]{id});
+        return delete(new HibernateQuery(modelClass).dataSource(dataSource).where("id=?"), new Object[] { id });
     }
 
     private StringBuilder from(StringBuilder hql, HibernateQuery query) {
         return hql.append(query.getModelClass().getName());
     }
 
-    private Query createQuery(String dataSource, Mode mode, StringBuilder hql, Object[] args, boolean lock, int size, int page) {
+    @SuppressWarnings("unchecked")
+    private <T extends Model> Query<T> createQuery(String dataSource, Mode mode, StringBuilder hql, Object[] args,
+            boolean lock, int size, int page) {
         if (logger.isDebugEnable())
             logger.debug("hql:{};args:{}", hql, converter.toString(args));
 
-        Query query = session.get(dataSource, mode).createQuery(replaceArgs(hql));
+        Query<T> query = (Query<T>) session.get(dataSource, mode).createQuery(replaceArgs(hql));
         if (lock) {
             session.beginTransaction();
             query.setLockOptions(LockOptions.UPGRADE);

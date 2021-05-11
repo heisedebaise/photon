@@ -12,7 +12,7 @@ public class MybatisBuilder {
     private Object parameter;
     private String mapKey;
     private RowBounds rowBounds;
-    private ResultHandler resultHandler;
+    private ResultHandler<?> resultHandler;
 
     /**
      * 设置数据源。
@@ -80,7 +80,7 @@ public class MybatisBuilder {
      * @param resultHandler 检索结果处理器。
      * @return 当前MybatisBuilder实例。
      */
-    public MybatisBuilder resultHandler(ResultHandler resultHandler) {
+    public MybatisBuilder resultHandler(ResultHandler<?> resultHandler) {
         this.resultHandler = resultHandler;
 
         return this;
@@ -136,7 +136,7 @@ public class MybatisBuilder {
      *
      * @return 检索结果处理器。
      */
-    public ResultHandler getResultHandler() {
+    public ResultHandler<?> getResultHandler() {
         return resultHandler;
     }
 }
