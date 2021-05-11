@@ -70,6 +70,7 @@ public class TableImpl implements Graphic {
         shape.put("table", table);
     }
 
+    @SuppressWarnings("all")
     private CTTableStyle findTableStyle(ReaderContext readerContext, XSLFTable xslfTable) {
         for (XSLFTableStyle xslfTableStyle : readerContext.getXmlSlideShow().getTableStyles())
             if (xslfTableStyle.getStyleId().equals(xslfTable.getCTTable().getTblPr().getTableStyleId()))
