@@ -91,7 +91,7 @@ public class TemplateImpl extends TemplateSupport {
     private void putIdTime(JSONObject object) {
         if (request.getId() != null)
             object.put("id", request.getId());
-        object.put("time", dispatcher.getTime());
+        object.put("duration", dispatcher.duration());
         object.put("timestamp", System.currentTimeMillis());
     }
 

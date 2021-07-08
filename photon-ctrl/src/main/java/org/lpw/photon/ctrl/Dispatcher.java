@@ -14,5 +14,5 @@ public interface Dispatcher {
      *
      * @return 执行时长。
      */
-    long getTime();
+    long duration();
 }

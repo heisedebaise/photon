@@ -64,7 +64,8 @@ public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedList
         time.set(System.currentTimeMillis());
         String uri = request.getUri();
         if (logger.isDebugEnable())
-            logger.debug("开始处理请求[{}:{}:{}]。", uri, converter.toString(request.getMap()), converter.toString(header.getMap()));
+            logger.debug("开始处理请求[{}:{}:{}]。", uri, converter.toString(request.getMap()),
+                    converter.toString(header.getMap()));
 
         boolean statusService = status.isStatus(uri);
         String ip = header.getIp();
@@ -94,7 +95,7 @@ public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedList
         Object object = execute(statusService, consoleService);
         if (logger.isDebugEnable())
             logger.debug("处理请求[{}:{}:{}]完成[{}]，耗时[{}]毫秒。", uri, converter.toString(request.getMap()),
-                    converter.toString(header.getMap()), object, getTime());
+                    converter.toString(header.getMap()), object, duration());
         closables.close();
         counter.decrease(uri, ip);
     }
@@ -140,7 +141,7 @@ public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedList
     }
 
     @Override
-    public long getTime() {
+    public long duration() {
         return System.currentTimeMillis() - time.get();
     }
 
@@ -151,7 +152,7 @@ public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedList
         return redirect(uri);
     }
 
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({ "unchecked" })
     @Override
     public <T> T getParameter(String name) {
         Map<String, Object> parameters = getParameters();
