@@ -45,7 +45,19 @@ public class CacheImpl implements Cache, ContextRefreshedListener {
         if (validator.isEmpty(key))
             return null;
 
-        return getHandler(null).get(key);
+        return getHandler(type).get(key);
+    }
+
+    @Override
+    public <T> boolean has(String key, T value) {
+        return has(null, key, value);
+    }
+
+    @Override
+    public <T> boolean has(String type, String key, T value) {
+        T v = get(type, key);
+
+        return v != null && v.equals(value);
     }
 
     @Override

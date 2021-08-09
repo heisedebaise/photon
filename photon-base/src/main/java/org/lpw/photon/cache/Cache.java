@@ -52,6 +52,27 @@ public interface Cache {
     <T> T get(String type, String key);
 
     /**
+     * 判断是否包含缓存信息。
+     * 
+     * @param <T>   缓存类型。
+     * @param key   引用key。
+     * @param value 目标值。
+     * @return 如果存在则返回true；否则返回false。
+     */
+    <T> boolean has(String key, T value);
+
+    /**
+     * 判断是否包含缓存信息。
+     * 
+     * @param <T>   缓存类型。
+     * @param type  缓存类型，为空则使用默认缓存。
+     * @param key   引用key。
+     * @param value 目标值。
+     * @return 如果存在则返回true；否则返回false。
+     */
+    <T> boolean has(String type, String key, T value);
+
+    /**
      * 获取缓存对对象，如果不存在则重新计算并缓存。
      *
      * @param key      引用key。
