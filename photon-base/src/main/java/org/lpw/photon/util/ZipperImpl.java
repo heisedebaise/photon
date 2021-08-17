@@ -22,34 +22,37 @@ public class ZipperImpl implements Zipper {
     private Io io;
 
     @Override
-    public void zip(List<File> input, File output) throws IOException {
-        ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(output));
-        for (File file : input) {
+    public void zip(List<File> files, OutputStream outputStream) throws IOException {
+        ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
+        for (File file : files) {
             zipOutputStream.putNextEntry(new ZipEntry(file.getName()));
             FileInputStream fileInputStream = new FileInputStream(file);
             io.copy(fileInputStream, zipOutputStream);
             fileInputStream.close();
         }
         zipOutputStream.close();
+        outputStream.close();
     }
 
     @Override
-    public void zip(Map<String, File> input, File output) throws IOException {
-        ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(output));
-        for (String name : input.keySet()) {
+    public void zip(Map<String, File> files, OutputStream outputStream) throws IOException {
+        ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
+        for (String name : files.keySet()) {
             zipOutputStream.putNextEntry(new ZipEntry(name));
-            FileInputStream fileInputStream = new FileInputStream(input.get(name));
+            FileInputStream fileInputStream = new FileInputStream(files.get(name));
             io.copy(fileInputStream, zipOutputStream);
             fileInputStream.close();
         }
         zipOutputStream.close();
+        outputStream.close();
     }
 
     @Override
-    public void zip(String input, String output) throws IOException {
-        ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(output));
-        zip(zipOutputStream, "", new File(input));
+    public void zip(File file, OutputStream outputStream) throws IOException {
+        ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
+        zip(zipOutputStream, "", file);
         zipOutputStream.close();
+        outputStream.close();
     }
 
     private void zip(ZipOutputStream zipOutputStream, String parent, File file) throws IOException {

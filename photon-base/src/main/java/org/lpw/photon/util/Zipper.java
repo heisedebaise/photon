@@ -3,6 +3,7 @@ package org.lpw.photon.util;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
@@ -14,29 +15,29 @@ public interface Zipper {
     /**
      * 打包压缩文件集。
      *
-     * @param input  待压缩文件集。
-     * @param output 输出文件。
+     * @param files        待压缩文件集。
+     * @param outputStream 输出文件流。
      * @throws IOException IO异常。
      */
-    void zip(List<File> input, File output) throws IOException;
+    void zip(List<File> files, OutputStream outputStream) throws IOException;
 
     /**
      * 打包压缩文件集。
      *
-     * @param input  待压缩文件集，key为输出文件名，value为文件。
-     * @param output 输出文件。
+     * @param files        待压缩文件集，key为输出文件名，value为文件。
+     * @param outputStream 输出文件流。
      * @throws IOException IO异常。
      */
-    void zip(Map<String, File> input, File output) throws IOException;
+    void zip(Map<String, File> files, OutputStream outputStream) throws IOException;
 
     /**
-     * 打包压缩文件目录。
+     * 打包压缩文件/目录。
      *
-     * @param input  待压缩目录。
-     * @param output 输出文件。
+     * @param file         待压缩文件/目录。
+     * @param outputStream 输出文件流。
      * @throws IOException IO异常。
      */
-    void zip(String input, String output) throws IOException;
+    void zip(File file, OutputStream outputStream) throws IOException;
 
     /**
      * 解压缩。
