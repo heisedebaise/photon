@@ -1,5 +1,6 @@
 package org.lpw.photon.pdf;
 
+import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 import javax.inject.Inject;
@@ -36,8 +37,19 @@ public class PdfConverterImpl implements PdfConverter {
             outputStream.close();
 
             return true;
-        } catch (Exception e) {
-            logger.warn(e, "HTML转化为PDF时发生异常！");
+        } catch (Throwable throwable) {
+            logger.warn(throwable, "HTML转化为PDF时发生异常！");
+
+            return false;
+        }
+    }
+
+    @Override
+    public boolean html2pdf(String html, String file) {
+        try {
+            return html2pdf(html, new FileOutputStream(file));
+        } catch (Throwable throwable) {
+            logger.warn(throwable, "HTML转化为PDF时发生异常！");
 
             return false;
         }
