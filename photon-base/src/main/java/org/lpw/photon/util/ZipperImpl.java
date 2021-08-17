@@ -46,6 +46,38 @@ public class ZipperImpl implements Zipper {
     }
 
     @Override
+    public void zip(String input, String output) throws IOException {
+        ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(output));
+        zip(zipOutputStream, "", new File(input));
+        zipOutputStream.close();
+    }
+
+    private void zip(ZipOutputStream zipOutputStream, String parent, File file) throws IOException {
+        if (file.isFile()) {
+            zipOutputStream.putNextEntry(new ZipEntry(parent + file.getName()));
+            FileInputStream fileInputStream = new FileInputStream(file);
+            io.copy(fileInputStream, zipOutputStream);
+            fileInputStream.close();
+            zipOutputStream.closeEntry();
+
+            return;
+        }
+
+        if (!file.isDirectory())
+            return;
+
+        File[] fs = file.listFiles();
+        if (fs == null || fs.length == 0)
+            return;
+
+        String p = parent + file.getName() + "/";
+        zipOutputStream.putNextEntry(new ZipEntry(p));
+        for (File f : fs)
+            zip(zipOutputStream, p, f);
+        zipOutputStream.closeEntry();
+    }
+
+    @Override
     public void unzip(File input, Charset charset, File output) throws IOException {
         unzip(new FileInputStream(input), charset, output);
     }
@@ -57,7 +89,7 @@ public class ZipperImpl implements Zipper {
 
     private void unzip(ZipInputStream zipInputStream, File output) throws IOException {
         String path = output.getAbsolutePath() + "/";
-        for (ZipEntry zipEntry; (zipEntry = zipInputStream.getNextEntry()) != null; ) {
+        for (ZipEntry zipEntry; (zipEntry = zipInputStream.getNextEntry()) != null;) {
             if (zipEntry.isDirectory())
                 continue;
 

@@ -30,6 +30,15 @@ public interface Zipper {
     void zip(Map<String, File> input, File output) throws IOException;
 
     /**
+     * 打包压缩文件目录。
+     *
+     * @param input  待压缩目录。
+     * @param output 输出文件。
+     * @throws IOException IO异常。
+     */
+    void zip(String input, String output) throws IOException;
+
+    /**
      * 解压缩。
      *
      * @param input   压缩文件。
