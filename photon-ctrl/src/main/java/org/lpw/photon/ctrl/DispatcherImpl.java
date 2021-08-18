@@ -19,6 +19,9 @@ import org.lpw.photon.util.Validator;
 import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
+
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -95,7 +98,9 @@ public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedList
         Object object = execute(statusService, consoleService);
         if (logger.isDebugEnable())
             logger.debug("处理请求[{}:{}:{}]完成[{}]，耗时[{}]毫秒。", uri, converter.toString(request.getMap()),
-                    converter.toString(header.getMap()), object, duration());
+                    converter.toString(header.getMap()),
+                    object instanceof JSONObject || object instanceof String ? object : "not json or string",
+                    duration());
         closables.close();
         counter.decrease(uri, ip);
     }
