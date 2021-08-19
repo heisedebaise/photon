@@ -1,5 +1,6 @@
 package org.lpw.photon.pdf;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
@@ -12,13 +13,22 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.font.FontProvider;
 
+import org.lpw.photon.util.Context;
 import org.lpw.photon.util.Logger;
+import org.lpw.photon.util.Validator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component("photon.pdf.converter")
 public class PdfConverterImpl implements PdfConverter {
     @Inject
+    private Validator validator;
+    @Inject
+    private Context context;
+    @Inject
     private Logger logger;
+    @Value("${photon.pdf.fonts:}")
+    private String fonts;
     private ConverterProperties properties;
 
     @Override
@@ -26,8 +36,7 @@ public class PdfConverterImpl implements PdfConverter {
         try {
             if (properties == null) {
                 properties = new ConverterProperties();
-                properties.setFontProvider(new FontProvider());
-                properties.getFontProvider().addSystemFonts();
+                fonts();
             }
 
             PdfDocument document = new PdfDocument(new PdfWriter(outputStream));
@@ -42,6 +51,24 @@ public class PdfConverterImpl implements PdfConverter {
 
             return false;
         }
+    }
+
+    private void fonts() {
+        if (validator.isEmpty(fonts))
+            return;
+
+        FontProvider provider = new FontProvider();
+        boolean has = false;
+        String path = context.getAbsolutePath(fonts);
+        for (File file : new File(path).listFiles()) {
+            if (file.isFile())
+                has = true;
+            else if (file.isDirectory())
+                provider.addDirectory(file.getAbsolutePath());
+        }
+        if (has)
+            provider.addDirectory(path);
+        properties.setFontProvider(provider);
     }
 
     @Override
