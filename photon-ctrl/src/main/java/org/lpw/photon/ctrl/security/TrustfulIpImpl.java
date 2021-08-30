@@ -1,5 +1,10 @@
 package org.lpw.photon.ctrl.security;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.inject.Inject;
+
 import org.lpw.photon.storage.StorageListener;
 import org.lpw.photon.storage.Storages;
 import org.lpw.photon.util.Converter;
@@ -8,10 +13,6 @@ import org.lpw.photon.util.Logger;
 import org.lpw.photon.util.Validator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-
-import javax.inject.Inject;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller("photon.ctrl.security.trustful-ip")
 public class TrustfulIpImpl implements TrustfulIp, StorageListener {
@@ -33,9 +34,13 @@ public class TrustfulIpImpl implements TrustfulIp, StorageListener {
         if (ips.contains(ip))
             return true;
 
-        for (String pattern : patterns)
-            if (validator.isMatchRegex(pattern, ip))
+        for (String pattern : patterns) {
+            if (validator.isMatchRegex(pattern, ip)) {
+                ips.add(ip);
+
                 return true;
+            }
+        }
 
         return false;
     }
@@ -47,7 +52,7 @@ public class TrustfulIpImpl implements TrustfulIp, StorageListener {
 
     @Override
     public String[] getScanPathes() {
-        return new String[]{trustfulIp};
+        return new String[] { trustfulIp };
     }
 
     @Override
@@ -62,7 +67,7 @@ public class TrustfulIpImpl implements TrustfulIp, StorageListener {
             if (string.charAt(0) == '#')
                 continue;
 
-            if (string.charAt(0) == 'r' && string.charAt(1) == 'g')
+            if (string.startsWith("rg"))
                 patterns.add(string.substring(2));
             else
                 ips.add(string);
