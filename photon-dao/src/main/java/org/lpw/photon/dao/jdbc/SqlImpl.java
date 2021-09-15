@@ -21,8 +21,8 @@ public class SqlImpl extends JdbcSupport<PreparedStatement> implements Sql {
             pstmt.close();
 
             if (logger.isDebugEnable())
-                logger.debug("执行SQL[{}:{}:{}:{}]检索操作。", dataSource, sql, converter.toString(args),
-                        System.currentTimeMillis() - time);
+                logger.debug("执行SQL[dataSource={}:sql={}:args={}:count={}:duration={}]检索操作。", dataSource, sql,
+                        converter.toString(args), sqlTable.getRowCount(), System.currentTimeMillis() - time);
 
             return sqlTable;
         } catch (SQLException e) {
@@ -34,20 +34,21 @@ public class SqlImpl extends JdbcSupport<PreparedStatement> implements Sql {
 
     @Override
     public JSONArray queryAsJson(String dataSource, String sql, Object[] args) {
+        long time = System.currentTimeMillis();
         try {
-            long time = System.currentTimeMillis();
             PreparedStatement pstmt = newPreparedStatement(dataSource, Mode.Read, sql);
             setArgs(pstmt, args);
             JSONArray array = queryAsJson(pstmt.executeQuery());
             pstmt.close();
 
             if (logger.isDebugEnable())
-                logger.debug("执行SQL[{}:{}:{}:{}]检索操作。", dataSource, sql, converter.toString(args),
-                        System.currentTimeMillis() - time);
+                logger.debug("执行SQL[dataSource={}:sql={}:args={}:count={}:duration={}]检索操作。", dataSource, sql,
+                        converter.toString(args), array.size(), System.currentTimeMillis() - time);
 
             return array;
         } catch (SQLException e) {
-            logger.warn(e, "执行SQL[{}:{}:{}]检索时发生异常！", dataSource, sql, converter.toString(args));
+            logger.warn(e, "执行SQL[dataSource={}:sql={}:args={}:duration={}]检索时发生异常！", dataSource, sql,
+                    converter.toString(args), System.currentTimeMillis() - time);
 
             throw new RuntimeException(e);
         }
@@ -61,13 +62,13 @@ public class SqlImpl extends JdbcSupport<PreparedStatement> implements Sql {
     @Override
     public int[] update(String dataSource, String sql, List<Object[]> args) {
         if (validator.isEmpty(args))
-            return new int[]{update(sql, new Object[0])};
+            return new int[] { update(sql, new Object[0]) };
 
         if (args.size() == 1)
-            return new int[]{update(sql, args.get(0))};
+            return new int[] { update(sql, args.get(0)) };
 
+        long time = System.currentTimeMillis();
         try {
-            long time = System.currentTimeMillis();
             PreparedStatement pstmt = newPreparedStatement(dataSource, Mode.Write, sql);
             for (Object[] array : args) {
                 setArgs(pstmt, array);
@@ -77,12 +78,13 @@ public class SqlImpl extends JdbcSupport<PreparedStatement> implements Sql {
             pstmt.close();
 
             if (logger.isDebugEnable())
-                logger.debug("执行SQL[{}:{}:{}:{}]批量更新操作。", dataSource, sql, converter.toString(args),
-                        System.currentTimeMillis() - time);
+                logger.debug("执行SQL[dataSource={}:sql={}:args={}:count={}:duration={}]批量更新操作。", dataSource, sql,
+                        converter.toString(args), converter.toString(array), System.currentTimeMillis() - time);
 
             return array;
         } catch (SQLException e) {
-            logger.warn(e, "执行SQL[{}:{}:{}]更新时发生异常！", dataSource, sql, converter.toString(args));
+            logger.warn(e, "执行SQL[dataSource={}:sql={}:args={}:duration={}]更新时发生异常！", dataSource, sql,
+                    converter.toString(args), System.currentTimeMillis() - time);
 
             throw new RuntimeException(e);
         }
