@@ -43,6 +43,14 @@ public interface Dialect {
     String selectTables(String schema);
 
     /**
+     * 不使用内存表。如果为内存表建表SQL，则替换为文件表的建表SQL。
+     * 
+     * @param create 建表SQL。
+     * @return 建表SQL。
+     */
+    String noMemory(String create);
+
+    /**
      * 获取Hibernate使用的数据库方言类名称。
      *
      * @return Hibernate使用的数据库方言类名称。

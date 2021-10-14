@@ -28,13 +28,19 @@ public class OracleDialect extends DialectSupport {
     }
 
     @Override
+    public String noMemory(String create) {
+        return create;
+    }
+
+    @Override
     public String getHibernateDialect() {
         return "org.hibernate.dialect.Oracle10gDialect";
     }
 
     @Override
     public void appendPagination(StringBuilder sql, int size, int page) {
-        sql.insert(0, "SELECT * FROM (SELECT oracle_pagination_1.*, ROWNUM AS rowno FROM (").append(") oracle_pagination_1 WHERE ROWNUM<=").append(size * page)
+        sql.insert(0, "SELECT * FROM (SELECT oracle_pagination_1.*, ROWNUM AS rowno FROM (")
+                .append(") oracle_pagination_1 WHERE ROWNUM<=").append(size * page)
                 .append(") oracle_pagination_2 WHERE oracle_pagination_2.rowno>").append(size * (page - 1));
     }
 }

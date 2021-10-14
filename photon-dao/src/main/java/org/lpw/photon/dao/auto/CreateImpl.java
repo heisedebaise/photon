@@ -1,20 +1,23 @@
 package org.lpw.photon.dao.auto;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
+import java.util.Set;
+
+import javax.inject.Inject;
+import javax.persistence.Table;
+
+import org.lpw.photon.dao.dialect.Dialect;
 import org.lpw.photon.dao.jdbc.DataSource;
 import org.lpw.photon.dao.model.Model;
 import org.lpw.photon.dao.model.ModelTable;
 import org.lpw.photon.dao.model.ModelTables;
 import org.lpw.photon.util.Io;
 import org.lpw.photon.util.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-
-import javax.inject.Inject;
-import javax.persistence.Table;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map;
-import java.util.Set;
 
 @Repository(AutoModel.NAME + ".create")
 public class CreateImpl implements Create {
@@ -28,6 +31,8 @@ public class CreateImpl implements Create {
     private DataSource dataSource;
     @Inject
     private Executer executer;
+    @Value("${photon.dao.database.memory:true}")
+    private boolean memory;
 
     @Override
     public void execute(Map<String, Set<String>> tables) {
@@ -43,8 +48,9 @@ public class CreateImpl implements Create {
         if (array == null)
             return;
 
+        Dialect dialect = this.dataSource.getDialect(dataSource);
         for (String string : array)
-            executer.execute(dataSource, string, false);
+            executer.execute(dataSource, memory ? string : dialect.noMemory(string), false);
         tables.get(dataSource).add(modelTable.getTableName());
     }
 

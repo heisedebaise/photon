@@ -27,6 +27,11 @@ public class MysqlDialect extends DialectSupport {
     }
 
     @Override
+    public String noMemory(String create) {
+        return create.replace("ENGINE=Memory", "ENGINE=InnoDB");
+    }
+
+    @Override
     public String getHibernateDialect() {
         return "org.hibernate.dialect.MySQLDialect";
     }

@@ -25,6 +25,11 @@ public class MssqlDialect extends DialectSupport {
     }
 
     @Override
+    public String noMemory(String create) {
+        return create;
+    }
+
+    @Override
     public String getHibernateDialect() {
         return "org.hibernate.dialect.SQLServerDialect";
     }
@@ -32,7 +37,7 @@ public class MssqlDialect extends DialectSupport {
     @Override
     public void appendPagination(StringBuilder sql, int size, int page) {
         sql.insert(7, "ROW_NUMBER() AS RowNum,").insert(0, "SELECT * FROM(")
-                .append(") AS RowConstrainedResult WHERE RowNum>")
-                .append(size * (page - 1)).append(" AND RowNum<=").append(size * page);
+                .append(") AS RowConstrainedResult WHERE RowNum>").append(size * (page - 1)).append(" AND RowNum<=")
+                .append(size * page);
     }
 }
