@@ -9,6 +9,7 @@ import org.lpw.photon.util.Json;
 import org.lpw.photon.util.Logger;
 import org.lpw.photon.util.Numeric;
 import org.lpw.photon.util.Validator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -42,6 +43,8 @@ public class ModelTableImpl implements ModelTable {
     private Json json;
     @Inject
     private Logger logger;
+    @Value("${photon.dao.database.memory:true}")
+    private boolean memory;
     private Class<? extends Model> modelClass;
     private String name;
     private String dataSource;
@@ -124,7 +127,8 @@ public class ModelTableImpl implements ModelTable {
 
     @Override
     public void setMemoryName(String memoryName) {
-        this.memoryName = memoryName;
+        if (memory)
+            this.memoryName = memoryName;
     }
 
     @Override
@@ -452,9 +456,10 @@ public class ModelTableImpl implements ModelTable {
 
     @Override
     public <T extends Model> String toString(T model) {
-        StringBuilder string = new StringBuilder().append("table=").append(tableName).append(";id=").append(model.getId());
-        columns.forEach((column, property) ->
-                string.append(';').append(column).append('&').append(property).append('=').append(get(model, column)));
+        StringBuilder string = new StringBuilder().append("table=").append(tableName).append(";id=")
+                .append(model.getId());
+        columns.forEach((column, property) -> string.append(';').append(column).append('&').append(property).append('=')
+                .append(get(model, column)));
 
         return string.toString();
     }
