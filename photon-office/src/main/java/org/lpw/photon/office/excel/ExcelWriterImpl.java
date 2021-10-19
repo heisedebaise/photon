@@ -7,11 +7,11 @@ import javax.inject.Inject;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.lpw.photon.util.Logger;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ public class ExcelWriterImpl implements ExcelWriter {
 
     @Override
     public boolean write(JSONObject object, OutputStream outputStream) {
-        try (Workbook workbook = new XSSFWorkbook()) {
+        try (Workbook workbook = new HSSFWorkbook()) {
             JSONArray sheets = object.getJSONArray("sheets");
             for (int sheetIndex = 0, sheetSize = sheets.size(); sheetIndex < sheetSize; sheetIndex++) {
                 JSONObject sheetJson = sheets.getJSONObject(sheetIndex);
