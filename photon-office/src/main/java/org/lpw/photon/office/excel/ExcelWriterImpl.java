@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.io.OutputStream;
 
-@Component("photon.office.excel")
+@Component("photon.office.excel.writer")
 public class ExcelWriterImpl implements ExcelWriter {
     @Inject
     private Logger logger;
