@@ -1,7 +1,17 @@
 package org.lpw.photon.ctrl.upload;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+
 import org.lpw.photon.bean.BeanFactory;
 import org.lpw.photon.bean.ContextRefreshedListener;
 import org.lpw.photon.storage.Storage;
@@ -14,15 +24,8 @@ import org.lpw.photon.util.Logger;
 import org.lpw.photon.util.Message;
 import org.lpw.photon.util.Validator;
 import org.lpw.photon.wormhole.WormholeHelper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import javax.inject.Inject;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Service(UploadService.PREFIX + "service")
 public class UploadServiceImpl implements UploadService, ContextRefreshedListener {
@@ -46,6 +49,8 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
     private WormholeHelper wormholeHelper;
     @Inject
     private JsonConfigs jsonConfigs;
+    @Value("${photon.ctrl.upload-fail:999994}")
+    private int failureCode;
     private Map<String, UploadListener> listeners;
 
     @Override
@@ -99,10 +104,11 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
 
         String contentType = uploadListener.getContentType(uploadReader);
         if (!uploadListener.isUploadEnable(uploadReader)) {
-            logger.warn(null, "无法处理文件上传请求[key={}&content-type={}&file-name={}]！",
-                    name, contentType, uploadReader.getFileName());
+            logger.warn(null, "无法处理文件上传请求[key={}&content-type={}&file-name={}]！", name, contentType,
+                    uploadReader.getFileName());
 
-            return failure(uploadReader, message.get(PREFIX + "disable", name, contentType, uploadReader.getFileName()));
+            return failure(uploadReader,
+                    message.get(PREFIX + "disable", name, contentType, uploadReader.getFileName()));
         }
 
         JSONObject object = uploadListener.settle(uploadReader);
@@ -110,8 +116,9 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
             object = save(name, uploadListener, uploadReader, contentType);
         uploadReader.delete();
         uploadListener.complete(uploadReader, object);
+        String message = uploadListener.message();
 
-        return object;
+        return validator.isEmpty(message) ? object : pack(0, object, message);
     }
 
     private UploadListener getListener(String key) {
@@ -129,7 +136,8 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         return uploadListener;
     }
 
-    private JSONObject save(String key, UploadListener uploadListener, UploadReader uploadReader, String contentType) throws IOException {
+    private JSONObject save(String key, UploadListener uploadListener, UploadReader uploadReader, String contentType)
+            throws IOException {
         Storage storage = storages.get(uploadListener.getStorage());
         if (storage == null) {
             logger.warn(null, "无法获得存储处理器[{}]，文件上传失败！", uploadListener.getStorage());
@@ -146,9 +154,9 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
 
         if (storage.getType().equals(Storages.TYPE_DISK)) {
             String path = uploadListener.getPath(uploadReader);
-            String whPath = image.is(contentType, uploadReader.getFileName()) ?
-                    wormholeHelper.image(path, null, suffix, null, uploadReader.getInputStream()) :
-                    wormholeHelper.file(path, null, suffix, null, uploadReader.getInputStream());
+            String whPath = image.is(contentType, uploadReader.getFileName())
+                    ? wormholeHelper.image(path, null, suffix, null, uploadReader.getInputStream())
+                    : wormholeHelper.file(path, null, suffix, null, uploadReader.getInputStream());
             if (whPath != null) {
                 object.put("path", whPath);
                 if (logger.isDebugEnable())
@@ -191,7 +199,8 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
             if (image == null)
                 return null;
 
-            image = size.length == 1 ? this.image.scale(image, 1.0D * size[0] / 100) : this.image.thumbnail(image, size[0], size[1]);
+            image = size.length == 1 ? this.image.scale(image, 1.0D * size[0] / 100)
+                    : this.image.thumbnail(image, size[0], size[1]);
             if (image == null)
                 return null;
 
@@ -212,6 +221,14 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         object.put("success", false);
         object.put("name", uploadReader.getName());
         object.put("fileName", uploadReader.getFileName());
+
+        return pack(failureCode, object, message);
+    }
+
+    private JSONObject pack(int code, JSONObject data, String message) {
+        JSONObject object = new JSONObject();
+        object.put("code", code);
+        object.put("data", data);
         object.put("message", message);
 
         return object;
@@ -234,8 +251,8 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
 
     @Override
     public String newSavePath(String contentType, String name, String suffix) {
-        return (ROOT + contentType + "/" + name + "/" + dateTime.toString(dateTime.today(), "yyyyMMdd") + "/" + generator.random(32) + suffix)
-                .replaceAll("[/]{2,}", "/");
+        return (ROOT + contentType + "/" + name + "/" + dateTime.toString(dateTime.today(), "yyyyMMdd") + "/"
+                + generator.random(32) + suffix).replaceAll("[/]{2,}", "/");
     }
 
     @Override
