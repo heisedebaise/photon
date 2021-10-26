@@ -24,6 +24,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -66,9 +67,18 @@ public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedList
     public void execute() {
         time.set(System.currentTimeMillis());
         String uri = request.getUri();
+        String param = "";
+        if (logger.isDebugEnable()) {
+            if (uri.equals("/photon/ctrl/upload")) {
+                Map<String, String> map = new HashMap<>(request.getMap());
+                map.remove("base64");
+                map.remove("string");
+                param = converter.toString(map);
+            } else
+                param = converter.toString(request.getMap());
+        }
         if (logger.isDebugEnable())
-            logger.debug("开始处理请求[{}:{}:{}]。", uri, converter.toString(request.getMap()),
-                    converter.toString(header.getMap()));
+            logger.debug("开始处理请求[{}:{}:{}]。", uri, param, converter.toString(header.getMap()));
 
         boolean statusService = status.isStatus(uri);
         String ip = header.getIp();
@@ -97,8 +107,7 @@ public class DispatcherImpl implements Dispatcher, Forward, ContextRefreshedList
 
         Object object = execute(statusService, consoleService);
         if (logger.isDebugEnable())
-            logger.debug("处理请求[{}:{}:{}]完成[{}]，耗时[{}]毫秒。", uri, converter.toString(request.getMap()),
-                    converter.toString(header.getMap()),
+            logger.debug("处理请求[{}:{}:{}]完成[{}]，耗时[{}]毫秒。", uri, param, converter.toString(header.getMap()),
                     object instanceof JSONObject || object instanceof String ? object : "not json or string",
                     duration());
         closables.close();
