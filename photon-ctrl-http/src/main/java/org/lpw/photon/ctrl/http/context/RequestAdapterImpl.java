@@ -72,8 +72,7 @@ public class RequestAdapterImpl implements RequestAdapter {
             BeanFactory.getBean(Io.class).copy(request.getInputStream(), output);
             content = output.toString();
             if (getLogger().isDebugEnable())
-                getLogger().debug("[{}]获取InputStream中的数据[{}:{}]。", uri, contentType,
-                        content.length() > 1024 ? content.substring(0, 64) : content);
+                getLogger().debug("[{}]获取InputStream中的数据[{}:{}]。", uri, contentType, content);
 
             if (boundary)
                 fromBoundary(contentType);

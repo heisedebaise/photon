@@ -24,7 +24,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.26</version>
+            <version>8.0.27</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat</groupId>
@@ -34,7 +34,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>5.3.11</version>
+            <version>5.3.12</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
