@@ -81,13 +81,13 @@ public class PageListImpl<T extends Model> implements PageList<T> {
     }
 
     @Override
-    public PageList<T> subList(List<T> list, int size, int number, Function<T, Boolean> function) {
+    public PageList<T> subList(int size, int number, Function<T, Boolean> function) {
         List<T> sub = new ArrayList<>();
         for (T t : list)
             if (function.apply(t))
                 sub.add(t);
         setPage(sub.size(), size, number);
-        this.list = sub.subList(this.size * (this.number - 1), Math.min(this.size * this.number, this.count));
+        list = sub.subList(this.size * (this.number - 1), Math.min(this.size * this.number, this.count));
 
         return this;
     }
