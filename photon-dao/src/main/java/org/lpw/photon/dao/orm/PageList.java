@@ -75,6 +75,17 @@ public interface PageList<T extends Model> {
     void setList(List<T> list);
 
     /**
+     * 过滤并截取数据集。
+     * 
+     * @param list     数据集。
+     * @param size     每页显示记录数。
+     * @param number   当前显示页码数。
+     * @param function 过滤器。
+     * @return 当前实例。
+     */
+    PageList<T> subList(List<T> list, int size, int number, Function<T, Boolean> function);
+
+    /**
      * 转化为JSON格式的数据。
      *
      * @return JSON格式的数据。

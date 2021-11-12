@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -76,6 +78,18 @@ public class PageListImpl<T extends Model> implements PageList<T> {
     @Override
     public void setList(List<T> list) {
         this.list = list;
+    }
+
+    @Override
+    public PageList<T> subList(List<T> list, int size, int number, Function<T, Boolean> function) {
+        List<T> sub = new ArrayList<>();
+        for (T t : list)
+            if (function.apply(t))
+                sub.add(t);
+        setPage(sub.size(), size, number);
+        this.list = sub.subList(this.size * (this.number - 1), Math.min(this.size * this.number, this.count));
+
+        return this;
     }
 
     @Override
