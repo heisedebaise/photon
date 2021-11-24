@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 @Component("photon.util.context")
 public class ContextImpl implements Context, Closable, ContextRefreshedListener {
@@ -22,10 +23,10 @@ public class ContextImpl implements Context, Closable, ContextRefreshedListener 
     private String charset;
     @Value("${photon.context.i18n:}")
     private String i18n;
-    private String root;
-    private Locale i18nLocale;
     private final ThreadLocal<Locale> locale = new ThreadLocal<>();
     private final ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
+    private String root;
+    private Locale i18nLocale;
 
     @Override
     public String getAbsoluteRoot() {
@@ -54,11 +55,6 @@ public class ContextImpl implements Context, Closable, ContextRefreshedListener 
     }
 
     @Override
-    public void setLocale(Locale locale) {
-        this.locale.set(locale);
-    }
-
-    @Override
     public Locale getLocale() {
         if (!validator.isEmpty(i18n))
             return i18nLocale == null ? i18nLocale = Locale.forLanguageTag(i18n) : i18nLocale;
@@ -66,6 +62,11 @@ public class ContextImpl implements Context, Closable, ContextRefreshedListener 
         Locale locale = this.locale.get();
 
         return locale == null ? Locale.getDefault() : locale;
+    }
+
+    @Override
+    public void setLocale(Locale locale) {
+        this.locale.set(locale);
     }
 
     @Override
@@ -112,7 +113,7 @@ public class ContextImpl implements Context, Closable, ContextRefreshedListener 
 
     @Override
     public void onContextRefreshed() {
-        String path = getClass().getResource("/").getPath();
+        String path = Objects.requireNonNull(getClass().getResource("/")).getPath();
         for (String name : new String[]{"/classes/", "/WEB-INF/"}) {
             int indexOf = path.lastIndexOf(name);
             if (indexOf > -1)
