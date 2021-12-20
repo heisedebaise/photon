@@ -29,22 +29,22 @@
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jdbc</artifactId>
-            <version>10.1.0-M7</version>
+            <version>10.1.0-M8</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>5.3.13</version>
+            <version>5.3.14</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.0.0.Beta2</version>
+            <version>6.0.0.Beta3</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.5.7</version>
+            <version>3.5.8</version>
         </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
