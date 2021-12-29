@@ -37,19 +37,12 @@ public class ExcelReaderImpl implements ExcelReader {
                         JSONObject cellJson = new JSONObject();
                         cellJson.put("type", cell.getCellType().name().toLowerCase());
                         switch (cell.getCellType()) {
-                            case STRING:
-                                cellJson.put("value", cell.getStringCellValue());
-                                break;
-                            case NUMERIC:
-                                cellJson.put("value", cell.getNumericCellValue());
-                                break;
-                            case BOOLEAN:
-                                cellJson.put("value", cell.getBooleanCellValue());
-                                break;
-                            case FORMULA:
-                                cellJson.put("formula", cell.getCellFormula());
-                                break;
-                            default:
+                            case STRING -> cellJson.put("value", cell.getStringCellValue());
+                            case NUMERIC -> cellJson.put("value", cell.getNumericCellValue());
+                            case BOOLEAN -> cellJson.put("value", cell.getBooleanCellValue());
+                            case FORMULA -> cellJson.put("formula", cell.getCellFormula());
+                            default -> {
+                            }
                         }
                         cells.add(cellJson);
                     });

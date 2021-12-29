@@ -89,34 +89,22 @@ public class TextImpl implements Simple {
 
     private void parseVerticalAlignment(XSLFTextShape xslfTextShape, JSONObject text) {
         switch (xslfTextShape.getVerticalAlignment()) {
-            case TOP:
-                text.put("verticalAlign", "top");
-                return;
-            case MIDDLE:
-                text.put("verticalAlign", "middle");
-                return;
-            case BOTTOM:
-                text.put("verticalAlign", "bottom");
-                return;
-            default:
+            case TOP -> text.put("verticalAlign", "top");
+            case MIDDLE -> text.put("verticalAlign", "middle");
+            case BOTTOM -> text.put("verticalAlign", "bottom");
+            default -> {
+            }
         }
     }
 
     private void parseAlign(XSLFTextParagraph xslfTextParagraph, JSONObject paragraph) {
         switch (xslfTextParagraph.getTextAlign()) {
-            case LEFT:
-                paragraph.put("horizontalAlign", "left");
-                return;
-            case CENTER:
-                paragraph.put("horizontalAlign", "center");
-                return;
-            case RIGHT:
-                paragraph.put("horizontalAlign", "right");
-                return;
-            case JUSTIFY:
-                paragraph.put("horizontalAlign", "justify");
-                return;
-            default:
+            case LEFT -> paragraph.put("horizontalAlign", "left");
+            case CENTER -> paragraph.put("horizontalAlign", "center");
+            case RIGHT -> paragraph.put("horizontalAlign", "right");
+            case JUSTIFY -> paragraph.put("horizontalAlign", "justify");
+            default -> {
+            }
         }
     }
 
@@ -257,14 +245,11 @@ public class TextImpl implements Simple {
         if (!text.containsKey("verticalAlign"))
             return null;
 
-        switch (text.getString("verticalAlign")) {
-            case "top":
-                return VerticalAlignment.TOP;
-            case "middle":
-                return VerticalAlignment.MIDDLE;
-            default:
-                return VerticalAlignment.BOTTOM;
-        }
+        return switch (text.getString("verticalAlign")) {
+            case "top" -> VerticalAlignment.TOP;
+            case "middle" -> VerticalAlignment.MIDDLE;
+            default -> VerticalAlignment.BOTTOM;
+        };
     }
 
     private TextParagraph.TextAlign getHorizontalAlign(JSONObject text, JSONObject paragraph) {
@@ -272,16 +257,12 @@ public class TextImpl implements Simple {
         if (horizontalAlign == null)
             return null;
 
-        switch (horizontalAlign) {
-            case "left":
-                return TextParagraph.TextAlign.LEFT;
-            case "center":
-                return TextParagraph.TextAlign.CENTER;
-            case "right":
-                return TextParagraph.TextAlign.RIGHT;
-            default:
-                return TextParagraph.TextAlign.JUSTIFY;
-        }
+        return switch (horizontalAlign) {
+            case "left" -> TextParagraph.TextAlign.LEFT;
+            case "center" -> TextParagraph.TextAlign.CENTER;
+            case "right" -> TextParagraph.TextAlign.RIGHT;
+            default -> TextParagraph.TextAlign.JUSTIFY;
+        };
     }
 
     private String getString(JSONObject text, JSONObject paragraph, JSONObject word, String key) {

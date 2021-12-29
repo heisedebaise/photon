@@ -87,27 +87,20 @@ public class IndexBuilder {
     }
 
     private String getType(Type type) {
-        switch (type) {
-            case Ignore:
-                return " IGNORE ";
-            case Force:
-                return " FORCE ";
-            default:
-                return " USE ";
-        }
+        return switch (type) {
+            case Ignore -> " IGNORE ";
+            case Force -> " FORCE ";
+            default -> " USE ";
+        };
     }
 
     private String getFor(For f) {
-        switch (f) {
-            case Join:
-                return " FOR JOIN";
-            case Group:
-                return " FOR GROUP BY";
-            case Order:
-                return " FOR ORDER BY";
-            default:
-                return "";
-        }
+        return switch (f) {
+            case Join -> " FOR JOIN";
+            case Group -> " FOR GROUP BY";
+            case Order -> " FOR ORDER BY";
+            default -> "";
+        };
     }
 
     public String get() {

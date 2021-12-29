@@ -15,10 +15,10 @@ import org.openxmlformats.schemas.presentationml.x2006.main.CTPicture;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import java.awt.Dimension;
-import java.awt.Insets;
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Set;
 
 @Component("photon.office.pptx.parser.image")
 public class ImageImpl implements Simple {
@@ -26,6 +26,7 @@ public class ImageImpl implements Simple {
     private Logger logger;
     @Inject
     private OfficeHelper officeHelper;
+    private final Set<String> contentTypes = Set.of("image/jpeg", "image/gif", "image/png");
 
     @Override
     public int getSort() {
@@ -34,10 +35,9 @@ public class ImageImpl implements Simple {
 
     @Override
     public void parseShape(ReaderContext readerContext, XSLFSimpleShape xslfSimpleShape, JSONObject shape) {
-        if (!(xslfSimpleShape instanceof XSLFPictureShape))
+        if (!(xslfSimpleShape instanceof XSLFPictureShape xslfPictureShape))
             return;
 
-        XSLFPictureShape xslfPictureShape = (XSLFPictureShape) xslfSimpleShape;
         parseClipping(xslfPictureShape, shape);
         JSONObject image = new JSONObject();
         XSLFPictureData xslfPictureData = xslfPictureShape.getPictureData();
@@ -95,16 +95,14 @@ public class ImageImpl implements Simple {
     }
 
     private PictureData.PictureType getPictureType(String url, String contentType) {
-        switch (contentType) {
-            case "image/jpeg":
-                return PictureData.PictureType.JPEG;
-            case "image/gif":
-                return PictureData.PictureType.GIF;
-            default:
-                if (!contentType.equals("image/png"))
-                    logger.warn(null, "未处理图片类型[{}:{}]！", url, contentType);
-                return PictureData.PictureType.PNG;
-        }
+        if (!contentTypes.contains(contentType))
+            logger.warn(null, "未处理图片类型[{}:{}]！", url, contentType);
+
+        return switch (contentType) {
+            case "image/jpeg" -> PictureData.PictureType.JPEG;
+            case "image/gif" -> PictureData.PictureType.GIF;
+            default -> PictureData.PictureType.PNG;
+        };
     }
 
     @Override

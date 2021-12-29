@@ -130,14 +130,13 @@ public class DateTimeImpl implements DateTime {
         if (validator.isEmpty(date))
             return null;
 
-        if (date instanceof Date)
-            return (Date) date;
+        if (date instanceof Date d)
+            return d;
 
-        if (date instanceof LocalDateTime)
-            return new Date(((LocalDateTime) date).toInstant(ZoneOffset.ofHours(8)).toEpochMilli());
+        if (date instanceof LocalDateTime ldt)
+            return new Date(ldt.toInstant(ZoneOffset.ofHours(8)).toEpochMilli());
 
-        if (date instanceof String) {
-            String string = (String) date;
+        if (date instanceof String string) {
             switch (string.length()) {
                 case 10 -> {
                     return toDate(string, DATE_FORMAT);

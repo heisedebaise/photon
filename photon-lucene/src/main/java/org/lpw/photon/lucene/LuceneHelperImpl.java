@@ -186,15 +186,11 @@ public class LuceneHelperImpl implements LuceneHelper {
     }
 
     private Analyzer newAnalyzer() {
-        switch (analyzer) {
-            case "char":
-                return new CharAnalyzer();
-            case "simple":
-                return new SimpleAnalyzer();
-            case "standard":
-                return new StandardAnalyzer();
-            default:
-                return new CJKAnalyzer();
-        }
+        return switch (analyzer) {
+            case "char" -> new CharAnalyzer();
+            case "simple" -> new SimpleAnalyzer();
+            case "standard" -> new StandardAnalyzer();
+            default -> new CJKAnalyzer();
+        };
     }
 }
