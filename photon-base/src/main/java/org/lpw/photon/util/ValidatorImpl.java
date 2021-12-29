@@ -16,17 +16,17 @@ public class ValidatorImpl implements Validator {
         if (object == null)
             return true;
 
-        if (object instanceof String)
-            return ((String) object).trim().length() == 0;
+        if (object instanceof String string)
+            return string.trim().length() == 0;
 
         if (object.getClass().isArray())
             return Array.getLength(object) == 0;
 
-        if (object instanceof Iterable)
-            return !((Iterable<?>) object).iterator().hasNext();
+        if (object instanceof Iterable iterable)
+            return !iterable.iterator().hasNext();
 
-        if (object instanceof Map)
-            return ((Map<?, ?>) object).isEmpty();
+        if (object instanceof Map map)
+            return map.isEmpty();
 
         return false;
     }

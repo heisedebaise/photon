@@ -2,12 +2,7 @@ package org.lpw.photon.bean;
 
 import org.lpw.photon.storage.StorageListener;
 import org.lpw.photon.storage.Storages;
-import org.lpw.photon.util.Context;
-import org.lpw.photon.util.Converter;
-import org.lpw.photon.util.Generator;
-import org.lpw.photon.util.Io;
-import org.lpw.photon.util.Logger;
-import org.lpw.photon.util.Validator;
+import org.lpw.photon.util.*;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -124,8 +119,8 @@ public class ClassReloaderImpl implements ClassReloader, StorageListener, Applic
                 boolean collection = isCollection(key);
                 if (collection) {
                     Type type = ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
-                    if (type instanceof Class)
-                        key = (Class<?>) type;
+                    if (type instanceof Class c)
+                        key = c;
                     else
                         continue;
                 }

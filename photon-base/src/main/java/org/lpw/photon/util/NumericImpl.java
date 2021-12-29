@@ -28,17 +28,17 @@ public class NumericImpl implements Numeric {
         if (validator.isEmpty(object))
             return defaultValue;
 
-        if (object instanceof Integer)
-            return (int) object;
+        if (object instanceof Integer n)
+            return n;
 
-        if (object instanceof Long)
-            return (int) (long) object;
+        if (object instanceof Long l)
+            return (int) (long) l;
 
-        if (object instanceof Float)
-            return Math.round((Float) object);
+        if (object instanceof Float f)
+            return Math.round(f);
 
-        if (object instanceof Double)
-            return (int) Math.round((Double) object);
+        if (object instanceof Double d)
+            return (int) Math.round(d);
 
         String string = toString(object);
         if (string.indexOf('.') > -1)
@@ -82,17 +82,17 @@ public class NumericImpl implements Numeric {
         if (validator.isEmpty(object))
             return defaultValue;
 
-        if (object instanceof Long)
-            return (long) object;
+        if (object instanceof Long l)
+            return l;
 
-        if (object instanceof Integer)
-            return (int) object;
+        if (object instanceof Integer n)
+            return n;
 
-        if (object instanceof Float)
-            return Math.round((Float) object);
+        if (object instanceof Float f)
+            return Math.round(f);
 
-        if (object instanceof Double)
-            return Math.round((Double) object);
+        if (object instanceof Double d)
+            return Math.round(d);
 
         String string = toString(object);
         if (string.indexOf('.') > -1)
@@ -117,17 +117,17 @@ public class NumericImpl implements Numeric {
         if (validator.isEmpty(object))
             return defaultValue;
 
-        if (object instanceof Float)
-            return (float) object;
+        if (object instanceof Float f)
+            return f;
 
-        if (object instanceof Double)
-            return (float) (double) object;
+        if (object instanceof Double d)
+            return (float) (double) d;
 
-        if (object instanceof Integer)
-            return (int) object;
+        if (object instanceof Integer n)
+            return n;
 
-        if (object instanceof Long)
-            return (float) (long) object;
+        if (object instanceof Long l)
+            return (float) (long) l;
 
         String string = toString(object);
         try {
@@ -149,17 +149,17 @@ public class NumericImpl implements Numeric {
         if (validator.isEmpty(object))
             return defaultValue;
 
-        if (object instanceof Double)
-            return (double) object;
+        if (object instanceof Double d)
+            return d;
 
-        if (object instanceof Float)
-            return (float) object;
+        if (object instanceof Float f)
+            return f;
 
-        if (object instanceof Integer)
-            return (int) object;
+        if (object instanceof Integer n)
+            return n;
 
-        if (object instanceof Long)
-            return (long) object;
+        if (object instanceof Long l)
+            return l;
 
         return stringToDouble(toString(object), defaultValue);
     }
@@ -175,7 +175,7 @@ public class NumericImpl implements Numeric {
     }
 
     private String toString(Object object) {
-        return (object instanceof String ? (String) object : object.toString()).replaceAll(",", "");
+        return (object instanceof String string ? string : object.toString()).replaceAll(",", "");
     }
 
     @Override

@@ -15,7 +15,7 @@ import org.lpw.photon.util.Validator;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
@@ -97,8 +97,8 @@ public class PptxWriterImpl implements PptxWriter {
                 continue;
             }
 
-            if (xslfShape instanceof XSLFSimpleShape)
-                parser.parseShape(writerContext, (XSLFSimpleShape) xslfShape, shape);
+            if (xslfShape instanceof XSLFSimpleShape xslfSimpleShape)
+                parser.parseShape(writerContext, xslfSimpleShape, shape);
         }
     }
 }

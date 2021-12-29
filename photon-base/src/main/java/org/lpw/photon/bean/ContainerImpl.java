@@ -121,7 +121,7 @@ public class ContainerImpl implements Container, ApplicationListener<Application
         if (logger.isDebugEnable())
             logger.debug("开始执行Bean环境初始化完成后续工作。");
 
-        if (!refreshedListeners.isPresent()) {
+        if (refreshedListeners.isEmpty()) {
             if (logger.isInfoEnable())
                 logger.info("无需执行Bean环境初始化完成后续工作。");
 
@@ -145,7 +145,7 @@ public class ContainerImpl implements Container, ApplicationListener<Application
         if (logger.isDebugEnable())
             logger.debug("开始执行Bean环境关闭后续工作。");
 
-        if (!closedListeners.isPresent()) {
+        if (closedListeners.isEmpty()) {
             if (logger.isInfoEnable())
                 logger.info("无需执行Bean环境关闭后续工作。");
 

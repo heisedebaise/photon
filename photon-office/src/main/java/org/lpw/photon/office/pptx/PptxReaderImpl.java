@@ -2,13 +2,7 @@ package org.lpw.photon.office.pptx;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.poi.xslf.usermodel.XMLSlideShow;
-import org.apache.poi.xslf.usermodel.XSLFBackground;
-import org.apache.poi.xslf.usermodel.XSLFGraphicFrame;
-import org.apache.poi.xslf.usermodel.XSLFGroupShape;
-import org.apache.poi.xslf.usermodel.XSLFShape;
-import org.apache.poi.xslf.usermodel.XSLFSimpleShape;
-import org.apache.poi.xslf.usermodel.XSLFSlide;
+import org.apache.poi.xslf.usermodel.*;
 import org.lpw.photon.office.MediaType;
 import org.lpw.photon.office.MediaWriter;
 import org.lpw.photon.office.OfficeHelper;
@@ -20,18 +14,14 @@ import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component("photon.office.pptx.reader")
 public class PptxReaderImpl implements PptxReader {
@@ -139,17 +129,17 @@ public class PptxReaderImpl implements PptxReader {
                 return;
             }
 
-            if (xslfShape instanceof XSLFGraphicFrame) {
+            if (xslfShape instanceof XSLFGraphicFrame xslfGraphicFrame) {
                 JSONObject shape = getOrNew(fromLayout, xslfShape.getShapeId());
-                parser.parseShape(readerContext, (XSLFGraphicFrame) xslfShape, shape);
+                parser.parseShape(readerContext, xslfGraphicFrame, shape);
                 add(shapes, shape);
 
                 return;
             }
 
-            if (xslfShape instanceof XSLFGroupShape) {
+            if (xslfShape instanceof XSLFGroupShape xslfGroupShape) {
                 if (shapes != null)
-                    parseGroup(readerContext, (XSLFGroupShape) xslfShape, shapes, layout, fromLayout);
+                    parseGroup(readerContext, xslfGroupShape, shapes, layout, fromLayout);
 
                 return;
             }

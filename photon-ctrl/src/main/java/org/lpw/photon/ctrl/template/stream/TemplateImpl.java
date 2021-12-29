@@ -31,13 +31,13 @@ public class TemplateImpl extends TemplateSupport {
 
     @Override
     public void process(String name, Object data, OutputStream outputStream) throws IOException {
-        if (data instanceof Failure)
-            data = getFailure((Failure) data);
-        if (data instanceof JSONObject) {
+        if (data instanceof Failure failure)
+            data = getFailure(failure);
+        if (data instanceof JSONObject object) {
             response.setContentType("application/json");
-            data = json.toBytes(data);
+            data = json.toBytes(object);
         }
-
-        outputStream.write((byte[]) data);
+        if (data instanceof byte[] bytes)
+            outputStream.write(bytes);
     }
 }

@@ -3,22 +3,12 @@ package org.lpw.photon.dao.model;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.lpw.photon.bean.BeanFactory;
-import org.lpw.photon.util.Converter;
-import org.lpw.photon.util.Json;
-import org.lpw.photon.util.Logger;
-import org.lpw.photon.util.Numeric;
-import org.lpw.photon.util.Validator;
+import org.lpw.photon.util.*;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -94,15 +84,14 @@ public class ModelHelperImpl implements ModelHelper {
             Object json = getJson(modelTable, name, value, jsonable);
             if (json != null) {
                 object.put(name, json);
-                if (jsonable.timestamp() && value instanceof Timestamp)
-                    object.put(name + "Timestamp", ((Timestamp) value).getTime());
+                if (jsonable.timestamp() && value instanceof Timestamp timestamp)
+                    object.put(name + "Timestamp", timestamp.getTime());
             }
         }
 
         return object;
     }
 
-    @SuppressWarnings("unchecked")
     private <T extends Model> Object getJson(ModelTable modelTable, String name, Object value, Jsonable jsonable) {
         if (value == null)
             return null;
@@ -110,24 +99,23 @@ public class ModelHelperImpl implements ModelHelper {
         if (value instanceof Number)
             return value;
 
-        if (value instanceof Model)
-            return toJson((T) value);
+        if (value instanceof Model model)
+            return toJson(model);
 
-        if (value instanceof Collection) {
+        if (value instanceof Collection collection) {
             JSONArray array = new JSONArray();
-            if (!validator.isEmpty(value))
-                for (Object object : (Collection<?>) value)
+            if (!validator.isEmpty(collection))
+                for (Object object : collection)
                     array.add(getJson(modelTable, name, object, jsonable));
 
             return array;
         }
 
-        if (value instanceof Date) {
+        if (value instanceof Date date) {
             Class<?> type = modelTable.getType(name);
             if (type == null)
                 return null;
 
-            Date date = (Date) value;
             if (Timestamp.class.equals(type))
                 return converter.toString(new Timestamp(date.getTime()));
 

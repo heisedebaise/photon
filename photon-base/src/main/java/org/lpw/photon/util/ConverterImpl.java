@@ -5,14 +5,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Component("photon.util.converter")
 public class ConverterImpl implements Converter {
@@ -36,8 +29,8 @@ public class ConverterImpl implements Converter {
         if (validator.isEmpty(object))
             return "";
 
-        if (object instanceof Object[])
-            return arrayString((Object[]) object, ",");
+        if (object instanceof Object[] objects)
+            return arrayString(objects, ",");
 
 
         if (object.getClass().isArray()) {
@@ -48,25 +41,21 @@ public class ConverterImpl implements Converter {
             return sb.length() == 0 ? "" : sb.substring(1);
         }
 
-        if (object instanceof Iterable)
-            return iterableString((Iterable<?>) object, ",");
+        if (object instanceof Iterable iterable)
+            return iterableString(iterable, ",");
 
-        if (object instanceof Map)
-            return mapString((Map<?, ?>) object, ",");
+        if (object instanceof Map map)
+            return mapString(map, ",");
 
-        if (object instanceof Date)
-            return dateTime.toString((Date) object);
+        if (object instanceof Date date)
+            return dateTime.toString(date);
 
         return object.toString();
     }
 
     @Override
     public String toString(Object number, int decimal, int point) {
-        StringBuilder sb = new StringBuilder().append("0.");
-        for (int i = 0; i < point; i++)
-            sb.append('0');
-
-        return numeric.toString(numeric.toLong(number) * Math.pow(0.1D, decimal), sb.toString());
+        return numeric.toString(numeric.toLong(number) * Math.pow(0.1D, decimal), "0." + "0".repeat(Math.max(0, point)));
     }
 
     @Override

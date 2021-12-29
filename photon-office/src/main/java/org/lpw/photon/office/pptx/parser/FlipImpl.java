@@ -39,10 +39,10 @@ public class FlipImpl implements Simple, Zero {
 
     private CTSphereCoords getScene3D(XSLFSimpleShape xslfSimpleShape) {
         XmlObject xmlObject = xslfSimpleShape.getXmlObject();
-        if (!(xmlObject instanceof CTShape))
+        if (!(xmlObject instanceof CTShape ctShape))
             return null;
 
-        CTScene3D ctScene3D = ((CTShape) xmlObject).getSpPr().getScene3D();
+        CTScene3D ctScene3D = ctShape.getSpPr().getScene3D();
         if (ctScene3D == null)
             return null;
 

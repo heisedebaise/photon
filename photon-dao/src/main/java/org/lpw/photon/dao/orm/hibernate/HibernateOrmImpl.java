@@ -18,7 +18,7 @@ import java.util.List;
 
 @Repository("photon.dao.orm.hibernate")
 public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements HibernateOrm {
-    private static final String[] ARG = { "?", ":arg", "arg" };
+    private static final String[] ARG = {"?", ":arg", "arg"};
 
     @Inject
     private Converter converter;
@@ -164,7 +164,7 @@ public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements Hibe
 
     @Override
     public <T extends Model> boolean deleteById(String dataSource, Class<T> modelClass, String id) {
-        return delete(new HibernateQuery(modelClass).dataSource(dataSource).where("id=?"), new Object[] { id });
+        return delete(new HibernateQuery(modelClass).dataSource(dataSource).where("id=?"), new Object[]{id});
     }
 
     private StringBuilder from(StringBuilder hql, HibernateQuery query) {
@@ -173,7 +173,7 @@ public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements Hibe
 
     @SuppressWarnings("unchecked")
     private <T extends Model> Query<T> createQuery(String dataSource, Mode mode, StringBuilder hql, Object[] args,
-            boolean lock, int size, int page) {
+                                                   boolean lock, int size, int page) {
         if (logger.isDebugEnable())
             logger.debug("hql:{};args:{}", hql, converter.toString(args));
 
@@ -191,8 +191,8 @@ public class HibernateOrmImpl extends OrmSupport<HibernateQuery> implements Hibe
         for (int i = 0; i < args.length; i++) {
             if (args[i] == null)
                 query.setParameter(ARG[2] + i, args[i]);
-            else if (args[i] instanceof Collection<?>)
-                query.setParameterList(ARG[2] + i, (Collection<?>) args[i]);
+            else if (args[i] instanceof Collection<?> collection)
+                query.setParameterList(ARG[2] + i, collection);
             else if (args[i].getClass().isArray())
                 query.setParameterList(ARG[2] + i, (Object[]) args[i]);
             else

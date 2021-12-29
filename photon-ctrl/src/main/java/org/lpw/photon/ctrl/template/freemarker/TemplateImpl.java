@@ -28,13 +28,13 @@ public class TemplateImpl extends TemplateSupport {
 
     @Override
     public void process(String name, Object data, OutputStream output) throws IOException {
-        if (data instanceof Failure) {
-            failure(getFailure((Failure) data), output);
+        if (data instanceof Failure failure) {
+            failure(getFailure(failure), output);
 
             return;
         }
 
-        if (data instanceof JSONObject && failure((JSONObject) data, output))
+        if (data instanceof JSONObject object && failure(object, output))
             return;
 
         freemarker.process(name, data, output);

@@ -30,8 +30,7 @@ public class TemplateImpl extends TemplateSupport {
 
     @Override
     public void process(String name, Object data, OutputStream outputStream) throws IOException {
-        if (data instanceof Failure) {
-            Failure failure = (Failure) data;
+        if (data instanceof Failure failure) {
             write(getFailureCode(failure) + ":" + message.get(failure.getMessageKey()), outputStream);
 
             return;

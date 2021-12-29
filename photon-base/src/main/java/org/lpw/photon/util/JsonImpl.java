@@ -48,8 +48,8 @@ public class JsonImpl implements Json {
     }
 
     private JSONArray asArray(Object object) {
-        if (object instanceof JSONArray)
-            return (JSONArray) object;
+        if (object instanceof JSONArray array)
+            return array;
 
         JSONArray array = new JSONArray();
         array.add(object);
@@ -85,12 +85,11 @@ public class JsonImpl implements Json {
         if (object == null)
             return nullable ? null : new JSONObject();
 
-        if (object instanceof JSONObject)
-            return (JSONObject) object;
+        if (object instanceof JSONObject obj)
+            return obj;
 
         try {
-            if (object instanceof String) {
-                String string = (String) object;
+            if (object instanceof String string) {
                 if (validator.isEmpty(string))
                     return nullable ? null : new JSONObject();
 
@@ -122,8 +121,8 @@ public class JsonImpl implements Json {
         if (object == null)
             return nullable ? null : new JSONArray();
 
-        if (object instanceof JSONArray)
-            return (JSONArray) object;
+        if (object instanceof JSONArray array)
+            return array;
 
         try {
             if (object.getClass().isArray()) {
@@ -139,8 +138,7 @@ public class JsonImpl implements Json {
                 return array;
             }
 
-            if (object instanceof String) {
-                String string = (String) object;
+            if (object instanceof String string) {
                 if (validator.isEmpty(string))
                     return nullable ? null : new JSONArray();
 

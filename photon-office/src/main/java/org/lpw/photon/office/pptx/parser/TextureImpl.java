@@ -39,12 +39,11 @@ public class TextureImpl implements Simple {
     @Override
     public void parseShape(ReaderContext readerContext, XSLFSimpleShape xslfSimpleShape, JSONObject shape) {
         PaintStyle paintStyle = xslfSimpleShape.getFillStyle().getPaint();
-        if (!(paintStyle instanceof PaintStyle.TexturePaint))
+        if (!(paintStyle instanceof PaintStyle.TexturePaint texturePaint))
             return;
 
         try {
             JSONObject texture = new JSONObject();
-            PaintStyle.TexturePaint texturePaint = (PaintStyle.TexturePaint) paintStyle;
             InputStream inputStream = texturePaint.getImageData();
             int[] wh = image.size(inputStream);
             inputStream.reset();
@@ -66,10 +65,10 @@ public class TextureImpl implements Simple {
 
     private void parseFillRect(XSLFSimpleShape xslfSimpleShape, JSONObject texture) {
         XmlObject xmlObject = xslfSimpleShape.getXmlObject();
-        if (xmlObject instanceof CTBackground)
-            parseBlipFill(((CTBackground) xmlObject).getBgPr().getBlipFill(), texture);
-        else if (xmlObject instanceof CTShape)
-            parseBlipFill(((CTShape) xmlObject).getSpPr().getBlipFill(), texture);
+        if (xmlObject instanceof CTBackground ctBackground)
+            parseBlipFill(ctBackground.getBgPr().getBlipFill(), texture);
+        else if (xmlObject instanceof CTShape ctShape)
+            parseBlipFill(ctShape.getSpPr().getBlipFill(), texture);
     }
 
     private void parseBlipFill(CTBlipFillProperties ctBlipFillProperties, JSONObject texture) {

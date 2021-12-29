@@ -47,10 +47,10 @@ public class ListenerImpl implements ServerListener {
         if (object == null)
             return;
 
-        if (object instanceof String)
-            local.remove((String) object);
-        else if (object instanceof Element)
-            local.put((Element) object);
+        if (object instanceof String string)
+            local.remove(string);
+        else if (object instanceof Element element)
+            local.put(element);
     }
 
     @Override

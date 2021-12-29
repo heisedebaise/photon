@@ -37,10 +37,9 @@ public class TableImpl implements Graphic {
 
     @Override
     public void parseShape(ReaderContext readerContext, XSLFGraphicFrame xslfGraphicFrame, JSONObject shape) {
-        if (!(xslfGraphicFrame instanceof XSLFTable))
+        if (!(xslfGraphicFrame instanceof XSLFTable xslfTable))
             return;
 
-        XSLFTable xslfTable = (XSLFTable) xslfGraphicFrame;
         JSONObject table = new JSONObject();
         XSLFTheme xslfTheme = readerContext.getTheme();
         CTTableStyle ctTableStyle = findTableStyle(readerContext, xslfTable);

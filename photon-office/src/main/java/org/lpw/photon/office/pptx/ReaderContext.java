@@ -34,8 +34,8 @@ public class ReaderContext {
             return xslfTheme;
 
         for (POIXMLDocumentPart poixmlDocumentPart : xmlSlideShow.getRelations())
-            if (poixmlDocumentPart instanceof XSLFTheme)
-                return xslfTheme = (XSLFTheme) poixmlDocumentPart;
+            if (poixmlDocumentPart instanceof XSLFTheme theme)
+                return xslfTheme = theme;
 
         return null;
     }

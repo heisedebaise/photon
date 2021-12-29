@@ -38,20 +38,19 @@ public class TemplateImpl extends TemplateSupport {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void process(String name, Object data, OutputStream outputStream) throws IOException {
-        if (data instanceof Failure) {
-            write(getFailure((Failure) data), outputStream);
+        if (data instanceof Failure failure) {
+            write(getFailure(failure), outputStream);
 
             return;
         }
 
-        if (data instanceof Model)
-            data = modelHelper.toJson((Model) data);
-        else if (data instanceof PageList)
-            data = ((PageList<? extends Model>) data).toJson();
-        else if (data instanceof String)
-            data = json((String) data);
+        if (data instanceof Model model)
+            data = modelHelper.toJson(model);
+        else if (data instanceof PageList pl)
+            data = pl.toJson();
+        else if (data instanceof String string)
+            data = json(string);
 
         write(pack(data), outputStream);
     }
@@ -71,8 +70,7 @@ public class TemplateImpl extends TemplateSupport {
     }
 
     private Object pack(Object object) {
-        if (object instanceof JSONObject) {
-            JSONObject json = (JSONObject) object;
+        if (object instanceof JSONObject json) {
             if (json.containsKey("code") && (json.containsKey("data") || json.containsKey("message"))) {
                 putIdTime(json);
 

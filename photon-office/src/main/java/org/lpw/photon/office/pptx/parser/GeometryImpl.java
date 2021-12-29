@@ -90,10 +90,10 @@ public class GeometryImpl implements Simple {
     }
 
     private double[] getViewBox(XSLFSimpleShape xslfSimpleShape) {
-        if (!(xslfSimpleShape.getXmlObject() instanceof CTShape))
+        if (!(xslfSimpleShape.getXmlObject() instanceof CTShape ctShape))
             return null;
 
-        CTCustomGeometry2D ctCustomGeometry2D = ((CTShape) xslfSimpleShape.getXmlObject()).getSpPr().getCustGeom();
+        CTCustomGeometry2D ctCustomGeometry2D = ctShape.getSpPr().getCustGeom();
         if (ctCustomGeometry2D == null || ctCustomGeometry2D.isNil())
             return null;
 

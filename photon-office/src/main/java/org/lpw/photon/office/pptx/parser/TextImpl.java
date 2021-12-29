@@ -31,10 +31,9 @@ public class TextImpl implements Simple {
 
     @Override
     public void parseShape(ReaderContext readerContext, XSLFSimpleShape xslfSimpleShape, JSONObject shape) {
-        if (!(xslfSimpleShape instanceof XSLFTextShape))
+        if (!(xslfSimpleShape instanceof XSLFTextShape xslfTextShape))
             return;
 
-        XSLFTextShape xslfTextShape = (XSLFTextShape) xslfSimpleShape;
         JSONArray paragraphs = new JSONArray();
         xslfTextShape.getTextParagraphs().forEach(xslfTextParagraph -> {
             JSONObject paragraph = new JSONObject();
@@ -109,9 +108,9 @@ public class TextImpl implements Simple {
     }
 
     private void parseColor(PaintStyle paintStyle, JSONObject word) {
-        if (paintStyle instanceof PaintStyle.SolidPaint)
+        if (paintStyle instanceof PaintStyle.SolidPaint solidPaint)
             word.put("color", officeHelper.colorToJson(
-                    DrawPaint.applyColorTransform(((PaintStyle.SolidPaint) paintStyle).getSolidColor())));
+                    DrawPaint.applyColorTransform(solidPaint.getSolidColor())));
     }
 
     private void merge(JSONObject object, JSONArray array) {
