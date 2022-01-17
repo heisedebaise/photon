@@ -5,5 +5,4 @@ git commit -m dev
 
 git push
 git push yjy
-git push sqxb
 git push github
