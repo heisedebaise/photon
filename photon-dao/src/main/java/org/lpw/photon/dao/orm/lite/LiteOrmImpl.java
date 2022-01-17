@@ -11,11 +11,14 @@ import org.lpw.photon.dao.orm.OrmSupport;
 import org.lpw.photon.dao.orm.PageList;
 import org.lpw.photon.util.Generator;
 import org.lpw.photon.util.Numeric;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Repository("photon.dao.orm.lite")
 public class LiteOrmImpl extends OrmSupport<LiteQuery> implements LiteOrm {
@@ -29,6 +32,9 @@ public class LiteOrmImpl extends OrmSupport<LiteQuery> implements LiteOrm {
     private Connection connection;
     @Inject
     private Sql sql;
+    @Value("${photon.dao.orm.lite.update.memory.async:0}")
+    private int async;
+    private ExecutorService executorService;
 
     @Override
     public <T extends Model> T findById(String dataSource, Class<T> modelClass, String id, boolean lock) {
@@ -91,9 +97,10 @@ public class LiteOrmImpl extends OrmSupport<LiteQuery> implements LiteOrm {
         if (query.isLocked()) {
             connection.beginTransaction();
             querySql.append(" FOR UPDATE");
-        } else if (size > 0)
+        } else if (size > 0) {
             dataSource.getDialects().get(getDataSource(null, query, modelTable, null))
-                    .appendPagination(querySql, size, page < 1 ? 1 : page);
+                    .appendPagination(querySql, size, Math.max(page, 1));
+        }
 
         return querySql.toString();
     }
@@ -236,11 +243,25 @@ public class LiteOrmImpl extends OrmSupport<LiteQuery> implements LiteOrm {
 
     private int update(String dataSource, ModelTable modelTable, StringBuilder updateSql, Object[] args) {
         String sql = updateSql.toString();
-        int n = this.sql.update(dataSource = getDataSource(dataSource, null, modelTable, null), sql, args);
-        if (!validator.isEmpty(modelTable.getMemoryName()))
-            this.sql.update(dataSource, sql.replaceFirst(modelTable.getTableName(), modelTable.getMemoryName()), args);
+        dataSource = getDataSource(dataSource, null, modelTable, null);
+        if (validator.isEmpty(modelTable.getMemoryName()))
+            return this.sql.update(dataSource, sql, args);
 
-        return n;
+        update(dataSource, sql, args);
+
+        return this.sql.update(dataSource, sql.replaceFirst(modelTable.getTableName(), modelTable.getMemoryName()), args);
+    }
+
+    private void update(String dataSource, String sql, Object[] args) {
+        if (async == 0) {
+            this.sql.update(dataSource, sql, args);
+
+            return;
+        }
+
+        if (executorService == null)
+            executorService = Executors.newFixedThreadPool(async);
+        executorService.submit(() -> this.sql.update(dataSource, sql, args));
     }
 
     @Override
