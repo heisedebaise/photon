@@ -261,7 +261,11 @@ public class LiteOrmImpl extends OrmSupport<LiteQuery> implements LiteOrm {
 
         if (executorService == null)
             executorService = Executors.newFixedThreadPool(async);
-        executorService.submit(() -> this.sql.update(dataSource, sql, args));
+        executorService.submit(() -> {
+            connection.beginTransaction();
+            this.sql.update(dataSource, sql, args);
+            connection.close();
+        });
     }
 
     @Override
