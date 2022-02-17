@@ -2,6 +2,7 @@ package org.lpw.photon.office.excel;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.lpw.photon.office.MediaWriter;
@@ -30,21 +31,29 @@ public class ExcelReaderImpl implements ExcelReader {
                 JSONArray rows = new JSONArray();
                 sheet.forEach(row -> {
                     JSONObject rowj = new JSONObject();
-                    rowj.put("first", row.getFirstCellNum());
-                    rowj.put("last", row.getLastCellNum());
+                    int first = row.getFirstCellNum();
+                    int last = row.getLastCellNum();
+                    rowj.put("first", first);
+                    rowj.put("last", last);
                     JSONArray cells = new JSONArray();
-                    row.forEach(cell -> {
+                    for (int i = first; i < last; i++) {
                         JSONObject cellj = new JSONObject();
-                        cellj.put("type", cell.getCellType().name().toLowerCase());
-                        switch (cell.getCellType()) {
-                            case STRING -> cellj.put("value", cell.getStringCellValue());
-                            case NUMERIC -> cellj.put("value", cell.getNumericCellValue());
-                            case BOOLEAN -> cellj.put("value", cell.getBooleanCellValue());
-                            case FORMULA -> cellj.put("formula", cell.getCellFormula());
-                            default -> cellj.put("value", "");
+                        Cell cell = row.getCell(i);
+                        if (cell == null) {
+                            cellj.put("type", "null");
+                            cellj.put("value", "");
+                        } else {
+                            cellj.put("type", cell.getCellType().name().toLowerCase());
+                            switch (cell.getCellType()) {
+                                case STRING -> cellj.put("value", cell.getStringCellValue());
+                                case NUMERIC -> cellj.put("value", cell.getNumericCellValue());
+                                case BOOLEAN -> cellj.put("value", cell.getBooleanCellValue());
+                                case FORMULA -> cellj.put("formula", cell.getCellFormula());
+                                default -> cellj.put("value", "");
+                            }
                         }
                         cells.add(cellj);
-                    });
+                    }
                     rowj.put("cells", cells);
                     rows.add(rowj);
                 });
