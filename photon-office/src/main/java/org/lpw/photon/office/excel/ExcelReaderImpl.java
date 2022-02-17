@@ -23,34 +23,33 @@ public class ExcelReaderImpl implements ExcelReader {
             Workbook workbook = WorkbookFactory.create(inputStream);
             JSONArray sheets = new JSONArray();
             workbook.forEach(sheet -> {
-                JSONObject sheetJson = new JSONObject();
-                sheetJson.put("name", sheet.getSheetName());
-                sheetJson.put("first", sheet.getFirstRowNum());
-                sheetJson.put("last", sheet.getLastRowNum());
+                JSONObject sheetj = new JSONObject();
+                sheetj.put("name", sheet.getSheetName());
+                sheetj.put("first", sheet.getFirstRowNum());
+                sheetj.put("last", sheet.getLastRowNum());
                 JSONArray rows = new JSONArray();
                 sheet.forEach(row -> {
-                    JSONObject rowJson = new JSONObject();
-                    rowJson.put("first", row.getFirstCellNum());
-                    rowJson.put("last", row.getLastCellNum());
+                    JSONObject rowj = new JSONObject();
+                    rowj.put("first", row.getFirstCellNum());
+                    rowj.put("last", row.getLastCellNum());
                     JSONArray cells = new JSONArray();
                     row.forEach(cell -> {
-                        JSONObject cellJson = new JSONObject();
-                        cellJson.put("type", cell.getCellType().name().toLowerCase());
+                        JSONObject cellj = new JSONObject();
+                        cellj.put("type", cell.getCellType().name().toLowerCase());
                         switch (cell.getCellType()) {
-                            case STRING -> cellJson.put("value", cell.getStringCellValue());
-                            case NUMERIC -> cellJson.put("value", cell.getNumericCellValue());
-                            case BOOLEAN -> cellJson.put("value", cell.getBooleanCellValue());
-                            case FORMULA -> cellJson.put("formula", cell.getCellFormula());
-                            default -> {
-                            }
+                            case STRING -> cellj.put("value", cell.getStringCellValue());
+                            case NUMERIC -> cellj.put("value", cell.getNumericCellValue());
+                            case BOOLEAN -> cellj.put("value", cell.getBooleanCellValue());
+                            case FORMULA -> cellj.put("formula", cell.getCellFormula());
+                            default -> cellj.put("value", "");
                         }
-                        cells.add(cellJson);
+                        cells.add(cellj);
                     });
-                    rowJson.put("cells", cells);
-                    rows.add(rowJson);
+                    rowj.put("cells", cells);
+                    rows.add(rowj);
                 });
-                sheetJson.put("rows", rows);
-                sheets.add(sheetJson);
+                sheetj.put("rows", rows);
+                sheets.add(sheetj);
             });
             object.put("sheets", sheets);
             workbook.close();
