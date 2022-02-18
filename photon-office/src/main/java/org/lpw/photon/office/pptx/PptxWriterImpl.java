@@ -2,6 +2,7 @@ package org.lpw.photon.office.pptx;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFShape;
 import org.apache.poi.xslf.usermodel.XSLFSimpleShape;
@@ -53,8 +54,12 @@ public class PptxWriterImpl implements PptxWriter {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MILLISECOND, -1 * (calendar.get(Calendar.ZONE_OFFSET) + calendar.get(Calendar.DST_OFFSET)));
         String time = dateTime.toString(calendar.getTime(), "yyyy-MM-dd'T'HH:mm:ss'Z'");
-        xmlSlideShow.getProperties().getCoreProperties().setCreated(time);
-        xmlSlideShow.getProperties().getCoreProperties().setModified(time);
+        try {
+            xmlSlideShow.getProperties().getCoreProperties().setCreated(time);
+            xmlSlideShow.getProperties().getCoreProperties().setModified(time);
+        } catch (InvalidFormatException e) {
+            logger.warn(e, "设置PPT创建/修改时间时发生异常！");
+        }
 
         return xmlSlideShow;
     }
