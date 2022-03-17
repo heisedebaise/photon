@@ -156,7 +156,7 @@ public class DateTimeImpl implements DateTime {
 
     @Override
     public Date toDate(String date, String format) {
-        if (validator.isEmpty(date) || validator.isEmpty(format) || date.length() != format.replaceAll("'", "").length())
+        if (validator.isEmpty(date) || validator.isEmpty(format))
             return null;
 
         try {
