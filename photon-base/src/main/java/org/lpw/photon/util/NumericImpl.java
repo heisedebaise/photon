@@ -16,7 +16,7 @@ public class NumericImpl implements Numeric {
     private Validator validator;
     @Inject
     private Logger logger;
-    private Map<String, DecimalFormat> formats = new ConcurrentHashMap<>();
+    private final Map<String, DecimalFormat> formats = new ConcurrentHashMap<>();
 
     @Override
     public int toInt(Object object) {
