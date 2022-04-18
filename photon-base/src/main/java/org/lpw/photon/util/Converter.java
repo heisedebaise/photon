@@ -135,4 +135,12 @@ public interface Converter {
      * @return Map集合。
      */
     Map<String, String> toParameterMap(String parameters);
+
+    /**
+     * MD5签名转ID格式字符串。
+     *
+     * @param md5 MD5值。
+     * @return ID格式字符串。
+     */
+    String md5ToId(String md5);
 }

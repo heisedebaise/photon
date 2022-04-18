@@ -247,4 +247,15 @@ public class ConverterImpl implements Converter {
 
         return map;
     }
+
+    @Override
+    public String md5ToId(String md5) {
+        StringBuilder sb = new StringBuilder(md5);
+        sb.insert(20, '-');
+        sb.insert(16, '-');
+        sb.insert(12, '-');
+        sb.insert(8, '-');
+
+        return sb.toString();
+    }
 }
