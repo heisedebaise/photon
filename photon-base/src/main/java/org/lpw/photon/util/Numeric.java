@@ -173,4 +173,12 @@ public interface Numeric {
      * @return 格式化后的数值字符串。
      */
     String toString(Number number, String format);
+
+    /**
+     * 转化为中文数值字符串。如：一万二千三百四十五/壹万贰仟叁佰肆拾伍。
+     *
+     * @param number 数值字符串。
+     * @return 中文数值字符串。
+     */
+    String toChineseString(String number, boolean big);
 }
