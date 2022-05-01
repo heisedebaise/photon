@@ -18,7 +18,7 @@ public class NumericImpl implements Numeric {
     private Logger logger;
     private final Map<String, DecimalFormat> formats = new ConcurrentHashMap<>();
     private final char[] chineses = {'零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '百', '千', '万', '亿'};
-    private final char[] bigChineses = {'零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾', '佰', '仟', '万', '亿'};
+    private final char[] bigChineses = {'零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾', '佰', '仟', '萬', '億'};
 
     @Override
     public int toInt(Object object) {
@@ -252,7 +252,12 @@ public class NumericImpl implements Numeric {
 
     @Override
     public String toChineseString(String number, boolean big) {
-        return toChineseString(big ? bigChineses : chineses, number);
+        char[] chars = big ? bigChineses : chineses;
+        String string = toChineseString(chars, number);
+        if (number.length() < 9)
+            return string;
+
+        return string.replaceAll("" + chars[14] + chars[13], "" + chars[14]);
     }
 
     private String toChineseString(char[] chars, String number) {
@@ -262,10 +267,14 @@ public class NumericImpl implements Numeric {
             int unit = (i - 1) % 4;
             if (unit == 0 && i > 1)
                 sb.insert(0, chars[13 + ((i - 1) / 4 - 1) % 2]);
-            if (n == 0 && unit == 0)
-                continue;
-
             if (n == 0) {
+                if (unit == 0 || sb.length() == 0)
+                    continue;
+
+                char ch = sb.charAt(0);
+                if (ch == chars[13] || ch == chars[14])
+                    continue;
+
                 sb.insert(0, chars[0]);
 
                 continue;
