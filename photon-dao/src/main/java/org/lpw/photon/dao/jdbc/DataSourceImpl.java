@@ -70,8 +70,7 @@ public class DataSourceImpl implements org.lpw.photon.dao.jdbc.DataSource, Conte
     @Override
     public synchronized void addGetFailure(String name, Mode mode, Throwable throwable) {
         AtomicInteger atomicInteger = failures.computeIfAbsent(name, key -> new AtomicInteger());
-        logger.error(null, "获取数据库[{}:{}:{}:{}]连接失败[{}]！", name, mode,
-                maxActive, atomicInteger.get(), throwable.getMessage());
+        logger.error(throwable, "获取数据库[{}:{}:{}:{}]连接失败！", name, mode, maxActive, atomicInteger.get());
         if (atomicInteger.incrementAndGet() < maxActive)
             return;
 

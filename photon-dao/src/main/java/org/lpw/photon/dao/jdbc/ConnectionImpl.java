@@ -25,9 +25,9 @@ public class ConnectionImpl extends ConnectionSupport<Connection> implements org
     private Logger logger;
     @Inject
     private org.lpw.photon.dao.jdbc.DataSource dataSource;
-    private ThreadLocal<Map<String, Connection>> connections = new ThreadLocal<>();
-    private ThreadLocal<Map<String, Savepoint>> savepoints = new ThreadLocal<>();
-    private ThreadLocal<Boolean> transactional = new ThreadLocal<>();
+    private final ThreadLocal<Map<String, Connection>> connections = new ThreadLocal<>();
+    private final ThreadLocal<Map<String, Savepoint>> savepoints = new ThreadLocal<>();
+    private final ThreadLocal<Boolean> transactional = new ThreadLocal<>();
 
     @Override
     public void beginTransaction() {
