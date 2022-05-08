@@ -45,12 +45,12 @@ public class DataSourceImpl implements org.lpw.photon.dao.jdbc.DataSource, Conte
     private String config;
     @Value("${photon.dao.data-source.key:}")
     private String key;
-    private Map<String, JSONObject> configs = new HashMap<>();
-    private Map<String, Dialect> dialects = new HashMap<>();
-    private Map<String, DataSource> writeables = new ConcurrentHashMap<>();
-    private Map<String, List<DataSource>> readonlys = new ConcurrentHashMap<>();
-    private Map<String, Boolean> readonly = new ConcurrentHashMap<>();
-    private Map<String, AtomicInteger> failures = new ConcurrentHashMap<>();
+    private final Map<String, JSONObject> configs = new HashMap<>();
+    private final Map<String, Dialect> dialects = new HashMap<>();
+    private final Map<String, DataSource> writeables = new ConcurrentHashMap<>();
+    private final Map<String, List<DataSource>> readonlys = new ConcurrentHashMap<>();
+    private final Map<String, Boolean> readonly = new ConcurrentHashMap<>();
+    private final Map<String, AtomicInteger> failures = new ConcurrentHashMap<>();
 
     @Override
     public DataSource getWriteable(String key) {
