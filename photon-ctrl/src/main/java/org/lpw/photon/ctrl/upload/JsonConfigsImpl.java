@@ -3,10 +3,7 @@ package org.lpw.photon.ctrl.upload;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.lpw.photon.scheduler.MinuteJob;
-import org.lpw.photon.util.Context;
-import org.lpw.photon.util.Io;
-import org.lpw.photon.util.Json;
-import org.lpw.photon.util.Validator;
+import org.lpw.photon.util.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +22,8 @@ public class JsonConfigsImpl implements JsonConfigs, MinuteJob {
     private Io io;
     @Inject
     private Json json;
+    @Inject
+    private Numeric numeric;
     @Value("${" + UploadService.PREFIX + "json-configs:/WEB-INF/upload}")
     private String configs;
     private Map<String, JsonConfig> map;
@@ -66,7 +65,7 @@ public class JsonConfigsImpl implements JsonConfigs, MinuteJob {
             for (Object contentType : path.keySet())
                 config.addPath(contentType.toString(), path.getString(contentType.toString()));
             JSONArray imageSize = json.getJSONArray("image-size");
-            config.setImageSize(imageSize.getIntValue(0), imageSize.getIntValue(1));
+            config.setImageSize(numeric.toInt(imageSize.get(0)), numeric.toInt(imageSize.get(1)));
             config.setLastModify(file.lastModified());
             map.put(key, config);
         }
