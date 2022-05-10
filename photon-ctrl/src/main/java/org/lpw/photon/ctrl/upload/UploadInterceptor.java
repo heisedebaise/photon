@@ -1,5 +1,7 @@
 package org.lpw.photon.ctrl.upload;
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * 上传拦截器。
  */
@@ -20,6 +22,7 @@ public interface UploadInterceptor {
      * @param reader      读取器。
      * @param listener    监听器。
      * @param contentType 文件类型。
+     * @param object      处理结果。
      */
-    void complete(UploadReader reader, UploadListener listener, String contentType);
+    void complete(UploadReader reader, UploadListener listener, String contentType, JSONObject object);
 }

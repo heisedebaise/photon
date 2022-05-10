@@ -124,7 +124,7 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
 
         if (!validator.isEmpty(interceptors))
             for (UploadInterceptor interceptor : interceptors)
-                interceptor.complete(uploadReader, uploadListener, contentType);
+                interceptor.complete(uploadReader, uploadListener, contentType, object);
 
         return validator.isEmpty(message) ? object : pack(0, object, message);
     }
@@ -144,8 +144,7 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         return uploadListener;
     }
 
-    private JSONObject save(UploadListener uploadListener, UploadReader uploadReader, String contentType)
-            throws IOException {
+    private JSONObject save(UploadListener uploadListener, UploadReader uploadReader, String contentType) throws IOException {
         Storage storage = storages.get(uploadListener.getStorage());
         if (storage == null) {
             logger.warn(null, "无法获得存储处理器[{}]，文件上传失败！", uploadListener.getStorage());
