@@ -2,10 +2,7 @@ package org.lpw.photon.ctrl.upload;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.inject.Inject;
 
@@ -49,6 +46,8 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
     private WormholeHelper wormholeHelper;
     @Inject
     private JsonConfigs jsonConfigs;
+    @Inject
+    private Optional<Set<UploadInterceptor>> interceptors;
     @Value("${photon.ctrl.upload-fail:999994}")
     private int failureCode;
     private Map<String, UploadListener> listeners;
@@ -107,16 +106,25 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
             logger.warn(null, "无法处理文件上传请求[key={}&content-type={}&file-name={}]！", name, contentType,
                     uploadReader.getFileName());
 
-            return failure(uploadReader,
-                    message.get(PREFIX + "disable", name, contentType, uploadReader.getFileName()));
+            return failure(uploadReader, message.get(PREFIX + "disable", name, contentType, uploadReader.getFileName()));
         }
+
+        Set<UploadInterceptor> interceptors = this.interceptors.orElse(null);
+        if (!validator.isEmpty(interceptors))
+            for (UploadInterceptor interceptor : interceptors)
+                if (!interceptor.enable(uploadReader, uploadListener, contentType))
+                    return failure(uploadReader, message.get(PREFIX + "disable", name, contentType, uploadReader.getFileName()));
 
         JSONObject object = uploadListener.settle(uploadReader);
         if (object == null)
-            object = save(name, uploadListener, uploadReader, contentType);
+            object = save(uploadListener, uploadReader, contentType);
         uploadReader.delete();
         uploadListener.complete(uploadReader, object);
         String message = uploadListener.message();
+
+        if (!validator.isEmpty(interceptors))
+            for (UploadInterceptor interceptor : interceptors)
+                interceptor.complete(uploadReader, uploadListener, contentType);
 
         return validator.isEmpty(message) ? object : pack(0, object, message);
     }
@@ -136,7 +144,7 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         return uploadListener;
     }
 
-    private JSONObject save(String key, UploadListener uploadListener, UploadReader uploadReader, String contentType)
+    private JSONObject save(UploadListener uploadListener, UploadReader uploadReader, String contentType)
             throws IOException {
         Storage storage = storages.get(uploadListener.getStorage());
         if (storage == null) {
@@ -252,7 +260,7 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
     @Override
     public String newSavePath(String contentType, String name, String suffix) {
         return (ROOT + contentType + "/" + name + "/" + dateTime.toString(dateTime.today(), "yyyyMMdd") + "/"
-                + generator.random(32) + suffix).replaceAll("[/]{2,}", "/");
+                + generator.random(32) + suffix).replaceAll("/{2,}", "/");
     }
 
     @Override
