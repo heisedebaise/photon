@@ -66,7 +66,7 @@ public class CreateImpl implements Create {
             inputStream.close();
             outputStream.close();
 
-            return outputStream.toString().split(";\n");
+            return outputStream.toString().split(";\r*\n");
         } catch (IOException e) {
             logger.warn(e, "读取DDL文件[{}:create.sql]时发生异常！", modelClass);
 
