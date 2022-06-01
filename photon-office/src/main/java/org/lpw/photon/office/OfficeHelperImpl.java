@@ -21,17 +21,17 @@ public class OfficeHelperImpl implements OfficeHelper {
     private Context context;
     @Inject
     private Numeric numeric;
-    private Set<String> excelContentTypes = new HashSet<>(Arrays.asList("application/vnd.ms-excel",
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
-    private Set<String> excelSuffixes = new HashSet<>(Arrays.asList(".xls", ".xlsx"));
-    private Set<String> pptContentTypes = new HashSet<>(Arrays.asList("application/octet-stream",
-            "application/vnd.openxmlformats-officedocument.presentationml.presentation"));
-    private Set<String> pptSuffixes = new HashSet<>(Arrays.asList(".ppt", ".pptx"));
-    private Set<String> wordContentTypes = new HashSet<>(Arrays.asList("application/msword",
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"));
-    private Set<String> wordSuffixes = new HashSet<>(Arrays.asList(".doc", ".docx"));
     @Value("${photon.office.temp-path:}")
-    private String tempPath;
+    private String temp;
+    private final Set<String> excelContentTypes = new HashSet<>(Arrays.asList("application/vnd.ms-excel",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+    private final Set<String> excelSuffixes = new HashSet<>(Arrays.asList(".xls", ".xlsx"));
+    private final Set<String> pptContentTypes = new HashSet<>(Arrays.asList("application/octet-stream",
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation"));
+    private final Set<String> pptSuffixes = new HashSet<>(Arrays.asList(".ppt", ".pptx"));
+    private final Set<String> wordContentTypes = new HashSet<>(Arrays.asList("application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"));
+    private final Set<String> wordSuffixes = new HashSet<>(Arrays.asList(".doc", ".docx"));
 
     @Override
     public boolean isExcel(String contentType, String fileName) {
@@ -71,7 +71,7 @@ public class OfficeHelperImpl implements OfficeHelper {
 
     @Override
     public String getTempPath(String name) {
-        return context.getAbsolutePath(tempPath + "/" + name + "/" + generator.random(32));
+        return context.getAbsolutePath(temp + "/" + name + "/" + generator.random(32));
     }
 
     @Override
