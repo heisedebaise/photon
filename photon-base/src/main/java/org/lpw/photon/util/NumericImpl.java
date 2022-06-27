@@ -284,7 +284,7 @@ public class NumericImpl implements Numeric {
                 sb.insert(0, chars[9 + unit]);
             sb.insert(0, chars[n]);
         }
-        if (sb.charAt(0) == chars[1] && sb.charAt(1) == chars[10])
+        if (sb.length() > 0 && sb.charAt(0) == chars[1] && sb.charAt(1) == chars[10])
             return sb.substring(1);
 
         return sb.toString();
