@@ -3,6 +3,7 @@ package org.lpw.photon.util;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -288,5 +289,15 @@ public class NumericImpl implements Numeric {
             return sb.substring(1);
 
         return sb.toString();
+    }
+
+    @Override
+    public int compareBigDecimal(String bd1, String bd2) {
+        return new BigDecimal(bd1).compareTo(new BigDecimal(bd2));
+    }
+
+    @Override
+    public String addBigDecimal(String bd1, String bd2) {
+        return new BigDecimal(bd1).add(new BigDecimal(bd2)).toString();
     }
 }

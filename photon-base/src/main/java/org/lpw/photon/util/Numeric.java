@@ -181,4 +181,22 @@ public interface Numeric {
      * @return 中文数值字符串。
      */
     String toChineseString(String number, boolean big);
+
+    /**
+     * 比较两个BigDecimal字符串大小。
+     *
+     * @param bd1 BigDecimal字符串。
+     * @param bd2 BigDecimal字符串。
+     * @return 如果相等则返回0, 如果前者大于后者则返回1；如果前者小于后者，则返回-1；
+     */
+    int compareBigDecimal(String bd1, String bd2);
+
+    /**
+     * 两个BigDecimal字符串相加。
+     *
+     * @param bd1 BigDecimal字符串。
+     * @param bd2 BigDecimal字符串。
+     * @return 相加结果。
+     */
+    String addBigDecimal(String bd1, String bd2);
 }
