@@ -196,7 +196,35 @@ public interface Numeric {
      *
      * @param bd1 BigDecimal字符串。
      * @param bd2 BigDecimal字符串。
-     * @return 相加结果。
+     * @return 相加结果；失败则返回null。
      */
     String addBigDecimal(String bd1, String bd2);
+
+    /**
+     * 两个BigDecimal字符串相减。
+     *
+     * @param bd1 BigDecimal字符串。
+     * @param bd2 BigDecimal字符串。
+     * @return 相减结果；失败则返回null。
+     */
+    String subtractBigDecimal(String bd1, String bd2);
+
+    /**
+     * 两个BigDecimal字符串相乘。
+     *
+     * @param bd1 BigDecimal字符串。
+     * @param bd2 BigDecimal字符串。
+     * @return 相乘结果；失败则返回null。
+     */
+    String multiplyBigDecimal(String bd1, String bd2);
+
+    /**
+     * 两个BigDecimal字符串相除。
+     *
+     * @param bd1   BigDecimal字符串。
+     * @param bd2   BigDecimal字符串。
+     * @param scale 结果保留小数点位数。
+     * @return 相除结果；失败则返回null。
+     */
+    String divideBigDecimal(String bd1, String bd2, int scale);
 }

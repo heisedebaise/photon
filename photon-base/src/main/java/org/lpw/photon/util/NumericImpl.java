@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -298,6 +299,45 @@ public class NumericImpl implements Numeric {
 
     @Override
     public String addBigDecimal(String bd1, String bd2) {
-        return new BigDecimal(bd1).add(new BigDecimal(bd2)).toString();
+        try {
+            return new BigDecimal(bd1).add(new BigDecimal(bd2)).toString();
+        } catch (Throwable throwable) {
+            logger.warn(throwable, "两个BigDecimal[{}:{}]相加异常！", bd1, bd2);
+
+            return null;
+        }
+    }
+
+    @Override
+    public String subtractBigDecimal(String bd1, String bd2) {
+        try {
+            return new BigDecimal(bd1).subtract(new BigDecimal(bd2)).toString();
+        } catch (Throwable throwable) {
+            logger.warn(throwable, "两个BigDecimal[{}:{}]相减异常！", bd1, bd2);
+
+            return null;
+        }
+    }
+
+    @Override
+    public String multiplyBigDecimal(String bd1, String bd2) {
+        try {
+            return new BigDecimal(bd1).multiply(new BigDecimal(bd2)).toString();
+        } catch (Throwable throwable) {
+            logger.warn(throwable, "两个BigDecimal[{}:{}]相乘异常！", bd1, bd2);
+
+            return null;
+        }
+    }
+
+    @Override
+    public String divideBigDecimal(String bd1, String bd2, int scale) {
+        try {
+            return new BigDecimal(bd1).divide(new BigDecimal(bd2), scale, RoundingMode.CEILING).toString();
+        } catch (Throwable throwable) {
+            logger.warn(throwable, "两个BigDecimal[{}:{}:{}]相乘异常！", bd1, bd2, scale);
+
+            return null;
+        }
     }
 }
