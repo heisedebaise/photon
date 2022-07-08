@@ -63,6 +63,23 @@ public interface Request {
     long getAsLong(String name, long defaultValue);
 
     /**
+     * 获取浮点型请求参数值。
+     *
+     * @param name 参数名称。
+     * @return 浮点型参数值。
+     */
+    double getAsDouble(String name);
+
+    /**
+     * 获取浮点型请求参数值。
+     *
+     * @param name         参数名称。
+     * @param defaultValue 默认值。
+     * @return 浮点型参数值。
+     */
+    double getAsDouble(String name, double defaultValue);
+
+    /**
      * 获取布尔请求参数值。
      *
      * @param name 参数名。

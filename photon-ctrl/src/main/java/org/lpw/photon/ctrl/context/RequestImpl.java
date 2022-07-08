@@ -5,12 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.lpw.photon.ctrl.Codec;
 import org.lpw.photon.dao.model.Model;
 import org.lpw.photon.dao.model.ModelHelper;
-import org.lpw.photon.util.Context;
-import org.lpw.photon.util.Converter;
-import org.lpw.photon.util.DateTime;
-import org.lpw.photon.util.Json;
-import org.lpw.photon.util.Numeric;
-import org.lpw.photon.util.Validator;
+import org.lpw.photon.util.*;
 import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
@@ -68,6 +63,16 @@ public class RequestImpl implements Request, RequestAware {
     @Override
     public long getAsLong(String name, long defaultValue) {
         return numeric.toLong(get(name), defaultValue);
+    }
+
+    @Override
+    public double getAsDouble(String name) {
+        return numeric.toDouble(get(name));
+    }
+
+    @Override
+    public double getAsDouble(String name, double defaultValue) {
+        return numeric.toDouble(get(name), defaultValue);
     }
 
     @Override
