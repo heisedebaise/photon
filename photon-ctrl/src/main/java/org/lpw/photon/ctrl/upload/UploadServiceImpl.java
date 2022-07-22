@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 @Service(UploadService.PREFIX + "service")
@@ -169,10 +170,7 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         object.put("path", path);
         uploadReader.write(storage, path);
         if (image.is(contentType, path)) {
-            int[] size = image.size(uploadReader.getInputStream());
-            object.put("width", size[0]);
-            object.put("height", size[1]);
-            String thumbnail = thumbnail(uploadListener.getImageSize(), storage, contentType, path);
+            String thumbnail = image(object, uploadListener.getImageSize(), storage, contentType, path);
             if (thumbnail != null)
                 object.put("thumbnail", thumbnail);
         }
@@ -192,13 +190,16 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         return indexOf == -1 ? "" : uploadReader.getFileName().substring(indexOf).toLowerCase();
     }
 
-    private String thumbnail(int[] size, Storage storage, String contentType, String path) {
-        if (size == null || size.length == 0)
-            return null;
-
-        try {
-            BufferedImage image = this.image.read(storage.getInputStream(path));
+    private String image(JSONObject object, int[] size, Storage storage, String contentType, String path) {
+        try (InputStream inputStream = storage.getInputStream(path)) {
+            BufferedImage image = this.image.read(inputStream);
             if (image == null)
+                return null;
+
+            object.put("width", image.getWidth());
+            object.put("height", image.getHeight());
+
+            if (size == null || size.length == 0)
                 return null;
 
             image = size.length == 1 ? this.image.scale(image, 1.0D * size[0] / 100)
