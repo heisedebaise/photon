@@ -1,28 +1,20 @@
 package org.lpw.photon.ctrl.upload;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.*;
-
-import javax.inject.Inject;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-
 import org.lpw.photon.bean.BeanFactory;
 import org.lpw.photon.bean.ContextRefreshedListener;
 import org.lpw.photon.storage.Storage;
 import org.lpw.photon.storage.Storages;
-import org.lpw.photon.util.DateTime;
-import org.lpw.photon.util.Generator;
-import org.lpw.photon.util.Image;
-import org.lpw.photon.util.Json;
-import org.lpw.photon.util.Logger;
-import org.lpw.photon.util.Message;
-import org.lpw.photon.util.Validator;
+import org.lpw.photon.util.*;
 import org.lpw.photon.wormhole.WormholeHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.*;
 
 @Service(UploadService.PREFIX + "service")
 public class UploadServiceImpl implements UploadService, ContextRefreshedListener {
@@ -177,6 +169,9 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         object.put("path", path);
         uploadReader.write(storage, path);
         if (image.is(contentType, path)) {
+            int[] size = image.size(uploadReader.getInputStream());
+            object.put("width", size[0]);
+            object.put("height", size[1]);
             String thumbnail = thumbnail(uploadListener.getImageSize(), storage, contentType, path);
             if (thumbnail != null)
                 object.put("thumbnail", thumbnail);
