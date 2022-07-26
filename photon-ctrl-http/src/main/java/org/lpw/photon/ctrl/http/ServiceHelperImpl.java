@@ -31,7 +31,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -78,12 +77,10 @@ public class ServiceHelperImpl implements ServiceHelper {
     private CookieAware cookieAware;
     @Value("${photon.ctrl.http.ignore.root:false}")
     private boolean ignoreRoot;
-    @Value("${photon.ctrl.http.ignore.prefixes:/upload/}")
+    @Value("${photon.ctrl.http.ignore.prefixes:}")
     private String ignorePrefixes;
     @Value("${photon.ctrl.http.ignore.suffixes:.ico,.js,.css,.html,.jpg,.jpeg,.gif,.png,.svg,.eot,.woff,.ttf,.json,.txt}")
     private String ignoreSuffixes;
-    @Value("${photon.ctrl.http.not-modified.names:/upload/image/}")
-    private String notModifiedNames;
     @Value("${photon.ctrl.http.virtual-context:}")
     private String virtualContext;
     @Value("${photon.ctrl.http.url:}")
@@ -91,10 +88,9 @@ public class ServiceHelperImpl implements ServiceHelper {
     private int contextPath;
     private String servletContextPath;
     private int virtualContextLength;
+    private final Set<String> ignoreUris = new HashSet<>();
     private String[] prefixes;
     private String[] suffixes;
-    private String[] names;
-    private Set<String> ignoreUris;
 
     @Override
     public void setPath(String real, String context) {
@@ -103,12 +99,10 @@ public class ServiceHelperImpl implements ServiceHelper {
         virtualContextLength = virtualContext.length();
         if (logger.isInfoEnable())
             logger.info("部署项目路径[{}]，虚拟路径[{}]。", context, virtualContext);
+
+        BeanFactory.getBeans(IgnoreUri.class).forEach(ignoreUri -> ignoreUris.addAll(ignoreUri.getIgnoreUris()));
         prefixes = converter.toArray(ignorePrefixes, ",");
         suffixes = converter.toArray(ignoreSuffixes, ",");
-        names = converter.toArray(notModifiedNames, ",");
-
-        ignoreUris = new HashSet<>();
-        BeanFactory.getBeans(IgnoreUri.class).forEach(ignoreUri -> ignoreUris.addAll(Arrays.asList(ignoreUri.getIgnoreUris())));
     }
 
     @Override
@@ -120,10 +114,19 @@ public class ServiceHelperImpl implements ServiceHelper {
         }
 
         String uri = getUri(request);
-        String lowerCaseUri = uri.toLowerCase();
-        if (lowerCaseUri.startsWith(UploadService.ROOT)) {
-            if (lowerCaseUri.startsWith(UploadService.ROOT + "image/"))
+        if (ignoreUris.contains(uri)) {
+            if (logger.isDebugEnable())
+                logger.debug("忽略请求[{}]。", uri);
+
+            return false;
+        }
+
+        if (uri.startsWith(UploadService.ROOT)) {
+            if (uri.startsWith(UploadService.ROOT + "image/")) {
+                resource(request, response, uri);
+
                 return false;
+            }
 
             StringBuilder attachment = new StringBuilder("attachment; filename*=").append(context.getCharset(null)).append("''");
             String filename = request.getParameter("filename");
@@ -142,9 +145,10 @@ public class ServiceHelperImpl implements ServiceHelper {
             return false;
         }
 
-        if (ignoreUris.contains(uri) || resource(request, response, uri)) {
+        if (ignore(uri)) {
+            resource(request, response, uri);
             if (logger.isDebugEnable())
-                logger.debug("忽略请求[{}]。", uri);
+                logger.debug("忽略资源请求[{}]。", uri);
 
             return false;
         }
@@ -153,7 +157,7 @@ public class ServiceHelperImpl implements ServiceHelper {
             return true;
 
         context.clearThreadLocal();
-        if (lowerCaseUri.equals(WsHelper.URI)) {
+        if (uri.equals(WsHelper.URI)) {
             context.putThreadLocal(WsHelper.IP, request.getRemoteAddr());
             context.putThreadLocal(WsHelper.PORT, request.getServerPort());
 
@@ -200,30 +204,6 @@ public class ServiceHelperImpl implements ServiceHelper {
         return true;
     }
 
-    private boolean resource(HttpServletRequest request, HttpServletResponse response, String uri) {
-        if (!ignore(uri))
-            return false;
-
-        File file = new File(context.getAbsolutePath(uri));
-        if (!file.exists()) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-
-            return true;
-        }
-
-        if (file.isDirectory())
-            return true;
-
-        String ifNoneMatch = request.getHeader("If-None-Match");
-        String lastModified = numeric.toString(file.lastModified());
-        if (notModified(ifNoneMatch, lastModified, uri))
-            response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-        else
-            response.setHeader("ETag", lastModified);
-
-        return true;
-    }
-
     private boolean ignore(String uri) {
         if (ignoreRoot && uri.equals(ROOT))
             return true;
@@ -253,18 +233,23 @@ public class ServiceHelperImpl implements ServiceHelper {
         return false;
     }
 
-    private boolean notModified(String ifNoneMatch, String lastModified, String uri) {
-        if (validator.isEmpty(ifNoneMatch))
-            return false;
+    private void resource(HttpServletRequest request, HttpServletResponse response, String uri) {
+        File file = new File(context.getAbsolutePath(uri));
+        if (!file.exists()) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
-        if (ifNoneMatch.equals(lastModified))
-            return true;
+            return;
+        }
 
-        for (String name : names)
-            if (uri.contains(name))
-                return true;
+        if (file.isDirectory())
+            return;
 
-        return false;
+        String ifNoneMatch = request.getHeader("If-None-Match");
+        String lastModified = numeric.toString(file.lastModified());
+        if (!validator.isEmpty(ifNoneMatch) && ifNoneMatch.equals(lastModified))
+            response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+        else
+            response.setHeader("ETag", lastModified);
     }
 
     @Override

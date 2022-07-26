@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service(UploadService.PREFIX + "helper")
 public class UploadServiceImpl implements UploadService, IgnoreUri, ContextRefreshedListener {
@@ -115,8 +116,8 @@ public class UploadServiceImpl implements UploadService, IgnoreUri, ContextRefre
     }
 
     @Override
-    public String[] getIgnoreUris() {
-        return new String[]{UPLOAD, UPLOAD_PATH};
+    public Set<String> getIgnoreUris() {
+        return Set.of(UPLOAD, UPLOAD_PATH);
     }
 
     @Override

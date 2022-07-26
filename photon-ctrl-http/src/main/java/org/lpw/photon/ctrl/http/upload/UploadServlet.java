@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.Serial;
 
 @MultipartConfig
 @WebServlet(name = "UploadServlet", urlPatterns = {UploadService.UPLOAD})
 public class UploadServlet extends HttpServlet {
+    @Serial
     private static final long serialVersionUID = 2035601763794785803L;
 
     private UploadService uploadService;

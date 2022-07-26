@@ -1,5 +1,7 @@
 package org.lpw.photon.ctrl.http;
 
+import java.util.Set;
+
 /**
  * 忽略URI地址。
  */
@@ -9,5 +11,5 @@ public interface IgnoreUri {
      *
      * @return URI地址集。
      */
-    String[] getIgnoreUris();
+    Set<String> getIgnoreUris();
 }
