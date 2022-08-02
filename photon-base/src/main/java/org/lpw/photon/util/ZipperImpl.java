@@ -87,12 +87,12 @@ public class ZipperImpl implements Zipper {
 
     @Override
     public void unzip(InputStream inputStream, Charset charset, File output) throws IOException {
-        unzip(new ZipInputStream(inputStream, charset), output);
+        unzip(new ZipInputStream(inputStream, charset == null ? Charset.defaultCharset() : charset), output);
     }
 
     private void unzip(ZipInputStream zipInputStream, File output) throws IOException {
         String path = output.getAbsolutePath() + "/";
-        for (ZipEntry zipEntry; (zipEntry = zipInputStream.getNextEntry()) != null;) {
+        for (ZipEntry zipEntry; (zipEntry = zipInputStream.getNextEntry()) != null; ) {
             if (zipEntry.isDirectory())
                 continue;
 
