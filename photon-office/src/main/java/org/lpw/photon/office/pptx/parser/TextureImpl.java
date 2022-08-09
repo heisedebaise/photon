@@ -72,18 +72,18 @@ public class TextureImpl implements Simple {
     }
 
     private void parseBlipFill(CTBlipFillProperties ctBlipFillProperties, JSONObject texture) {
-        CTStretchInfoProperties ctStretchInfoProperties = ctBlipFillProperties.getStretch();
-        if (ctStretchInfoProperties == null)
-            return;
-
-        CTRelativeRect ctRelativeRect = ctStretchInfoProperties.getFillRect();
-        if (ctRelativeRect == null)
-            return;
-
-        texture.put("left", officeHelper.fromPercent(ctRelativeRect.getL()));
-        texture.put("top", officeHelper.fromPercent(ctRelativeRect.getT()));
-        texture.put("right", officeHelper.fromPercent(ctRelativeRect.getR()));
-        texture.put("bottom", officeHelper.fromPercent(ctRelativeRect.getB()));
+//        CTStretchInfoProperties ctStretchInfoProperties = ctBlipFillProperties.getStretch();
+//        if (ctStretchInfoProperties == null)
+//            return;
+//
+//        CTRelativeRect ctRelativeRect = ctStretchInfoProperties.getFillRect();
+//        if (ctRelativeRect == null)
+//            return;
+//
+//        texture.put("left", officeHelper.fromPercent(ctRelativeRect.getL()));
+//        texture.put("top", officeHelper.fromPercent(ctRelativeRect.getT()));
+//        texture.put("right", officeHelper.fromPercent(ctRelativeRect.getR()));
+//        texture.put("bottom", officeHelper.fromPercent(ctRelativeRect.getB()));
     }
 
     @Override
