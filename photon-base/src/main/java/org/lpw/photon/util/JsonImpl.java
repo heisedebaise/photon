@@ -88,6 +88,13 @@ public class JsonImpl implements Json {
         if (object instanceof JSONObject obj)
             return obj;
 
+        if (object instanceof Map<?, ?> map) {
+            JSONObject obj = new JSONObject();
+            map.forEach((key, value) -> obj.put(key.toString(), value));
+
+            return obj;
+        }
+
         try {
             if (object instanceof String string) {
                 if (validator.isEmpty(string))
