@@ -5,7 +5,14 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Component("photon.util.converter")
 public class ConverterImpl implements Converter {
@@ -128,8 +135,8 @@ public class ConverterImpl implements Converter {
 
     @Override
     public String[][] toArray(String string, String[] separator) {
-        if (validator.isEmpty(string) || validator.isEmpty(separator) || separator.length < 2 || validator.isEmpty(separator[0])
-                || validator.isEmpty(separator[1]) || !string.contains(separator[1]))
+        if (validator.isEmpty(string) || validator.isEmpty(separator) || separator.length < 2 || separator[0] == null || separator[0].length() == 0
+                || separator[1] == null || separator[1].length() == 0)
             return new String[0][0];
 
         List<String> list = new ArrayList<>();
