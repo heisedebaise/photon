@@ -38,7 +38,7 @@ public class SignImpl implements Sign, StorageListener {
     private String path;
     @Value("${photon.crypto.sign.time:10000}")
     private long time;
-    private Map<String, String> map = new HashMap<>();
+    private final Map<String, String> map = new HashMap<>();
 
     @Override
     public void put(Map<String, String> map, String name) {
