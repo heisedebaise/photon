@@ -28,10 +28,8 @@ public class GeneratorImpl implements Generator {
     @Override
     public String number(int length) {
         StringBuilder sb = new StringBuilder();
-        while (sb.length() < length) {
-            int n = Math.abs(random.nextInt()) % 10 + '0';
-            sb.append((char) n);
-        }
+        while (sb.length() < length)
+            sb.append(Math.abs(random.nextInt()) % 10);
 
         return sb.toString();
     }
