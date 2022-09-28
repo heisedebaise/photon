@@ -68,6 +68,17 @@ public class GeneratorImpl implements Generator {
     }
 
     @Override
+    public double random(double min, double max) {
+        if (min == max)
+            return min;
+
+        if (min > max)
+            return random.nextDouble() * (min - max) + max;
+
+        return random.nextDouble() * (max - min) + min;
+    }
+
+    @Override
     public String uuid() {
         return UUID.randomUUID().toString();
     }
