@@ -6,7 +6,15 @@ import org.lpw.photon.bean.BeanFactory;
 import org.lpw.photon.bean.ContextRefreshedListener;
 import org.lpw.photon.storage.Storage;
 import org.lpw.photon.storage.Storages;
-import org.lpw.photon.util.*;
+import org.lpw.photon.util.Context;
+import org.lpw.photon.util.DateTime;
+import org.lpw.photon.util.Generator;
+import org.lpw.photon.util.Image;
+import org.lpw.photon.util.Io;
+import org.lpw.photon.util.Json;
+import org.lpw.photon.util.Logger;
+import org.lpw.photon.util.Message;
+import org.lpw.photon.util.Validator;
 import org.lpw.photon.wormhole.WormholeHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,7 +23,12 @@ import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 @Service(UploadService.PREFIX + "service")
 public class UploadServiceImpl implements UploadService, ContextRefreshedListener {
@@ -31,6 +44,10 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
     private Generator generator;
     @Inject
     private Image image;
+    @Inject
+    private Context context;
+    @Inject
+    private Io io;
     @Inject
     private Logger logger;
     @Inject
@@ -254,8 +271,10 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
 
     @Override
     public String newSavePath(String contentType, String name, String suffix) {
-        return (ROOT + contentType + "/" + name + "/" + dateTime.toString(dateTime.today(), "yyyyMMdd") + "/"
-                + generator.random(32) + suffix).replaceAll("/{2,}", "/");
+        String dir = (ROOT + contentType + "/" + name + "/" + dateTime.toString(dateTime.today(), "yyyyMMdd") + "/").replaceAll("/{2,}", "/");
+        io.mkdirs(context.getAbsolutePath(dir));
+
+        return dir + generator.random(32) + suffix;
     }
 
     @Override
