@@ -23,7 +23,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -254,7 +259,7 @@ public class HttpImpl implements Http {
                 for (Header header : response.getAllHeaders())
                     responseHeaders.put(header.getName(), header.getValue());
             copy(request, httpEntity, outputStream);
-            logger.info(null, "执行HTTP请求[{}:{}:{}]！", request.getMethod(), request.getURI(), statusCode);
+            logger.info("执行HTTP请求[{}:{}:{}]！", request.getMethod(), request.getURI(), statusCode);
         } catch (Throwable throwable) {
             request.abort();
             logger.warn(throwable, "执行HTTP请求时发生异常！");
