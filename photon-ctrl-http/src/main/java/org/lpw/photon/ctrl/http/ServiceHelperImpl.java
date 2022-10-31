@@ -101,8 +101,17 @@ public class ServiceHelperImpl implements ServiceHelper {
             logger.info("部署项目路径[{}]，虚拟路径[{}]。", context, virtualContext);
 
         BeanFactory.getBeans(IgnoreUri.class).forEach(ignoreUri -> ignoreUris.addAll(ignoreUri.getIgnoreUris()));
-        prefixes = converter.toArray(ignorePrefixes, ",");
-        suffixes = converter.toArray(ignoreSuffixes, ",");
+        prefixes = array(ignorePrefixes);
+        suffixes = array(ignoreSuffixes);
+    }
+
+    private String[] array(String ignore) {
+        Set<String> set = new HashSet<>();
+        for (String string : converter.toArray(ignore, ","))
+            if (!validator.isEmpty(string))
+                set.add(string);
+
+        return set.toArray(new String[0]);
     }
 
     @Override
