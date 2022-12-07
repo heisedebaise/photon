@@ -54,6 +54,8 @@ public class ServiceHelperImpl implements ServiceHelper {
     @Inject
     private Logger logger;
     @Inject
+    private Optional<HttpListener> listener;
+    @Inject
     private HeaderAware headerAware;
     @Inject
     private SessionAware sessionAware;
@@ -123,6 +125,7 @@ public class ServiceHelperImpl implements ServiceHelper {
         }
 
         String uri = getUri(request);
+        listener.ifPresent(l -> l.onHttpService(request, uri));
         if (ignoreUris.contains(uri)) {
             if (logger.isDebugEnable())
                 logger.debug("忽略请求[{}]。", uri);
