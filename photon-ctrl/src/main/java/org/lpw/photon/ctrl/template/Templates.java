@@ -38,4 +38,17 @@ public interface Templates {
      * @return 模板实例。
      */
     Template get(String type);
+
+    /**
+     * 不进行包装。
+     *
+     * @param bool 是否不进行包装。
+     */
+    void setNopack(boolean bool);
+
+    /**
+     * 获取不进行包装。
+     * @return 是否不进行包装，true表示不包装，其他表示包装。
+     */
+    boolean isNopack();
 }

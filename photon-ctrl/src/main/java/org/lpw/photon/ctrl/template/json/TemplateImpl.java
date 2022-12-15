@@ -26,6 +26,8 @@ public class TemplateImpl extends TemplateSupport {
     private Request request;
     @Inject
     private Dispatcher dispatcher;
+    @Inject
+    private Templates templates;
 
     @Override
     public String getType() {
@@ -47,7 +49,7 @@ public class TemplateImpl extends TemplateSupport {
 
         if (data instanceof Model model)
             data = modelHelper.toJson(model);
-        else if (data instanceof PageList pl)
+        else if (data instanceof PageList<?> pl)
             data = pl.toJson();
         else if (data instanceof String string)
             data = json(string);
@@ -70,11 +72,14 @@ public class TemplateImpl extends TemplateSupport {
     }
 
     private Object pack(Object object) {
-        if (object instanceof JSONObject json) {
-            if (json.containsKey("code") && (json.containsKey("data") || json.containsKey("message"))) {
-                putIdTime(json);
+        if (templates.isNopack())
+            return object;
 
-                return object;
+        if (object instanceof JSONObject obj) {
+            if (obj.containsKey("code") && (obj.containsKey("data") || obj.containsKey("message"))) {
+                putIdTime(obj);
+
+                return obj;
             }
         }
 

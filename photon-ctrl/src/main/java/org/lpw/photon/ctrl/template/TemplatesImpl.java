@@ -11,8 +11,9 @@ import java.util.Map;
 @Controller("photon.ctrl.templates")
 public class TemplatesImpl implements Templates, ContextRefreshedListener {
     @Value("${photon.ctrl.template.type:json}")
-    protected String type;
-    protected Map<String, Template> map;
+    private String type;
+    private Map<String, Template> map;
+    private final ThreadLocal<Boolean> nopack = new ThreadLocal<>();
 
     @Override
     public Template get() {
@@ -22,6 +23,18 @@ public class TemplatesImpl implements Templates, ContextRefreshedListener {
     @Override
     public Template get(String type) {
         return map.get(type);
+    }
+
+    @Override
+    public void setNopack(boolean bool) {
+        nopack.set(bool);
+    }
+
+    @Override
+    public boolean isNopack() {
+        Boolean bool = nopack.get();
+
+        return bool != null && bool;
     }
 
     @Override
