@@ -1,11 +1,6 @@
 package org.lpw.photon.util;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.DecodeHintType;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.Result;
-import com.google.zxing.WriterException;
+import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
@@ -16,18 +11,10 @@ import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +26,7 @@ public class QrCodeImpl implements QrCode {
     @Inject
     private Context context;
     @Inject
-    private Validator validator;
+    private Io io;
     @Inject
     private Codec codec;
     @Inject
@@ -60,8 +47,7 @@ public class QrCodeImpl implements QrCode {
     @Override
     public void create(String content, int size, String logo, OutputStream outputStream) {
         try {
-            InputStream inputStream = validator.isEmpty(logo) ? null : new FileInputStream(logo);
-            create(content, size, inputStream, outputStream);
+            create(content, size, io.exists(logo) ? new FileInputStream(logo) : null, outputStream);
         } catch (Throwable e) {
             logger.warn(e, "生成二维码图片[{}:{}:{}]时发生异常！", content, size, logo);
         }
@@ -83,9 +69,7 @@ public class QrCodeImpl implements QrCode {
     @Override
     public String create(String content, int size, String logo) {
         try {
-            InputStream inputStream = validator.isEmpty(logo) ? null : new FileInputStream(logo);
-
-            return create(content, size, inputStream);
+            return create(content, size, io.exists(logo) ? new FileInputStream(logo) : null);
         } catch (Throwable e) {
             logger.warn(e, "生成二维码图片[{}:{}:{}]时发生异常！", content, size, logo);
 
