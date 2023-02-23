@@ -13,11 +13,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
 import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Controller("photon.ctrl.execute.map")
@@ -118,7 +114,8 @@ public class ExecutorHelperImpl implements ExecutorHelper, FailureCode, ContextR
                     continue;
 
                 Executor executor = new ExecutorImpl(BeanFactory.getBean(name), method, getKey(classExecute, execute),
-                        execute.permit(), execute.validates(), templates.get(execute.type()), prefix + execute.template());
+                        execute.permit(), execute.validates(), templates.get(execute.type()),
+                        prefix + (validator.isEmpty(execute.template()) ? execute.name() : execute.template()));
                 String code = prefixCode + execute.code();
                 for (String service : converter.toArray(execute.name(), ",")) {
                     String key = prefix + service;
