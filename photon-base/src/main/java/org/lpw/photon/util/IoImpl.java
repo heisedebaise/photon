@@ -3,15 +3,7 @@ package org.lpw.photon.util;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.*;
 
 @Component("photon.util.io")
 public class IoImpl implements Io {
@@ -29,7 +21,7 @@ public class IoImpl implements Io {
 
     @Override
     public boolean exists(String path) {
-        return exists(new File(path));
+        return !validator.isEmpty(path) && exists(new File(path));
     }
 
     @Override
