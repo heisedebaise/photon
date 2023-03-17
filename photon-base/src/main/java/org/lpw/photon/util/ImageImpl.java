@@ -7,15 +7,9 @@ import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.*;
 
 @Component("photon.util.image")
 public class ImageImpl implements Image {
@@ -58,8 +52,10 @@ public class ImageImpl implements Image {
             return image;
 
         BufferedImage thumbnail = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        thumbnail.getGraphics().drawImage(image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH),
+        Graphics graphics = thumbnail.getGraphics();
+        graphics.drawImage(image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH),
                 0, 0, width, height, null);
+        graphics.dispose();
 
         return thumbnail;
     }
@@ -89,8 +85,10 @@ public class ImageImpl implements Image {
             return image;
 
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        bufferedImage.getGraphics().drawImage(image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH),
+        Graphics graphics = bufferedImage.getGraphics();
+        graphics.drawImage(image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH),
                 0, 0, width, height, null);
+        graphics.dispose();
 
         return bufferedImage;
     }
