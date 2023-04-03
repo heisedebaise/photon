@@ -105,26 +105,27 @@ public class ExecutorHelperImpl implements ExecutorHelper, FailureCode, ContextR
         for (String name : BeanFactory.getBeanNames()) {
             Class<?> clazz = BeanFactory.getBeanClass(name);
             Execute classExecute = clazz.getAnnotation(Execute.class);
-            String prefix = classExecute == null ? "" : classExecute.name();
-            boolean regex = classExecute != null && classExecute.regex();
-            String prefixCode = classExecute == null ? "" : classExecute.code();
-            for (Method method : clazz.getMethods()) {
-                Execute execute = method.getAnnotation(Execute.class);
-                if (execute == null || validator.isEmpty(prefix + execute.name()))
-                    continue;
+            for (String prefix : classExecute == null ? new String[]{""} : classExecute.name().split(",")) {
+                boolean regex = classExecute != null && classExecute.regex();
+                String prefixCode = classExecute == null ? "" : classExecute.code();
+                for (Method method : clazz.getMethods()) {
+                    Execute execute = method.getAnnotation(Execute.class);
+                    if (execute == null || validator.isEmpty(prefix + execute.name()))
+                        continue;
 
-                Executor executor = new ExecutorImpl(BeanFactory.getBean(name), method, getKey(classExecute, execute),
-                        execute.permit(), execute.validates(), templates.get(execute.type()),
-                        prefix + (validator.isEmpty(execute.template()) ? execute.name() : execute.template()));
-                String code = prefixCode + execute.code();
-                for (String service : converter.toArray(execute.name(), ",")) {
-                    String key = prefix + service;
-                    map.put(key, executor);
-                    if (regex || execute.regex())
-                        regexes.add(key);
-                    codes.put(key, code);
+                    Executor executor = new ExecutorImpl(BeanFactory.getBean(name), method, getKey(classExecute, execute),
+                            execute.permit(), execute.validates(), templates.get(execute.type()),
+                            prefix + (validator.isEmpty(execute.template()) ? execute.name() : execute.template()));
+                    String code = prefixCode + execute.code();
+                    for (String service : execute.name().split(",")) {
+                        String key = prefix + service;
+                        map.put(key, executor);
+                        if (regex || execute.regex())
+                            regexes.add(key);
+                        codes.put(key, code);
+                    }
+                    listeners.forEach(listener -> listener.definition(classExecute, execute, executor));
                 }
-                listeners.forEach(listener -> listener.definition(classExecute, execute, executor));
             }
         }
 
