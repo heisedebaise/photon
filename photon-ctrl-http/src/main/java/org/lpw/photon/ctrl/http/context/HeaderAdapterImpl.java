@@ -2,7 +2,7 @@ package org.lpw.photon.ctrl.http.context;
 
 import org.lpw.photon.ctrl.context.HeaderAdapter;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;

@@ -9,7 +9,7 @@ import org.lpw.photon.util.Json;
 import org.lpw.photon.util.Logger;
 import org.lpw.photon.util.Validator;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;

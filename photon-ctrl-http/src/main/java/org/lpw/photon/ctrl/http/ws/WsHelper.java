@@ -2,7 +2,7 @@ package org.lpw.photon.ctrl.http.ws;
 
 import org.lpw.photon.ctrl.context.ResponseSender;
 
-import javax.websocket.Session;
+import jakarta.websocket.Session;
 
 /**
  * WebSocket支持类。

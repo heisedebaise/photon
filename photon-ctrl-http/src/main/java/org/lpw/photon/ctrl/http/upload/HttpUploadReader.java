@@ -5,7 +5,7 @@ import org.lpw.photon.ctrl.upload.UploadReader;
 import org.lpw.photon.storage.Storage;
 import org.lpw.photon.util.Io;
 
-import javax.servlet.http.Part;
+import jakarta.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;

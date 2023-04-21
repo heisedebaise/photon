@@ -17,7 +17,7 @@ import org.lpw.photon.util.*;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import javax.websocket.Session;
+import jakarta.websocket.Session;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Map;

@@ -4,7 +4,7 @@ import org.lpw.photon.bean.BeanFactory;
 import org.lpw.photon.ctrl.context.ResponseAdapter;
 import org.lpw.photon.util.Logger;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
