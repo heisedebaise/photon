@@ -1,5 +1,7 @@
 package org.lpw.photon.ctrl.http;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.lpw.photon.bean.BeanFactory;
 import org.lpw.photon.ctrl.Dispatcher;
 import org.lpw.photon.ctrl.Handler;
@@ -7,31 +9,20 @@ import org.lpw.photon.ctrl.context.HeaderAware;
 import org.lpw.photon.ctrl.context.RequestAware;
 import org.lpw.photon.ctrl.context.ResponseAware;
 import org.lpw.photon.ctrl.context.SessionAware;
-import org.lpw.photon.ctrl.http.context.CookieAware;
-import org.lpw.photon.ctrl.http.context.HeaderAdapterImpl;
-import org.lpw.photon.ctrl.http.context.RequestAdapterImpl;
-import org.lpw.photon.ctrl.http.context.ResponseAdapterImpl;
-import org.lpw.photon.ctrl.http.context.SessionAdapterImpl;
+import org.lpw.photon.ctrl.http.context.*;
 import org.lpw.photon.ctrl.http.ws.WsHelper;
 import org.lpw.photon.ctrl.status.Status;
 import org.lpw.photon.ctrl.upload.UploadService;
-import org.lpw.photon.util.Codec;
-import org.lpw.photon.util.Context;
-import org.lpw.photon.util.Converter;
-import org.lpw.photon.util.Logger;
-import org.lpw.photon.util.Numeric;
-import org.lpw.photon.util.TimeHash;
-import org.lpw.photon.util.Validator;
+import org.lpw.photon.util.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 
@@ -271,6 +262,9 @@ public class ServiceHelperImpl implements ServiceHelper {
 
     private OutputStream setContext(HttpServletRequest request, HttpServletResponse response, String uri, String sessionId) throws IOException {
         context.setLocale(request.getLocale());
+        String lang = request.getParameter("lang");
+        if (!validator.isEmpty(lang))
+            context.setLocale(Locale.forLanguageTag(lang));
         headerAware.set(new HeaderAdapterImpl(request));
         sessionAware.set(new SessionAdapterImpl(sessionId));
         requestAware.set(new RequestAdapterImpl(request, uri));
