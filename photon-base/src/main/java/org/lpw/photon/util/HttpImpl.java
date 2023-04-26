@@ -2,6 +2,7 @@ package org.lpw.photon.util;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -23,12 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -103,7 +99,7 @@ public class HttpImpl implements Http {
             logger.debug("使用GET访问[{}]。", url);
 
         HttpGet get = new HttpGet(url);
-        get.setConfig(getRequestConfig());
+        get.setConfig(getRequestConfig(null, -1));
         execute(get, requestHeaders, responseHeaders, outputStream);
     }
 
@@ -171,6 +167,25 @@ public class HttpImpl implements Http {
     }
 
     @Override
+    public String post(HttpBuilder hb, Map<String, String> header) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        post(hb, header, outputStream);
+
+        return outputStream.toString();
+    }
+
+    @Override
+    public void post(HttpBuilder hb, Map<String, String> header, OutputStream outputStream) {
+        HttpPost post = new HttpPost(hb.url);
+        if (!validator.isEmpty(hb.parameter))
+            post.setEntity(toEntity(hb.parameter, hb.charset));
+        else if (!validator.isEmpty(hb.content))
+            post.setEntity(toEntity(hb.content, hb.charset));
+        post.setConfig(getRequestConfig(hb.host, hb.port));
+        execute(post, hb.header, header, outputStream);
+    }
+
+    @Override
     public String upload(String url, Map<String, String> requestHeaders, Map<String, String> parameters,
                          Map<String, File> files) {
         return upload(url, requestHeaders, parameters, files, null);
@@ -225,14 +240,18 @@ public class HttpImpl implements Http {
             logger.debug("使用POST访问{}[{}]。", url, entity);
 
         HttpPost post = new HttpPost(url);
-        post.setConfig(getRequestConfig());
+        post.setConfig(getRequestConfig(null, -1));
         if (entity != null)
             post.setEntity(entity);
         execute(post, requestHeaders, responseHeaders, outputStream);
     }
 
-    private RequestConfig getRequestConfig() {
-        return RequestConfig.custom().setConnectTimeout(connectTimeout).setSocketTimeout(readTimeout).build();
+    private RequestConfig getRequestConfig(String host, int port) {
+        RequestConfig.Builder builder = RequestConfig.custom().setConnectTimeout(connectTimeout).setSocketTimeout(readTimeout);
+        if (host != null)
+            builder.setProxy(new HttpHost(host, port));
+
+        return builder.build();
     }
 
     private void execute(HttpUriRequest request, Map<String, String> requestHeaders,
