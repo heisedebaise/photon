@@ -9,17 +9,11 @@ import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
 import javax.inject.Inject;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.*;
 import java.util.Iterator;
 
 @Component("photon.util.image")
@@ -133,11 +127,13 @@ public class ImageImpl implements Image {
             throw new IllegalStateException("No writers found");
 
         ImageWriter writer = writers.next();
-        writer.setOutput(outputStream);
+        ImageOutputStream imageOutputStream = ImageIO.createImageOutputStream(outputStream);
+        writer.setOutput(imageOutputStream);
         ImageWriteParam param = writer.getDefaultWriteParam();
         param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-        param.setCompressionQuality(quality);
+        param.setCompressionQuality(quality / 100.0f);
         writer.write(null, new IIOImage(image, null, null), param);
+        imageOutputStream.close();
         writer.dispose();
     }
 

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.awt.image.BufferedImage;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -206,11 +205,13 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
             String suffix = path.substring(indexOf);
             if (maxLength > 0 && quality > 0 && length > maxLength) {
                 String original = path.substring(0, indexOf) + ".original" + suffix;
-                io.move(path, original);
-                OutputStream outputStream = new FileOutputStream(path);
+                storage.move(path, original);
+                path = path.substring(0, indexOf) + ".jpeg";
+                OutputStream outputStream = storage.getOutputStream(path);
                 this.image.jpeg(image, quality, outputStream);
                 outputStream.close();
                 object.put("original", original);
+                object.put("path", path);
             }
             if (size == null || size.length == 0)
                 return;

@@ -5,12 +5,7 @@ import org.lpw.photon.util.Io;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 @Component("photon.storage.disk")
 public class DiskStorageImpl implements Storage {
@@ -73,6 +68,11 @@ public class DiskStorageImpl implements Storage {
     @Override
     public OutputStream getOutputStream(String path) throws IOException {
         return new FileOutputStream(getAbsolutePath(path, true));
+    }
+
+    @Override
+    public String move(String source, String target) {
+        return io.move(getAbsolutePath(source, false), getAbsolutePath(target));
     }
 
     @Override

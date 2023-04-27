@@ -92,6 +92,15 @@ public interface Storage {
     OutputStream getOutputStream(String path) throws IOException;
 
     /**
+     * 移动文件。
+     *
+     * @param source 源文件。
+     * @param target 目标文件。
+     * @return 如果移动成功则返回目标文件；失败则返回源文件。
+     */
+    String move(String source, String target);
+
+    /**
      * 删除文件。
      *
      * @param path 文件路径。

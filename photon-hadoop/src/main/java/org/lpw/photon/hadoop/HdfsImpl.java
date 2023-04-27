@@ -33,7 +33,7 @@ public class HdfsImpl implements Hdfs, Storage, ContextRefreshedListener {
     private String url;
     private boolean disabled;
     private Configuration configuration;
-    private ThreadLocal<FileSystem> fileSystem = new ThreadLocal<>();
+    private final ThreadLocal<FileSystem> fileSystem = new ThreadLocal<>();
 
     @Override
     public String getType() {
@@ -169,6 +169,11 @@ public class HdfsImpl implements Hdfs, Storage, ContextRefreshedListener {
     }
 
     @Override
+    public String move(String source, String target) {
+        return null;
+    }
+
+    @Override
     public void delete(String path) {
         if (isDisabled())
             return;
@@ -237,7 +242,8 @@ public class HdfsImpl implements Hdfs, Storage, ContextRefreshedListener {
 
     @Override
     public void onContextRefreshed() {
-        if (disabled = validator.isEmpty(url)) {
+        disabled = validator.isEmpty(url);
+        if (disabled) {
             if (logger.isDebugEnable())
                 logger.debug("HDFS环境为空，不启用HDFS。");
 
