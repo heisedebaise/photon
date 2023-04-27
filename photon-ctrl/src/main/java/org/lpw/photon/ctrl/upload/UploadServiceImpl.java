@@ -6,29 +6,18 @@ import org.lpw.photon.bean.BeanFactory;
 import org.lpw.photon.bean.ContextRefreshedListener;
 import org.lpw.photon.storage.Storage;
 import org.lpw.photon.storage.Storages;
-import org.lpw.photon.util.Context;
-import org.lpw.photon.util.DateTime;
-import org.lpw.photon.util.Generator;
-import org.lpw.photon.util.Image;
-import org.lpw.photon.util.Io;
-import org.lpw.photon.util.Json;
-import org.lpw.photon.util.Logger;
-import org.lpw.photon.util.Message;
-import org.lpw.photon.util.Validator;
+import org.lpw.photon.util.*;
 import org.lpw.photon.wormhole.WormholeHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.awt.image.BufferedImage;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.io.OutputStream;
+import java.util.*;
 
 @Service(UploadService.PREFIX + "service")
 public class UploadServiceImpl implements UploadService, ContextRefreshedListener {
@@ -186,11 +175,9 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         String path = newSavePath(contentType, uploadListener.getPath(uploadReader), suffix);
         object.put("path", path);
         uploadReader.write(storage, path);
-        if (image.is(contentType, path)) {
-            String thumbnail = image(object, uploadListener.getImageSize(), storage, contentType, path);
-            if (thumbnail != null)
-                object.put("thumbnail", thumbnail);
-        }
+        if (image.is(contentType, path))
+            image(object, uploadReader.getSize(), uploadListener.getImageMaxLength(), uploadListener.getJpegQuality(),
+                    uploadListener.getImageSize(), storage, contentType, path);
         if (logger.isDebugEnable())
             logger.debug("保存上传文件[{}]。", object);
 
@@ -207,32 +194,37 @@ public class UploadServiceImpl implements UploadService, ContextRefreshedListene
         return indexOf == -1 ? "" : uploadReader.getFileName().substring(indexOf).toLowerCase();
     }
 
-    private String image(JSONObject object, int[] size, Storage storage, String contentType, String path) {
+    private void image(JSONObject object, long length, long maxLength, int quality, int[] size, Storage storage, String contentType, String path) {
         try (InputStream inputStream = storage.getInputStream(path)) {
             BufferedImage image = this.image.read(inputStream);
             if (image == null)
-                return null;
+                return;
 
             object.put("width", image.getWidth());
             object.put("height", image.getHeight());
-
+            int indexOf = path.lastIndexOf('.');
+            String suffix = path.substring(indexOf);
+            if (maxLength > 0 && quality > 0 && length > maxLength) {
+                String original = path.substring(0, indexOf) + ".original" + suffix;
+                io.move(path, original);
+                OutputStream outputStream = new FileOutputStream(path);
+                this.image.jpeg(image, quality, outputStream);
+                outputStream.close();
+                object.put("original", original);
+            }
             if (size == null || size.length == 0)
-                return null;
+                return;
 
             image = size.length == 1 ? this.image.scale(image, 1.0D * size[0] / 100)
                     : this.image.thumbnail(image, size[0], size[1]);
             if (image == null)
-                return null;
+                return;
 
-            int indexOf = path.lastIndexOf('.');
             String thumbnail = path.substring(0, indexOf) + ".thumbnail" + path.substring(indexOf);
             this.image.write(image, this.image.formatFromContentType(contentType), storage.getOutputStream(thumbnail));
-
-            return thumbnail;
+            object.put("thumbnail", thumbnail);
         } catch (Exception e) {
             logger.warn(e, "生成压缩图片时发生异常！");
-
-            return null;
         }
     }
 

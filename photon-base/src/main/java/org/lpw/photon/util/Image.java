@@ -121,6 +121,16 @@ public interface Image {
     void write(BufferedImage image, Format format, OutputStream outputStream) throws IOException;
 
     /**
+     * 输出JPEG格式图片。
+     *
+     * @param image        图片。
+     * @param quality      压缩质量，1-100。
+     * @param outputStream 输出流。
+     * @throws IOException 写入异常。
+     */
+    void jpeg(BufferedImage image, int quality, OutputStream outputStream) throws IOException;
+
+    /**
      * SVG转化为PNG图。
      *
      * @param svg          SVG文档。

@@ -5,11 +5,22 @@ import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.PNGTranscoder;
 import org.springframework.stereotype.Component;
 
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
 import javax.inject.Inject;
-import java.awt.*;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.Iterator;
 
 @Component("photon.util.image")
 public class ImageImpl implements Image {
@@ -113,6 +124,21 @@ public class ImageImpl implements Image {
             case Gif -> "GIF";
             default -> "PNG";
         };
+    }
+
+    @Override
+    public void jpeg(BufferedImage image, int quality, OutputStream outputStream) throws IOException {
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("jpg");
+        if (!writers.hasNext())
+            throw new IllegalStateException("No writers found");
+
+        ImageWriter writer = writers.next();
+        writer.setOutput(outputStream);
+        ImageWriteParam param = writer.getDefaultWriteParam();
+        param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+        param.setCompressionQuality(quality);
+        writer.write(null, new IIOImage(image, null, null), param);
+        writer.dispose();
     }
 
     @Override

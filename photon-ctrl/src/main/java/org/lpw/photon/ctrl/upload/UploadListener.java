@@ -74,6 +74,24 @@ public interface UploadListener {
     }
 
     /**
+     * 获取图片大小最大值，超过此设置将自动压缩为JPEG，压缩质量由getJpegQuality设置。
+     *
+     * @return 图片大小最大值。
+     */
+    default long getImageMaxLength() {
+        return 0;
+    }
+
+    /**
+     * 获取图片压缩为JPEG格式时的压缩质量，1-100。
+     *
+     * @return 图片压缩为JPEG格式时的压缩质量，1-100。
+     */
+    default int getJpegQuality() {
+        return 100;
+    }
+
+    /**
      * 获取图片大小。 当上传文件为图片时，并且返回的图片大小（长、高）大于0时，自动将图片修改为长宽不超过设置值的图片，并进行压缩。
      *
      * @return 图片大小[长, 高]或[百分比]，如果返回null则表示不需要调整图片。
@@ -93,7 +111,7 @@ public interface UploadListener {
 
     /**
      * 获取上传成功消息。
-     * 
+     *
      * @return 上传成功消息。
      */
     default String message() {
