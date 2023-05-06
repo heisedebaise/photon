@@ -126,13 +126,18 @@ public class ImageImpl implements Image {
         if (!writers.hasNext())
             throw new IllegalStateException("No writers found");
 
+        BufferedImage bi = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphics2D = bi.createGraphics();
+        graphics2D.drawImage(image, 0, 0, null);
+        graphics2D.dispose();
+
         ImageWriter writer = writers.next();
         ImageOutputStream imageOutputStream = ImageIO.createImageOutputStream(outputStream);
         writer.setOutput(imageOutputStream);
         ImageWriteParam param = writer.getDefaultWriteParam();
         param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
         param.setCompressionQuality(quality / 100.0f);
-        writer.write(null, new IIOImage(image, null, null), param);
+        writer.write(null, new IIOImage(bi, null, null), param);
         imageOutputStream.close();
         writer.dispose();
     }
