@@ -11,9 +11,19 @@ import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
 import javax.inject.Inject;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.Iterator;
 
 @Component("photon.util.image")
@@ -96,6 +106,34 @@ public class ImageImpl implements Image {
         graphics.dispose();
 
         return bufferedImage;
+    }
+
+    @Override
+    public void circle(BufferedImage image, OutputStream outputStream) throws IOException {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        int size = Math.min(width, height);
+        BufferedImage bi = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics2D = bi.createGraphics();
+        graphics2D.setClip(new Ellipse2D.Double(0, 0, size, size));
+        graphics2D.drawImage(image, (width - size) / 2, (height - size) / 2, size, size, null);
+        write(bi, Format.Png, outputStream);
+    }
+
+    @Override
+    public void circle(BufferedImage image, int w, Color color, OutputStream outputStream) throws IOException {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        int size = Math.min(width, height);
+        int border = size + 2 * w;
+        BufferedImage bi = new BufferedImage(border, border, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics2D = bi.createGraphics();
+        graphics2D.setClip(new Ellipse2D.Double(0, 0, border, border));
+        graphics2D.setColor(color);
+        graphics2D.fillRect(0, 0, border, border);
+        graphics2D.setClip(new Ellipse2D.Double(w, w, size, size));
+        graphics2D.drawImage(image, w, w, size, size, null);
+        write(bi, Format.Png, outputStream);
     }
 
     @Override

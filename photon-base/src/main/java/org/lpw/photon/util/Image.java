@@ -1,5 +1,6 @@
 package org.lpw.photon.util;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -99,6 +100,26 @@ public interface Image {
      * @return 缩放后图片。
      */
     BufferedImage scale(BufferedImage image, int width, int height);
+
+    /**
+     * 修剪为圆形，并输出PNG图片。
+     *
+     * @param image        图片。
+     * @param outputStream 输出流。
+     * @throws IOException 写入异常。
+     */
+    void circle(BufferedImage image, OutputStream outputStream) throws IOException;
+
+    /**
+     * 修剪为圆形，同时加边框，并输出PNG图片。
+     *
+     * @param image        图片。
+     * @param width        边框宽度。
+     * @param color        边框颜色。
+     * @param outputStream 输出流。
+     * @throws IOException 写入异常。
+     */
+    void circle(BufferedImage image, int width, Color color, OutputStream outputStream) throws IOException;
 
     /**
      * 输出图片。
