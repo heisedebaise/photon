@@ -29,6 +29,15 @@ public interface Request {
     String get(String name);
 
     /**
+     * 获得请求参数值。
+     *
+     * @param name         参数名称。
+     * @param defaultValue 默认值，null时返回。
+     * @return 参数值。
+     */
+    String get(String name, String defaultValue);
+
+    /**
      * 获得整型请求参数值。
      *
      * @param name 参数名称。

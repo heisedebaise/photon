@@ -46,6 +46,13 @@ public class RequestImpl implements Request, RequestAware {
     }
 
     @Override
+    public String get(String name, String defaultValue) {
+        String value = get(name);
+
+        return value == null ? defaultValue : value;
+    }
+
+    @Override
     public int getAsInt(String name) {
         return numeric.toInt(get(name));
     }
