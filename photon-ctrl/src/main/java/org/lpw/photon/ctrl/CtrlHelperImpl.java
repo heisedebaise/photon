@@ -12,9 +12,18 @@ public class CtrlHelperImpl implements CtrlHelper {
     private Validator validator;
     @Value("${photon.ctrl.root:}")
     private String root;
+    private final ThreadLocal<String> threadLocal = new ThreadLocal<>();
+
+    @Override
+    public void setRoot(String root) {
+        threadLocal.set(root);
+    }
 
     @Override
     public String url(String uri) {
+        if (threadLocal.get() != null)
+            return threadLocal.get() + uri;
+
         return validator.isEmpty(root) ? null : (root + uri);
     }
 }
