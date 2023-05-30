@@ -1,17 +1,17 @@
 package org.lpw.photon.ctrl.http.context;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.lpw.photon.bean.BeanFactory;
 import org.lpw.photon.ctrl.context.ResponseAdapter;
 import org.lpw.photon.util.Logger;
 
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
 public class ResponseAdapterImpl implements ResponseAdapter {
-    private String servletContextPath;
-    private HttpServletResponse response;
-    private OutputStream output;
+    private final String servletContextPath;
+    private final HttpServletResponse response;
+    private final OutputStream output;
 
     public ResponseAdapterImpl(String servletContextPath, HttpServletResponse response, OutputStream output) {
         this.servletContextPath = servletContextPath;

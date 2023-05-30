@@ -40,9 +40,9 @@ public class CounterImpl implements Counter, StorageListener {
     private int ipMax = 64;
     private int ipDelay = 5000;
     private Map<String, Integer> uriMap = new HashMap<>();
-    private AtomicInteger counter = new AtomicInteger();
-    private Map<String, AtomicInteger> ips = new ConcurrentHashMap<>();
-    private Map<String, AtomicInteger> uris = new ConcurrentHashMap<>();
+    private final AtomicInteger counter = new AtomicInteger();
+    private final Map<String, AtomicInteger> ips = new ConcurrentHashMap<>();
+    private final Map<String, AtomicInteger> uris = new ConcurrentHashMap<>();
 
     @Override
     public boolean increase(String uri, String ip) {

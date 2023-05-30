@@ -1,17 +1,16 @@
 package org.lpw.photon.ctrl.http.ws;
 
-import org.lpw.photon.bean.BeanFactory;
-
 import jakarta.websocket.OnClose;
 import jakarta.websocket.OnError;
 import jakarta.websocket.OnMessage;
 import jakarta.websocket.OnOpen;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.ServerEndpoint;
+import org.lpw.photon.bean.BeanFactory;
 
 @ServerEndpoint(WsHelper.URI)
 public class WebSocket {
-    private WsHelper wsHelper;
+    private final WsHelper wsHelper;
 
     public WebSocket() {
         wsHelper = BeanFactory.getBean(WsHelper.class);

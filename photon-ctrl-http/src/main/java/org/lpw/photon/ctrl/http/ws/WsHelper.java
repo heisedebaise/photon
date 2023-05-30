@@ -1,8 +1,7 @@
 package org.lpw.photon.ctrl.http.ws;
 
-import org.lpw.photon.ctrl.context.ResponseSender;
-
 import jakarta.websocket.Session;
+import org.lpw.photon.ctrl.context.ResponseSender;
 
 /**
  * WebSocket支持类。
@@ -42,9 +41,10 @@ public interface WsHelper extends ResponseSender {
      * 发送消息到客户端。
      *
      * @param sessionId 客户端Session ID。
-     * @param message 消息。
+     * @param message   消息。
+     * @return 发送成功则返回true；否则返回false。
      */
-    void send(String sessionId, String message);
+    boolean send(String sessionId, String message);
 
     /**
      * 发送消息到所有客户端。

@@ -54,7 +54,7 @@ public class HandlerImpl implements Handler, MinuteJob {
     }
 
     private ExecutorService getExecutorService(Integer key) {
-        return executors.computeIfAbsent(key, k -> Executors.newSingleThreadExecutor());
+        return executors.computeIfAbsent(key, k -> Executors.newFixedThreadPool(3));
     }
 
     private void addFuture(Integer key, Future<?> future) {

@@ -1,6 +1,7 @@
 package org.lpw.photon.ctrl.http.ws;
 
 import com.alibaba.fastjson.JSONObject;
+import jakarta.websocket.Session;
 import org.lpw.photon.bean.ContextClosedListener;
 import org.lpw.photon.crypto.Digest;
 import org.lpw.photon.ctrl.Dispatcher;
@@ -13,11 +14,14 @@ import org.lpw.photon.ctrl.context.json.JsonRequestAdapter;
 import org.lpw.photon.ctrl.context.json.JsonResponseAdapter;
 import org.lpw.photon.ctrl.context.json.JsonSessionAdapter;
 import org.lpw.photon.ctrl.http.ServiceHelper;
-import org.lpw.photon.util.*;
+import org.lpw.photon.util.Context;
+import org.lpw.photon.util.Generator;
+import org.lpw.photon.util.Json;
+import org.lpw.photon.util.Logger;
+import org.lpw.photon.util.Validator;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import jakarta.websocket.Session;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Map;
@@ -47,9 +51,9 @@ public class WsHelperImpl implements WsHelper, ContextClosedListener {
     private ResponseAware responseAware;
     @Inject
     private Dispatcher dispatcher;
-    private Map<String, Session> sessions = new ConcurrentHashMap<>();
-    private Map<String, String> sids = new ConcurrentHashMap<>();
-    private Map<String, String> ips = new ConcurrentHashMap<>();
+    private final Map<String, Session> sessions = new ConcurrentHashMap<>();
+    private final Map<String, String> sids = new ConcurrentHashMap<>();
+    private final Map<String, String> ips = new ConcurrentHashMap<>();
     private int port;
     private String sessionKey;
 
@@ -76,15 +80,15 @@ public class WsHelperImpl implements WsHelper, ContextClosedListener {
 
         String sid = getSessionId(session);
         JSONObject header = object.getJSONObject("header");
-        String tsid = null;
+        String psid = null;
         if (!validator.isEmpty(header) && header.containsKey(ServiceHelper.SESSION_ID)) {
-            tsid = header.getString(ServiceHelper.SESSION_ID);
-            sids.put(sid, tsid);
-            sids.put(tsid, sid);
+            psid = header.getString(ServiceHelper.SESSION_ID);
+            sids.put(sid, psid);
+            sids.put(psid, sid);
         }
 
         headerAware.set(new JsonHeaderAdapter(header, ips.get(sid)));
-        sessionAware.set(new JsonSessionAdapter(tsid == null ? sid : tsid));
+        sessionAware.set(new JsonSessionAdapter(psid == null ? sid : psid));
         requestAware.set(new JsonRequestAdapter(port, object.getString("id"), object.getString("uri"),
                 object.getJSONObject("request")));
         responseAware.set(new JsonResponseAdapter(this, sid));
@@ -97,19 +101,23 @@ public class WsHelperImpl implements WsHelper, ContextClosedListener {
     }
 
     @Override
-    public void send(String sessionId, String message) {
+    public boolean send(String sessionId, String message) {
         if (validator.isEmpty(sessionId))
-            return;
+            return false;
 
         if (!sessions.containsKey(sessionId))
             sessionId = sids.get(sessionId);
         if (!sessions.containsKey(sessionId))
-            return;
+            return false;
 
         try {
             sessions.get(sessionId).getBasicRemote().sendText(message);
+
+            return true;
         } catch (Throwable throwable) {
             logger.warn(throwable, "推送消息[{}]到WebSocket客户端时发生异常！", message);
+
+            return false;
         }
     }
 
