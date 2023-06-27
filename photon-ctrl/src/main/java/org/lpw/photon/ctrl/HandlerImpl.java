@@ -6,17 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.*;
+import java.util.concurrent.*;
 
 @Controller("photon.ctrl.handler")
 public class HandlerImpl implements Handler, MinuteJob {
@@ -24,6 +15,8 @@ public class HandlerImpl implements Handler, MinuteJob {
     private Counter counter;
     @Value("${photon.ctrl.handler.queue:true}")
     private boolean queue;
+    @Value("${photon.ctrl.handler.concurrency:3}")
+    private int concurrency;
     @Value("${photon.ctrl.handler.max-idle:30}")
     private int maxIdle;
     private final Map<Integer, ExecutorService> executors = new ConcurrentHashMap<>();
@@ -54,7 +47,7 @@ public class HandlerImpl implements Handler, MinuteJob {
     }
 
     private ExecutorService getExecutorService(Integer key) {
-        return executors.computeIfAbsent(key, k -> Executors.newFixedThreadPool(3));
+        return executors.computeIfAbsent(key, k -> Executors.newFixedThreadPool(concurrency));
     }
 
     private void addFuture(Integer key, Future<?> future) {
