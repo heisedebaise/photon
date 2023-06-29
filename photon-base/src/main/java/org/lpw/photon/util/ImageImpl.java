@@ -11,19 +11,10 @@ import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
 import javax.inject.Inject;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.*;
 import java.util.Iterator;
 
 @Component("photon.util.image")
@@ -214,6 +205,10 @@ public class ImageImpl implements Image {
             return false;
 
         String suffix = name.substring(indexOf).toLowerCase();
+        indexOf = contentType.indexOf(':');
+        if (indexOf > -1)
+            contentType = contentType.substring(0, indexOf);
+
         return switch (contentType) {
             case "image/jpeg", "image/jpg" -> suffix.equals(".jpg") || suffix.equals(".jpeg");
             case "image/png" -> suffix.equals(".png");
